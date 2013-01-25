@@ -1,0 +1,356 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F159F5516AF160A00DE596E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F159F5416AF160A00DE596E /* UIKit.framework */; };
+		0F159F5716AF160A00DE596E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F159F5616AF160A00DE596E /* Foundation.framework */; };
+		0F159F5916AF160A00DE596E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F159F5816AF160A00DE596E /* CoreGraphics.framework */; };
+		0F159F5F16AF160B00DE596E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F5D16AF160B00DE596E /* InfoPlist.strings */; };
+		0F159F6116AF160B00DE596E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F159F6016AF160B00DE596E /* main.m */; };
+		0F159F6516AF160B00DE596E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F159F6416AF160B00DE596E /* AppDelegate.m */; };
+		0F159F6716AF160B00DE596E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F6616AF160B00DE596E /* Default.png */; };
+		0F159F6916AF160B00DE596E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F6816AF160B00DE596E /* Default@2x.png */; };
+		0F159F6B16AF160B00DE596E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F6A16AF160B00DE596E /* Default-568h@2x.png */; };
+		0F159F6E16AF160B00DE596E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F6C16AF160B00DE596E /* MainStoryboard_iPhone.storyboard */; };
+		0F159F7116AF160B00DE596E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F6F16AF160B00DE596E /* MainStoryboard_iPad.storyboard */; };
+		0F159F7416AF160B00DE596E /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F159F7316AF160B00DE596E /* FirstViewController.m */; };
+		0F159F7616AF160B00DE596E /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7516AF160B00DE596E /* first.png */; };
+		0F159F7816AF160B00DE596E /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7716AF160B00DE596E /* first@2x.png */; };
+		0F159F7B16AF160B00DE596E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F159F7A16AF160B00DE596E /* SecondViewController.m */; };
+		0F159F7D16AF160B00DE596E /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7C16AF160B00DE596E /* second.png */; };
+		0F159F7F16AF160B00DE596E /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7E16AF160B00DE596E /* second@2x.png */; };
+		0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */; };
+		0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */; };
+		0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F537A8416B0593F006F00FD /* StatsMainViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0F159F5016AF160A00DE596E /* iWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F159F5416AF160A00DE596E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0F159F5616AF160A00DE596E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0F159F5816AF160A00DE596E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0F159F5C16AF160B00DE596E /* iWallet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iWallet-Info.plist"; sourceTree = "<group>"; };
+		0F159F5E16AF160B00DE596E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0F159F6016AF160B00DE596E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0F159F6216AF160B00DE596E /* iWallet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iWallet-Prefix.pch"; sourceTree = "<group>"; };
+		0F159F6316AF160B00DE596E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0F159F6416AF160B00DE596E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0F159F6616AF160B00DE596E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		0F159F6816AF160B00DE596E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0F159F6A16AF160B00DE596E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0F159F6D16AF160B00DE596E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		0F159F7016AF160B00DE596E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		0F159F7216AF160B00DE596E /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		0F159F7316AF160B00DE596E /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		0F159F7516AF160B00DE596E /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		0F159F7716AF160B00DE596E /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		0F159F7916AF160B00DE596E /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		0F159F7A16AF160B00DE596E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		0F159F7C16AF160B00DE596E /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		0F159F7E16AF160B00DE596E /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailAllCategoriesTableViewController.h; sourceTree = "<group>"; };
+		0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsDetailAllCategoriesTableViewController.m; sourceTree = "<group>"; };
+		0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailCategoryTableViewController.h; sourceTree = "<group>"; };
+		0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsDetailCategoryTableViewController.m; sourceTree = "<group>"; };
+		0F537A8316B0593F006F00FD /* StatsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsMainViewController.h; sourceTree = "<group>"; };
+		0F537A8416B0593F006F00FD /* StatsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsMainViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0F159F4D16AF160A00DE596E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F159F5516AF160A00DE596E /* UIKit.framework in Frameworks */,
+				0F159F5716AF160A00DE596E /* Foundation.framework in Frameworks */,
+				0F159F5916AF160A00DE596E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F159F4516AF160A00DE596E = {
+			isa = PBXGroup;
+			children = (
+				0F159F5A16AF160A00DE596E /* iWallet */,
+				0F159F5316AF160A00DE596E /* Frameworks */,
+				0F159F5116AF160A00DE596E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0F159F5116AF160A00DE596E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0F159F5016AF160A00DE596E /* iWallet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0F159F5316AF160A00DE596E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F159F5416AF160A00DE596E /* UIKit.framework */,
+				0F159F5616AF160A00DE596E /* Foundation.framework */,
+				0F159F5816AF160A00DE596E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0F159F5A16AF160A00DE596E /* iWallet */ = {
+			isa = PBXGroup;
+			children = (
+				0F159F6316AF160B00DE596E /* AppDelegate.h */,
+				0F159F6416AF160B00DE596E /* AppDelegate.m */,
+				0F159F6C16AF160B00DE596E /* MainStoryboard_iPhone.storyboard */,
+				0F159F6F16AF160B00DE596E /* MainStoryboard_iPad.storyboard */,
+				0F159F7216AF160B00DE596E /* FirstViewController.h */,
+				0F159F7316AF160B00DE596E /* FirstViewController.m */,
+				0F159F7516AF160B00DE596E /* first.png */,
+				0F159F7716AF160B00DE596E /* first@2x.png */,
+				0F159F7916AF160B00DE596E /* SecondViewController.h */,
+				0F159F7A16AF160B00DE596E /* SecondViewController.m */,
+				0F159F7C16AF160B00DE596E /* second.png */,
+				0F159F7E16AF160B00DE596E /* second@2x.png */,
+				0F159F5B16AF160A00DE596E /* Supporting Files */,
+				0F537A8316B0593F006F00FD /* StatsMainViewController.h */,
+				0F537A8416B0593F006F00FD /* StatsMainViewController.m */,
+				0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */,
+				0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */,
+				0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */,
+				0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */,
+			);
+			path = iWallet;
+			sourceTree = "<group>";
+		};
+		0F159F5B16AF160A00DE596E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F159F5C16AF160B00DE596E /* iWallet-Info.plist */,
+				0F159F5D16AF160B00DE596E /* InfoPlist.strings */,
+				0F159F6016AF160B00DE596E /* main.m */,
+				0F159F6216AF160B00DE596E /* iWallet-Prefix.pch */,
+				0F159F6616AF160B00DE596E /* Default.png */,
+				0F159F6816AF160B00DE596E /* Default@2x.png */,
+				0F159F6A16AF160B00DE596E /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0F159F4F16AF160A00DE596E /* iWallet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F159F8216AF160B00DE596E /* Build configuration list for PBXNativeTarget "iWallet" */;
+			buildPhases = (
+				0F159F4C16AF160A00DE596E /* Sources */,
+				0F159F4D16AF160A00DE596E /* Frameworks */,
+				0F159F4E16AF160A00DE596E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iWallet;
+			productName = iWallet;
+			productReference = 0F159F5016AF160A00DE596E /* iWallet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0F159F4716AF160A00DE596E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = lab;
+			};
+			buildConfigurationList = 0F159F4A16AF160A00DE596E /* Build configuration list for PBXProject "iWallet" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0F159F4516AF160A00DE596E;
+			productRefGroup = 0F159F5116AF160A00DE596E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0F159F4F16AF160A00DE596E /* iWallet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0F159F4E16AF160A00DE596E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F159F5F16AF160B00DE596E /* InfoPlist.strings in Resources */,
+				0F159F6716AF160B00DE596E /* Default.png in Resources */,
+				0F159F6916AF160B00DE596E /* Default@2x.png in Resources */,
+				0F159F6B16AF160B00DE596E /* Default-568h@2x.png in Resources */,
+				0F159F6E16AF160B00DE596E /* MainStoryboard_iPhone.storyboard in Resources */,
+				0F159F7116AF160B00DE596E /* MainStoryboard_iPad.storyboard in Resources */,
+				0F159F7616AF160B00DE596E /* first.png in Resources */,
+				0F159F7816AF160B00DE596E /* first@2x.png in Resources */,
+				0F159F7D16AF160B00DE596E /* second.png in Resources */,
+				0F159F7F16AF160B00DE596E /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F159F4C16AF160A00DE596E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F159F6116AF160B00DE596E /* main.m in Sources */,
+				0F159F6516AF160B00DE596E /* AppDelegate.m in Sources */,
+				0F159F7416AF160B00DE596E /* FirstViewController.m in Sources */,
+				0F159F7B16AF160B00DE596E /* SecondViewController.m in Sources */,
+				0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */,
+				0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */,
+				0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0F159F5D16AF160B00DE596E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F159F5E16AF160B00DE596E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0F159F6C16AF160B00DE596E /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F159F6D16AF160B00DE596E /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		0F159F6F16AF160B00DE596E /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F159F7016AF160B00DE596E /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0F159F8016AF160B00DE596E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0F159F8116AF160B00DE596E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0F159F8316AF160B00DE596E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iWallet/iWallet-Prefix.pch";
+				INFOPLIST_FILE = "iWallet/iWallet-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0F159F8416AF160B00DE596E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iWallet/iWallet-Prefix.pch";
+				INFOPLIST_FILE = "iWallet/iWallet-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F159F4A16AF160A00DE596E /* Build configuration list for PBXProject "iWallet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F159F8016AF160B00DE596E /* Debug */,
+				0F159F8116AF160B00DE596E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F159F8216AF160B00DE596E /* Build configuration list for PBXNativeTarget "iWallet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F159F8316AF160B00DE596E /* Debug */,
+				0F159F8416AF160B00DE596E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0F159F4716AF160A00DE596E /* Project object */;
+}
