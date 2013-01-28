@@ -108,6 +108,8 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     self.modeLabel.text = @"Monthly chart";
     
     self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
+    
+    NSLog(@" tableview height:%f and page height:%f", self.categoriesTableView.frame.size.height, self.scrollView.contentSize.height);
 
 }
 
@@ -118,25 +120,28 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    float roundedValue = round(scrollView.contentOffset.x / viewWidth);
-    self.pageControl.currentPage = roundedValue;
+
+    if([scrollView.restorationIdentifier isEqualToString:@"chartScroll"]){
     
-    // 1st is monthly chart, 2nd is yearly mode.
-    self.modeLabel.text = [chartModes objectAtIndex:roundedValue];
+        float roundedValue = round(scrollView.contentOffset.x / viewWidth);
+        self.pageControl.currentPage = roundedValue;
+    
+        // 1st is monthly chart, 2nd is yearly mode.
+        self.modeLabel.text = [chartModes objectAtIndex:roundedValue];
     
     
-    modeValue = roundedValue;
+        modeValue = roundedValue;
     
-    // TITLE: Year mode title-> current year, month mode title-> current month
-    if(modeValue == 0){
-        self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
+        // TITLE: Year mode title-> current year, month mode title-> current month
+        if(modeValue == 0){
+            self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
+        }
+        else{
+            self.mainTitle.title = [years objectAtIndex:currentYearIndex];
+        }
+    
+        NSLog(@"did scroll:%f",roundedValue);
     }
-    else{
-        self.mainTitle.title = [years objectAtIndex:currentYearIndex];
-    }
-    
-    NSLog(@"did scroll:%f",roundedValue);
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -219,7 +224,7 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
 
 - (IBAction)nextTimePeriodButtonTapped:(id)sender {
 
-    if(currentMonthIndex<months.count-1 && currentYearIndex<years.count-1){
+    if(currentMonthIndex<months.count && currentYearIndex<years.count-1){
         if(modeValue == 0){
             [self incrementByMonth];
         }
