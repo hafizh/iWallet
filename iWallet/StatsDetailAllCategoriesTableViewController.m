@@ -16,7 +16,7 @@
 @implementation StatsDetailAllCategoriesTableViewController
 
 
-NSArray *categories;
+NSArray *localCategories;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,7 +39,7 @@ NSArray *categories;
     
     //*************** Init DUMMY arrays *******************
     
-    categories = [[NSArray alloc] initWithObjects:
+    localCategories = [[NSArray alloc] initWithObjects:
                   @"All",
                   @"Food & Groceries",
                   @"Houshold & Rent",
@@ -68,7 +68,7 @@ NSArray *categories;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return categories.count;
+    return localCategories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,7 +77,7 @@ NSArray *categories;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [categories objectAtIndex:indexPath.row];
+    cell.textLabel.text = [localCategories objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d€", arc4random_uniform(150)];
     return cell;
 }

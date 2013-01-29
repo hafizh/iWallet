@@ -14,7 +14,7 @@
 
 @implementation StatsDetailCategoryTableViewController
 
-NSArray *categories;
+NSArray *localCategories;
 NSArray *months;
 NSArray *years;
 NSMutableArray *sectionsHeaders;
@@ -37,7 +37,7 @@ NSMutableArray *sectionsHeaders;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    categories = [[NSArray alloc] initWithObjects:
+    localCategories = [[NSArray alloc] initWithObjects:
                   @"All",
                   @"Food & Groceries",
                   @"Houshold & Rent",
@@ -87,7 +87,7 @@ NSMutableArray *sectionsHeaders;
         self.mainTitle.title = @"Unknown category!";
     }
     else{
-        self.mainTitle.title = [categories objectAtIndex:self.selectedCategoryID];
+        self.mainTitle.title = [localCategories objectAtIndex:self.selectedCategoryID];
     }
 NSLog(@"currentYear: %d", self.currentYearIndex);
 

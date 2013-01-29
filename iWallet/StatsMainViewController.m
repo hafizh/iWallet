@@ -41,9 +41,18 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
+//    CGRect categoriesFrame = CGRectMake(0, 0, 320, 240);
+//    [self.categoriesTableView setFrame:categoriesFrame];
+//    
+//    CGRect chartFrame = CGRectMake(0,250, 320, 230);
+//    [self.scrollView setFrame:chartFrame];
+//    
+//    [self.view addSubview:self.categoriesTableView];
+//    [self.view addSubview:self.scrollView];
     //*************** Init DUMMY arrays *******************
     
     categories = [[NSArray alloc] initWithObjects:
+                  @"Detail...",
                   @"All",
                   @"Food & Groceries",
                   @"Houshold & Rent",
@@ -109,10 +118,13 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     
     self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
     
-    NSLog(@" tableview height:%f and page height:%f", self.categoriesTableView.frame.size.height, self.scrollView.contentSize.height);
+    NSLog(@" tableview height:%f and page height:%f", self.categoriesTableView.frame.size.height, self.scrollView.frame.size.height);
 
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    NSLog(@"categories.count:%d", categories.count);
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -140,7 +152,7 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
             self.mainTitle.title = [years objectAtIndex:currentYearIndex];
         }
     
-        NSLog(@"did scroll:%f",roundedValue);
+        //NSLog(@"did scroll:%f",roundedValue);
     }
 }
 
@@ -152,22 +164,36 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    NSLog(@"number of rows method");
     return categories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"category";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier;
+    UITableViewCell *cell;
+    
+    if (indexPath.row == 0) {
+        CellIdentifier = @"detailCell";
+        
+    }
+    else if(indexPath.row > 0){
+        CellIdentifier = @"category";
+    }
+//    static NSString *CellIdentifier = @"category";
+
+     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     cell.textLabel.text = [categories objectAtIndex:indexPath.row];
     
     // set the first category cell selected and set selectedcategory label accordingly.
-    if(indexPath.row == 0){
-        cell.selected = YES;
-        self.selectedCategoryLabel.text = cell.textLabel.text;
-    }
+//    if(indexPath.row == 1){
+//        cell.selected = YES;
+//        self.selectedCategoryLabel.text = cell.textLabel.text;
+//    }
+    NSLog(@"id:%@, rowindex:%d, cell text:%@", CellIdentifier, indexPath.row, cell.textLabel.text);
+
     return cell;
 }
 
@@ -183,14 +209,16 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    self.selectedCategoryLabel.text = [categories objectAtIndex:indexPath.row];
+    if(indexPath.row > 0){
+        self.selectedCategoryLabel.text = [categories objectAtIndex:indexPath.row];
+
+        NSString *selection = [NSString stringWithFormat:@"%@ %@", [categories objectAtIndex:indexPath.row], @"selected"];
     
-    NSString *selection = [NSString stringWithFormat:@"%@ %@", [categories objectAtIndex:indexPath.row], @"selected"];
+        NSLog(@"%@", selection);
     
-    NSLog(@"%@", selection);
-    
-    self.selectedCategoryLabel.text = selection;
-    
+        self.selectedCategoryLabel.text = selection;
+    }
+    NSLog(@"row selected method, row:%d", indexPath.row);
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -200,7 +228,6 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
         dest.currentYearIndex = currentYearIndex;
         NSLog(@"fromMainStatsToDetail");
     }
-    
     
 }
 
