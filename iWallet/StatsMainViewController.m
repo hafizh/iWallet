@@ -8,6 +8,7 @@
 
 #import "StatsMainViewController.h"
 #import "StatsDetailAllCategoriesTableViewController.h"
+#import "PlotView.h"
 
 @interface StatsMainViewController ()
 
@@ -99,15 +100,15 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     self.scrollView.delegate = self;
     
     // view 1: monthly chart
-    CGRect frame = CGRectMake(0, 0, viewWidth, viewHeight);
-    UIView *page1 = [[UIView alloc] initWithFrame:frame];
-    page1.backgroundColor = [UIColor grayColor];
+    CGRect frame1 = CGRectMake(0, 0, viewWidth, viewHeight);
+    PlotView *page1 = [[PlotView alloc] initWithFrame:frame1];
+    //page1.backgroundColor = [UIColor blackColor];
     [self.scrollView addSubview:page1];
     
     // view 2: yearly chart
-    frame = CGRectMake(page1.frame.origin.x+page1.frame.size.width, page1.frame.origin.y, page1.frame.size.width, page1.frame.size.height);
-    UIView *page2 = [[UIView alloc] initWithFrame:frame];
-    page2.backgroundColor = [UIColor blackColor];
+    CGRect frame2 = CGRectMake(page1.frame.origin.x+page1.frame.size.width, page1.frame.origin.y, page1.frame.size.width, page1.frame.size.height);
+    PlotView *page2 = [[PlotView alloc] initWithFrame:frame2];
+//    page2.backgroundColor = [UIColor blackColor];
     [self.scrollView addSubview:page2];
     
     
@@ -186,6 +187,7 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     
     // Configure the cell...
     cell.textLabel.text = [categories objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d%%", arc4random_uniform(90)];
     
     // set the first category cell selected and set selectedcategory label accordingly.
 //    if(indexPath.row == 1){

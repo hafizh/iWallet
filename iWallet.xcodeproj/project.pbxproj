@@ -24,6 +24,7 @@
 		0F159F7B16AF160B00DE596E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F159F7A16AF160B00DE596E /* SecondViewController.m */; };
 		0F159F7D16AF160B00DE596E /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7C16AF160B00DE596E /* second.png */; };
 		0F159F7F16AF160B00DE596E /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7E16AF160B00DE596E /* second@2x.png */; };
+		0F3D06EA16B82A7500BC7850 /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D06E916B82A7500BC7850 /* PlotView.m */; };
 		0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */; };
 		0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */; };
 		0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F537A8416B0593F006F00FD /* StatsMainViewController.m */; };
@@ -53,6 +54,8 @@
 		0F159F7A16AF160B00DE596E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		0F159F7C16AF160B00DE596E /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		0F159F7E16AF160B00DE596E /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		0F3D06E816B82A7400BC7850 /* PlotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotView.h; sourceTree = "<group>"; };
+		0F3D06E916B82A7500BC7850 /* PlotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotView.m; sourceTree = "<group>"; };
 		0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailAllCategoriesTableViewController.h; sourceTree = "<group>"; };
 		0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsDetailAllCategoriesTableViewController.m; sourceTree = "<group>"; };
 		0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailCategoryTableViewController.h; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 				0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */,
 				0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */,
 				0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */,
+				0F3D06E816B82A7400BC7850 /* PlotView.h */,
+				0F3D06E916B82A7500BC7850 /* PlotView.m */,
 			);
 			path = iWallet;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 				0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */,
 				0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */,
 				0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */,
+				0F3D06EA16B82A7500BC7850 /* PlotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
