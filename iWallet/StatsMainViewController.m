@@ -23,7 +23,7 @@ NSArray *years;
 int currentMonthIndex = 0;
 int currentYearIndex = 1;
 
-int viewHeight = 275;
+int viewHeight = 180;
 int viewWidth = 320;
 int modeValue = 0; // 0 or 1, monthly or yearly respectively
 
