@@ -40,7 +40,6 @@ NSArray *localCategories;
     //*************** Init DUMMY arrays *******************
     
     localCategories = [[NSArray alloc] initWithObjects:
-                  @"All",
                   @"Food & Groceries",
                   @"Houshold & Rent",
                   @"Clothing",

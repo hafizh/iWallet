@@ -11,7 +11,7 @@
 @implementation PlotView
 
 int paddingH = 10;
-int paddingV = 10;
+int paddingV = 15;
 int plotWidth = 320;
 int plotHeight;
 NSMutableArray *dummyData;
@@ -60,12 +60,22 @@ CGColorRef graphLineColor()
     // ******** INIT DUMMY DATA *****************//
     
     dummyData = [[NSMutableArray alloc]init];
-    
-    for(int i = 0; i <=30; i++){
-        [dummyData addObject:[NSString stringWithFormat:@"%d€", arc4random_uniform(150)]];
-    }
+    [self updateData];
     // ********* FINISH DUMMY ******************//
     return self;
+}
+
+- (void) updateData
+{
+    [dummyData removeAllObjects];
+    
+    // generate random data
+    for(int i = 0; i <=30; i++){
+        [dummyData addObject:[NSString stringWithFormat:@"%d€", arc4random_uniform(75)]];
+    }
+    
+    // update view
+    [self setNeedsDisplay];
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -90,13 +100,22 @@ CGColorRef graphLineColor()
 		CGContextAddLineToPoint(context, plotWidth, i);
 		CGContextStrokePath(context);
         
+        // draw y axis labels
         int reverseIndex = (i/10);
-        [[NSString stringWithFormat:@"%i", reverseIndex] drawInRect:
-                 CGRectMake(2, (plotHeight-paddingH) - reverseIndex*10, paddingV, paddingH)
-                                                     withFont:[UIFont systemFontOfSize:paddingH - 3]
+        if(reverseIndex < 16){
+            [[NSString stringWithFormat:@"%i", reverseIndex*5] drawInRect:
+                 CGRectMake(4, (plotHeight-paddingH) - reverseIndex*10, paddingV, paddingH)
+                                                     withFont:[UIFont systemFontOfSize:paddingH - 4]
                                                 lineBreakMode:NSLineBreakByWordWrapping
                                                     alignment:NSTextAlignmentLeft];
-        
+        }
+        else{
+            [@"€" drawInRect:
+             CGRectMake(4, (plotHeight-paddingH) - reverseIndex*10, paddingV, paddingH)
+                                                                 withFont:[UIFont systemFontOfSize:paddingH - 2]
+                                                            lineBreakMode:NSLineBreakByWordWrapping
+                                                                alignment:NSTextAlignmentLeft];
+        }
 	}
     
     // draw x axis
@@ -105,22 +124,52 @@ CGColorRef graphLineColor()
     CGContextAddLineToPoint(context, plotWidth, plotHeight - paddingH);
     CGContextStrokePath(context);
 
+    [self drawData:context];
     
 }
 
 
 - (void)drawData:(CGContextRef) context
 {
-    CGContextSetStrokeColorWithColor(context, CreateDeviceGrayColor(0.9, 1.0));
+    CGContextSetStrokeColorWithColor(context, CreateDeviceGrayColor(1.0, 1.0));
+    
+    // init variables
+    float originx = paddingV; float originy = plotHeight - paddingH;
+    float xAxisLength = (plotWidth - 2*paddingV)/30; // 30 days in monthly mode
+    float destX = paddingV + xAxisLength;
+    int counter = 1;
+    
+    // draw x axis label 0
+    [[NSString stringWithFormat:@"%i", 0] drawInRect:
+     CGRectMake(paddingV, plotHeight - 6, paddingV, paddingH)
+                                                  withFont:[UIFont systemFontOfSize:paddingH - 4]
+                                             lineBreakMode:NSLineBreakByWordWrapping
+                                                 alignment:NSTextAlignmentLeft];
+    
+    
     for (NSString *str in dummyData) {
         float xValue = [str floatValue];
-        
+        // draw 1 data line
         [self drawLineInContext:context
-                        originX:paddingV
-                        originY:plotHeight-paddingH
-                          destX:paddingV
-                          destY:(plotHeight-paddingH) - xValue
-                          width:4];
+                        originX:originx
+                        originY:originy
+                          destX:destX
+                          destY:(plotHeight-paddingH) - xValue*2
+                          width:1];
+        
+        
+        // draw x axis label
+        [[NSString stringWithFormat:@"%i", counter] drawInRect:
+         CGRectMake(destX, plotHeight - 6, xAxisLength, paddingH)
+                                                             withFont:[UIFont systemFontOfSize:paddingH - 4]
+                                                        lineBreakMode:NSLineBreakByWordWrapping
+                                                            alignment:NSTextAlignmentLeft];
+        originx = destX;
+        destX +=xAxisLength;
+        originy = (plotHeight-paddingH) - xValue*2;
+        //NSLog(@"data item:%@, originx:%f, originy:%f", str, originx, originy);
+        
+        counter++;
     }
     
 }
@@ -131,7 +180,7 @@ CGColorRef graphLineColor()
         CGContextMoveToPoint(context, x1, y1);
         CGContextAddLineToPoint(context, x2, y2);
         CGContextSetLineWidth(context, width);
-    CGContextStrokePath(context);
+        CGContextStrokePath(context);
 }
 
 

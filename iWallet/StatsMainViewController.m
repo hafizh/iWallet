@@ -27,6 +27,10 @@ int viewHeight = 180;
 int viewWidth = 320;
 int modeValue = 0; // 0 or 1, monthly or yearly respectively
 
+// scrollview pages
+PlotView *page1;
+PlotView *page2;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -101,20 +105,20 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     
     // view 1: monthly chart
     CGRect frame1 = CGRectMake(0, 0, viewWidth, viewHeight);
-    PlotView *page1 = [[PlotView alloc] initWithFrame:frame1];
+    page1 = [[PlotView alloc] initWithFrame:frame1];
     //page1.backgroundColor = [UIColor blackColor];
     [self.scrollView addSubview:page1];
     
     // view 2: yearly chart
     CGRect frame2 = CGRectMake(page1.frame.origin.x+page1.frame.size.width, page1.frame.origin.y, page1.frame.size.width, page1.frame.size.height);
-    PlotView *page2 = [[PlotView alloc] initWithFrame:frame2];
+    page2 = [[PlotView alloc] initWithFrame:frame2];
 //    page2.backgroundColor = [UIColor blackColor];
     [self.scrollView addSubview:page2];
     
     
     // set default text for labels: these are placeholders for further implementation on feedback on which
     // category selected and which mode is it(mothly, yearly, etc.)
-    self.selectedCategoryLabel.text = @"No category selected!";
+    //self.selectedCategoryLabel.text = @"";//@"No category selected!";
     self.modeLabel.text = @"Monthly chart";
     
     self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
@@ -194,7 +198,7 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
 //        cell.selected = YES;
 //        self.selectedCategoryLabel.text = cell.textLabel.text;
 //    }
-    NSLog(@"id:%@, rowindex:%d, cell text:%@", CellIdentifier, indexPath.row, cell.textLabel.text);
+    //NSLog(@"id:%@, rowindex:%d, cell text:%@", CellIdentifier, indexPath.row, cell.textLabel.text);
 
     return cell;
 }
@@ -212,15 +216,18 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     if(indexPath.row > 0){
-        self.selectedCategoryLabel.text = [categories objectAtIndex:indexPath.row];
-
-        NSString *selection = [NSString stringWithFormat:@"%@ %@", [categories objectAtIndex:indexPath.row], @"selected"];
+//        self.selectedCategoryLabel.text = [categories objectAtIndex:indexPath.row];
+//
+//        NSString *selection = [NSString stringWithFormat:@"%@ %@", [categories objectAtIndex:indexPath.row], @"selected"];
+//    
+//        NSLog(@"%@", selection);
+//    
+//        self.selectedCategoryLabel.text = selection;
+        [page1 updateData];
+        [page2 updateData];
     
-        NSLog(@"%@", selection);
-    
-        self.selectedCategoryLabel.text = selection;
     }
-    NSLog(@"row selected method, row:%d", indexPath.row);
+    //NSLog(@"row selected method, row:%d", indexPath.row);
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -246,6 +253,8 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
             }
         }
         NSLog(@" currentMonthIndex:%d and year:%d", currentMonthIndex, currentYearIndex);
+    [page1 updateData];
+    [page2 updateData];
     
         //self.mainTitle.title = [months objectAtIndex:currentMonthIndex]
 }
@@ -263,6 +272,8 @@ int modeValue = 0; // 0 or 1, monthly or yearly respectively
     }
     
     NSLog(@" currentMonthIndex:%d and year:%d", currentMonthIndex, currentYearIndex);
+    [page1 updateData];
+    [page2 updateData];
   
     //self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
 }

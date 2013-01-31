@@ -10,4 +10,6 @@
 
 @interface PlotView : UIView
 
+- (void) updateData;
+
 @end
