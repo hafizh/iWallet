@@ -23,6 +23,8 @@ NSArray *years;
 int currentMonthIndex = 0;
 int currentYearIndex = 1;
 
+int tableHeightInit = 370;
+int tableHeight = 190;
 int viewHeight = 180;
 int viewWidth = 320;
 int modeValue = 0; // 0 or 1, monthly or yearly respectively
@@ -124,12 +126,11 @@ PlotView *page2;
     self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
     
     NSLog(@" tableview height:%f and page height:%f", self.categoriesTableView.frame.size.height, self.scrollView.frame.size.height);
-
+    
+    [self initLayout];
+    
 }
 
-- (void) viewWillAppear:(BOOL)animated{
-    NSLog(@"categories.count:%d", categories.count);
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -223,9 +224,11 @@ PlotView *page2;
 //        NSLog(@"%@", selection);
 //    
 //        self.selectedCategoryLabel.text = selection;
+        [self updateLayout];
         [page1 updateData];
         [page2 updateData];
     
+        
     }
     //NSLog(@"row selected method, row:%d", indexPath.row);
 }
@@ -238,6 +241,11 @@ PlotView *page2;
         NSLog(@"fromMainStatsToDetail");
     }
     
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [self initLayout];
 }
 
 - (IBAction)prevTimePeriodButtonTapped:(id)sender {
@@ -320,5 +328,32 @@ PlotView *page2;
         currentYearIndex++;
         self.mainTitle.title = [years objectAtIndex:currentYearIndex];
     }
+}
+
+- (void)updateLayout
+{
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         [self.scrollView setAlpha:1.0f];
+                     }
+     ];
+    
+    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeight);
+    
+}
+
+- (void) initLayout
+{
+    self.view.frame = CGRectMake(0, 0, 320, 370);
+
+    //self.scrollView.hidden = YES;
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         [self.scrollView setAlpha:0.0f];
+                     }
+    ];
+    [self.categoriesTableView deselectRowAtIndexPath:[self.categoriesTableView indexPathForSelectedRow] animated:NO];
+    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeightInit);
+    self.scrollView.frame = CGRectMake(0, tableHeight, viewWidth, viewHeight);
 }
 @end

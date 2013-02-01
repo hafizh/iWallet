@@ -30,7 +30,7 @@ CGColorRef graphBackgroundColor()
 	static CGColorRef c = NULL;
 	if(c == NULL)
 	{
-		c = CreateDeviceGrayColor(0.6, 1.0);
+		c = CreateDeviceGrayColor(0.7, 1.0);
 	}
 	return c;
 }
@@ -92,7 +92,7 @@ CGColorRef graphLineColor()
 	CGContextStrokePath(context);
     
     // draw gridlines
-    NSLog(@"plotHeight:%d", plotHeight);
+    //NSLog(@"plotHeight:%d", plotHeight);
     for (int i = 10; i < plotHeight; i+= 10) {
 		CGContextSetStrokeColorWithColor(context, graphLineColor());
 		
