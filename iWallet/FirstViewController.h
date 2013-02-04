@@ -10,4 +10,11 @@
 
 @interface FirstViewController : UIViewController
 
+-(void) currentMonth;
+-(void) moneyLeft;
+@property (weak, nonatomic) IBOutlet UILabel *currentMonth;
+
+@property (weak, nonatomic) IBOutlet UILabel *monthlyBudgetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneySpentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLeftLabel;
 @end
