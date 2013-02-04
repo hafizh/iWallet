@@ -37,11 +37,15 @@
 }
 -(void) moneyLeft{
     //get value from settings
-    //double monthlyBudget = 1000;
-    //[monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.20f", monthlyBudget]];
+    double monthlyBudget = 1000;
+    [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f", monthlyBudget]];
     //[monthlyBudgetLabel setText: @"aaa"];
     //get sum of spent money
-    //  double spentMoney = 333.45;
+    double spentMoney = 333.45;
+    [moneySpentLabel setText: [NSString stringWithFormat:@"%.2f", spentMoney]];
+    double moneyLeft = monthlyBudget - spentMoney;
+    [moneyLeftLabel setText: [NSString stringWithFormat:@"%.2f", moneyLeft]];
+    
     
     //
 }
@@ -52,6 +56,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self currentMonth];
+    [self moneyLeft];
 }
 
 - (void)didReceiveMemoryWarning
