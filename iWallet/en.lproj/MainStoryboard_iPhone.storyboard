@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--First View Controller - First-->
@@ -96,19 +96,16 @@
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="chartScroll" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="FDo-pM-fUz">
                                 <rect key="frame" x="0.0" y="183" width="320" height="180"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mode(yearly/monthly)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMd-ZW-emJ">
-                                        <rect key="frame" x="78" y="36" width="164" height="22"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.4192637568" green="0.060623054660000002" blue="0.040841947869999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" red="0.4192637568" green="0.060623054660000002" blue="0.040841947869999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="shadowColor" red="0.4192637568" green="0.060623054660000002" blue="0.040841947869999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </label>
-                                </subviews>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" numberOfPages="2" id="QFF-aC-vi7">
-                                <rect key="frame" x="141" y="316" width="38" height="36"/>
+                                <rect key="frame" x="141" y="324" width="38" height="36"/>
                             </pageControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mode(yearly/monthly)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMd-ZW-emJ">
+                                <rect key="frame" x="95" y="210" width="164" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="highlightedColor" red="0.4192637568" green="0.060623054660000002" blue="0.040841947869999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" red="0.4192637568" green="0.060623054660000002" blue="0.040841947869999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.4192637568" green="0.060623054660000002" blue="0.040841947869999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>

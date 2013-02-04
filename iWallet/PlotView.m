@@ -124,15 +124,13 @@ CGColorRef graphLineColor()
     CGContextAddLineToPoint(context, plotWidth, plotHeight - paddingH);
     CGContextStrokePath(context);
 
-    [self drawData:context];
+    [self drawDataColumnPlot:context];
     
 }
 
 
-- (void)drawData:(CGContextRef) context
+- (void)drawDataNormalPlot:(CGContextRef) context
 {
-    CGContextSetStrokeColorWithColor(context, CreateDeviceGrayColor(1.0, 1.0));
-    
     // init variables
     float originx = paddingV; float originy = plotHeight - paddingH;
     float xAxisLength = (plotWidth - 2*paddingV)/30; // 30 days in monthly mode
@@ -161,7 +159,7 @@ CGColorRef graphLineColor()
         // draw x axis label
         [[NSString stringWithFormat:@"%i", counter] drawInRect:
          CGRectMake(destX, plotHeight - 6, xAxisLength, paddingH)
-                                                             withFont:[UIFont systemFontOfSize:paddingH - 4]
+                                                             withFont:[UIFont systemFontOfSize:paddingH - 3]
                                                         lineBreakMode:NSLineBreakByWordWrapping
                                                             alignment:NSTextAlignmentLeft];
         originx = destX;
@@ -174,8 +172,44 @@ CGColorRef graphLineColor()
     
 }
 
+- (void) drawDataColumnPlot:(CGContextRef)context
+{
+    // init variables
+    float xAxisLength = (plotWidth - 2*paddingV)/30; // 30 days in monthly mode
+    float originx = paddingV+xAxisLength/2; float originy = plotHeight - paddingH;
+    float destX = originx;
+    int counter = 1;
+    
+    for (NSString *str in dummyData) {
+        float xValue = [str floatValue];
+        // draw 1 data line
+        [self drawLineInContext:context
+                        originX:originx
+                        originY:originy
+                          destX:destX
+                          destY:(plotHeight - paddingH) - xValue*2
+                          width:xAxisLength - 0.5];
+        
+        
+        // draw x axis label
+        [[NSString stringWithFormat:@"%i", counter] drawInRect:
+         CGRectMake(destX-2, plotHeight - 6, xAxisLength, paddingH)
+                                                      withFont:[UIFont systemFontOfSize:paddingH - 3]
+                                                 lineBreakMode:NSLineBreakByWordWrapping
+                                                     alignment:NSTextAlignmentLeft];
+
+        originx +=xAxisLength;
+        destX +=xAxisLength;
+        //originy = (plotHeight-paddingH) - xValue*2;
+        
+        counter++;
+    }
+    
+}
+
 - (void)drawLineInContext:(CGContextRef)context originX:(float)x1 originY:(float)y1 destX:(float)x2 destY:(float)y2 width:(float)width
 {
+        CGContextSetRGBStrokeColor(context, 0.6, 0.3, 0.7, 1.0);
         CGContextBeginPath(context);
         CGContextMoveToPoint(context, x1, y1);
         CGContextAddLineToPoint(context, x2, y2);

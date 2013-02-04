@@ -335,23 +335,30 @@ PlotView *page2;
     [UIView animateWithDuration:0.5f
                      animations:^{
                          [self.scrollView setAlpha:1.0f];
+                         [self.categoriesTableView setFrame:CGRectMake(0, 0, viewWidth, tableHeight)];
+                         self.pageControl.hidden = NO;
+                         self.modeLabel.hidden = NO;
                      }
      ];
-    
-    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeight);
-    
+
+    [self.categoriesTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle
+                                                                animated:YES];
 }
 
 - (void) initLayout
 {
     self.view.frame = CGRectMake(0, 0, 320, 370);
 
-    //self.scrollView.hidden = YES;
+    
     [UIView animateWithDuration:0.5f
                      animations:^{
                          [self.scrollView setAlpha:0.0f];
+                         self.modeLabel.hidden = YES;
+                         self.pageControl.hidden = YES;
+
                      }
     ];
+    
     [self.categoriesTableView deselectRowAtIndexPath:[self.categoriesTableView indexPathForSelectedRow] animated:NO];
     self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeightInit);
     self.scrollView.frame = CGRectMake(0, tableHeight, viewWidth, viewHeight);
