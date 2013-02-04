@@ -39,15 +39,16 @@
     //get value from settings
     double monthlyBudget = 1000;
     [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f", monthlyBudget]];
-    //[monthlyBudgetLabel setText: @"aaa"];
+
     //get sum of spent money
     double spentMoney = 333.45;
     [moneySpentLabel setText: [NSString stringWithFormat:@"%.2f", spentMoney]];
+    
     double moneyLeft = monthlyBudget - spentMoney;
     [moneyLeftLabel setText: [NSString stringWithFormat:@"%.2f", moneyLeft]];
     
     
-    //
+ 
 }
 
 
