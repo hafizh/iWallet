@@ -24,6 +24,8 @@
 		0F159F7B16AF160B00DE596E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F159F7A16AF160B00DE596E /* SecondViewController.m */; };
 		0F159F7D16AF160B00DE596E /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7C16AF160B00DE596E /* second.png */; };
 		0F159F7F16AF160B00DE596E /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F159F7E16AF160B00DE596E /* second@2x.png */; };
+		0F1D2A7116C00C3E007031A3 /* StatsMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D2A7016C00C3E007031A3 /* StatsMainNavigationController.m */; };
+		0F1D2A7416C00D97007031A3 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D2A7316C00D97007031A3 /* MainTabBarController.m */; };
 		0F3D06EA16B82A7500BC7850 /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D06E916B82A7500BC7850 /* PlotView.m */; };
 		0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */; };
 		0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */; };
@@ -75,6 +77,10 @@
 		0F159F7A16AF160B00DE596E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		0F159F7C16AF160B00DE596E /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		0F159F7E16AF160B00DE596E /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		0F1D2A6F16C00C3E007031A3 /* StatsMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsMainNavigationController.h; sourceTree = "<group>"; };
+		0F1D2A7016C00C3E007031A3 /* StatsMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsMainNavigationController.m; sourceTree = "<group>"; };
+		0F1D2A7216C00D97007031A3 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		0F1D2A7316C00D97007031A3 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		0F3D06E816B82A7400BC7850 /* PlotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotView.h; sourceTree = "<group>"; };
 		0F3D06E916B82A7500BC7850 /* PlotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotView.m; sourceTree = "<group>"; };
 		0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailAllCategoriesTableViewController.h; sourceTree = "<group>"; };
@@ -153,7 +159,6 @@
 			children = (
 				7651677416BD6C7E005EB96E /* third.png */,
 				7651677516BD6C7E005EB96E /* third@2x.png */,
-				7651674B16BD44B2005EB96E /* Categories */,
 				0F159F6316AF160B00DE596E /* AppDelegate.h */,
 				0F159F6416AF160B00DE596E /* AppDelegate.m */,
 				0F159F6C16AF160B00DE596E /* MainStoryboard_iPhone.storyboard */,
@@ -168,15 +173,11 @@
 				0F159F7E16AF160B00DE596E /* second@2x.png */,
 				0F9F5B5D16BFFE93002F8C26 /* Welcome.h */,
 				0F9F5B5E16BFFE93002F8C26 /* Welcome.m */,
+				0F1D2A7216C00D97007031A3 /* MainTabBarController.h */,
+				0F1D2A7316C00D97007031A3 /* MainTabBarController.m */,
+				0F1D2A7716C01375007031A3 /* Statistics */,
+				7651674B16BD44B2005EB96E /* Categories */,
 				0F159F5B16AF160A00DE596E /* Supporting Files */,
-				0F537A8316B0593F006F00FD /* StatsMainViewController.h */,
-				0F537A8416B0593F006F00FD /* StatsMainViewController.m */,
-				0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */,
-				0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */,
-				0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */,
-				0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */,
-				0F3D06E816B82A7400BC7850 /* PlotView.h */,
-				0F3D06E916B82A7500BC7850 /* PlotView.m */,
 			);
 			path = iWallet;
 			sourceTree = "<group>";
@@ -193,6 +194,23 @@
 				0F159F6A16AF160B00DE596E /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F1D2A7716C01375007031A3 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				0F1D2A6F16C00C3E007031A3 /* StatsMainNavigationController.h */,
+				0F1D2A7016C00C3E007031A3 /* StatsMainNavigationController.m */,
+				0F537A8316B0593F006F00FD /* StatsMainViewController.h */,
+				0F537A8416B0593F006F00FD /* StatsMainViewController.m */,
+				0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */,
+				0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */,
+				0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */,
+				0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */,
+				0F3D06E816B82A7400BC7850 /* PlotView.h */,
+				0F3D06E916B82A7500BC7850 /* PlotView.m */,
+			);
+			name = Statistics;
 			sourceTree = "<group>";
 		};
 		7651674B16BD44B2005EB96E /* Categories */ = {
@@ -320,6 +338,8 @@
 				0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */,
 				0F3D06EA16B82A7500BC7850 /* PlotView.m in Sources */,
 				0F9F5B5F16BFFE93002F8C26 /* Welcome.m in Sources */,
+				0F1D2A7116C00C3E007031A3 /* StatsMainNavigationController.m in Sources */,
+				0F1D2A7416C00D97007031A3 /* MainTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

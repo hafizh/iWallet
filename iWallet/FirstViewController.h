@@ -12,7 +12,7 @@
 
 -(void) currentMonth;
 -(void) moneyLeft;
-@property (weak, nonatomic) IBOutlet UILabel *currentMonth;
+@property (weak, nonatomic) IBOutlet UILabel *currentMonthLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *monthlyBudgetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneySpentLabel;

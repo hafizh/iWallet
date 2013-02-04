@@ -14,7 +14,7 @@
 
 @implementation FirstViewController
 
-@synthesize currentMonth;
+@synthesize currentMonthLabel;
 
 @synthesize monthlyBudgetLabel;
 @synthesize moneySpentLabel;
@@ -31,7 +31,7 @@
     
     dateFormatter.dateFormat=@"MMMM";
     NSString * monthString = [[dateFormatter stringFromDate:date] capitalizedString];
-    [currentMonth setText: [@"Current month: 	" stringByAppendingString:monthString]];
+    [currentMonthLabel setText: [@"Current month: 	" stringByAppendingString:monthString]];
     // NSLog(@"month: %@", monthString);
     
 }

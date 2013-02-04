@@ -108,25 +108,21 @@ PlotView *page2;
     // view 1: monthly chart
     CGRect frame1 = CGRectMake(0, 0, viewWidth, viewHeight);
     page1 = [[PlotView alloc] initWithFrame:frame1];
-    //page1.backgroundColor = [UIColor blackColor];
     [self.scrollView addSubview:page1];
     
     // view 2: yearly chart
     CGRect frame2 = CGRectMake(page1.frame.origin.x+page1.frame.size.width, page1.frame.origin.y, page1.frame.size.width, page1.frame.size.height);
     page2 = [[PlotView alloc] initWithFrame:frame2];
-//    page2.backgroundColor = [UIColor blackColor];
     [self.scrollView addSubview:page2];
     
     
     // set default text for labels: these are placeholders for further implementation on feedback on which
     // category selected and which mode is it(mothly, yearly, etc.)
-    //self.selectedCategoryLabel.text = @"";//@"No category selected!";
     self.modeLabel.text = @"Monthly chart";
     
     self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
-    
-    NSLog(@" tableview height:%f and page height:%f", self.categoriesTableView.frame.size.height, self.scrollView.frame.size.height);
-    
+ 
+    // initialize the layout
     [self initLayout];
     
 }
@@ -135,6 +131,29 @@ PlotView *page2;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+    
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // Not doing anything yet.
+//    if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)){
+//        [self updateLayoutToLandscape];
+//    }
+//    else if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)){
+//        [self updateLayout];
+//    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -170,7 +189,6 @@ PlotView *page2;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSLog(@"number of rows method");
     return categories.count;
 }
 
@@ -362,5 +380,15 @@ PlotView *page2;
     [self.categoriesTableView deselectRowAtIndexPath:[self.categoriesTableView indexPathForSelectedRow] animated:NO];
     self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeightInit);
     self.scrollView.frame = CGRectMake(0, tableHeight, viewWidth, viewHeight);
+}
+
+// This Method is not working yet. 
+- (void) updateLayoutToLandscape
+{
+    // Do some crazy stuff to display the Plot in Full screen.
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    UIViewController *LandscapePlotViewController = [storyboard instantiateViewControllerWithIdentifier:@"LandscapePlotViewController"];
+    
+    [self presentViewController:LandscapePlotViewController animated:YES completion:NULL];
 }
 @end
