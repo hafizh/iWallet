@@ -48,13 +48,4 @@
     return [self.selectedViewController shouldAutorotate];
 }
 
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-//{
-//    if([[self.selectedViewController restorationIdentifier] isEqualToString:@"MainNavi"]){
-//        return [self.selectedViewController preferredInterfaceOrientationForPresentation];
-//    }
-//    
-//    return UIInterfaceOrientationPortrait;
-//}
-
 @end

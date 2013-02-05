@@ -7,6 +7,7 @@
 //
 
 #import "StatsMainNavigationController.h"
+#import "LandscapePlotViewController.h"
 
 @interface StatsMainNavigationController ()
 
@@ -35,8 +36,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (NSUInteger) supportedInterfaceOrientations
-{
+{       
     return [self.visibleViewController supportedInterfaceOrientations];
 }
 
@@ -45,5 +47,29 @@
 {
     return [self.visibleViewController shouldAutorotate];
 }
+
+//- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)){
+//        [self supportedInterfaceOrientations];
+//        [self shouldAutorotate];
+//        //[self dismissed:toInterfaceOrientation duration:duration];
+//        [self dismissViewControllerAnimated:YES completion:NULL];
+//    }
+//    else if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)){
+//        [self.visibleViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//    }
+//}
+
+//- (void) updateLayoutToLandscape
+//{
+//    // Do some crazy stuff to display the Plot in Full screen.
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+//    LandscapePlotViewController *landscapePlotViewController = [storyboard instantiateViewControllerWithIdentifier:@"LandscapePlotViewController"];
+//    
+//    //[landscapePlotViewController setDelegate:self];
+//    [self presentViewController:landscapePlotViewController animated:YES completion:NULL];
+//}
+
 
 @end

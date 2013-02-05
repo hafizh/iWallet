@@ -31,6 +31,7 @@
 		0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */; };
 		0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F537A8416B0593F006F00FD /* StatsMainViewController.m */; };
 		0F9F5B5F16BFFE93002F8C26 /* Welcome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9F5B5E16BFFE93002F8C26 /* Welcome.m */; };
+		0FE4B46216C10EEB0015B499 /* LandscapePlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4B46116C10EEB0015B499 /* LandscapePlotViewController.m */; };
 		7651674F16BD459E005EB96E /* clothing.png in Resources */ = {isa = PBXBuildFile; fileRef = 7651674D16BD459E005EB96E /* clothing.png */; };
 		7651675016BD459E005EB96E /* clothing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7651674E16BD459E005EB96E /* clothing@2x.png */; };
 		7651675316BD45AD005EB96E /* food.png in Resources */ = {isa = PBXBuildFile; fileRef = 7651675116BD45AD005EB96E /* food.png */; };
@@ -91,6 +92,8 @@
 		0F537A8416B0593F006F00FD /* StatsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsMainViewController.m; sourceTree = "<group>"; };
 		0F9F5B5D16BFFE93002F8C26 /* Welcome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Welcome.h; sourceTree = "<group>"; };
 		0F9F5B5E16BFFE93002F8C26 /* Welcome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Welcome.m; sourceTree = "<group>"; };
+		0FE4B46016C10EEB0015B499 /* LandscapePlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandscapePlotViewController.h; sourceTree = "<group>"; };
+		0FE4B46116C10EEB0015B499 /* LandscapePlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandscapePlotViewController.m; sourceTree = "<group>"; };
 		7651674D16BD459E005EB96E /* clothing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clothing.png; sourceTree = "<group>"; };
 		7651674E16BD459E005EB96E /* clothing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothing@2x.png"; sourceTree = "<group>"; };
 		7651675116BD45AD005EB96E /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food.png; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */,
 				0F3D06E816B82A7400BC7850 /* PlotView.h */,
 				0F3D06E916B82A7500BC7850 /* PlotView.m */,
+				0FE4B46016C10EEB0015B499 /* LandscapePlotViewController.h */,
+				0FE4B46116C10EEB0015B499 /* LandscapePlotViewController.m */,
 			);
 			name = Statistics;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				0F9F5B5F16BFFE93002F8C26 /* Welcome.m in Sources */,
 				0F1D2A7116C00C3E007031A3 /* StatsMainNavigationController.m in Sources */,
 				0F1D2A7416C00D97007031A3 /* MainTabBarController.m in Sources */,
+				0FE4B46216C10EEB0015B499 /* LandscapePlotViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

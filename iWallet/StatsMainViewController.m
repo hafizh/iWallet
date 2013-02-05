@@ -29,10 +29,16 @@ int viewHeight = 180;
 int viewWidth = 320;
 int modeValue = 0; // 0 or 1, monthly or yearly respectively
 
+// default Landscape plot init
+int lPlotViewHeight = 320;
+int lPlotViewWidth = 460;
+
 // scrollview pages
 PlotView *page1;
 PlotView *page2;
 
+UIInterfaceOrientation toOrientation;
+CGRect previousFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,14 +54,6 @@ PlotView *page2;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-//    CGRect categoriesFrame = CGRectMake(0, 0, 320, 240);
-//    [self.categoriesTableView setFrame:categoriesFrame];
-//    
-//    CGRect chartFrame = CGRectMake(0,250, 320, 230);
-//    [self.scrollView setFrame:chartFrame];
-//    
-//    [self.view addSubview:self.categoriesTableView];
-//    [self.view addSubview:self.scrollView];
     //*************** Init DUMMY arrays *******************
     
     categories = [[NSArray alloc] initWithObjects:
@@ -97,13 +95,131 @@ PlotView *page2;
     self.categoriesTableView.delegate = self;
     self.categoriesTableView.dataSource = self;
 
+   
+    // set self as scroll view delegate: to catch scrollViewDidScroll method
+    self.scrollView.delegate = self;
+    
+    // set default text for labels: these are placeholders for further implementation on feedback on which
+    // category selected and which mode is it(mothly, yearly, etc.)
+    self.modeLabel.text = @"Monthly chart";
+    
+    self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
+ 
+    // initialize the layout
+    [self initLayout];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [self initLayout];
+}
+
+// INTERFACE ORIENTATION METHODS
+
+// Overriden
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)){
+        toOrientation = toInterfaceOrientation;
+        [self updateLayoutToPortrait];
+    }
+    else if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation) && !UIInterfaceOrientationIsLandscape(toOrientation)){
+        //[self performSegueWithIdentifier:@"modalLandscapePlotSegue" sender:NULL];
+        toOrientation = toInterfaceOrientation;
+        UIView *tempView = [self.tabBarController.view.subviews objectAtIndex:0];
+        previousFrame = tempView.frame;
+        [self updateLayoutToLandscape];
+    }
+}
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if(UIInterfaceOrientationIsLandscape(toOrientation) && UIInterfaceOrientationIsPortrait(fromInterfaceOrientation)){
+        [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:CGRectMake(0, 0, 480, 320)];
+        [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:TRUE];
+    }
+    if(UIInterfaceOrientationIsPortrait(toOrientation)){
+        [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:previousFrame];
+        [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:FALSE];
+    }
+}
+
+// Custom Methods
+- (void) updateLayoutToPortrait
+{
+    [self.navigationController setNavigationBarHidden:FALSE animated:FALSE];
+    [self initLayout];
+    //[self updateLayout];
+}
+
+- (void) updateLayoutToLandscape
+{
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.height;
+    CGFloat screenHeight = screenRect.size.width;
+    
+    [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
+    //[[UIApplication sharedApplication] setStatusBarHidden:TRUE withAnimation:FALSE];
+    screenHeight -= [[UIApplication sharedApplication] statusBarFrame].size.height;
+    [self.scrollView setFrame:CGRectMake(0, 0, screenWidth,screenHeight)];
+    // Init scroll view
+    // 2 charts size: monthly & yearly
+    [self.scrollView setContentSize: CGSizeMake(screenWidth*2, screenHeight)];
+    
+    // view 1: monthly chart
+    CGRect frame1 = CGRectMake(0, 0, screenWidth, screenHeight);
+    [page1 setFrame:frame1];
+    
+    // view 2: yearly chart
+    CGRect frame2 = CGRectMake(screenWidth, 0, screenWidth, screenHeight);
+    [page2 setFrame:frame2];
+    
+    [self.scrollView addSubview:page1];
+    [self.scrollView addSubview:page2];
+    
+    [self.scrollView setAlpha:1.0f];
+}
+
+
+- (void)updateLayout
+{
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         [self.scrollView setAlpha:1.0f];
+                         [self.categoriesTableView setFrame:CGRectMake(0, 0, viewWidth, tableHeight)];
+                         self.pageControl.hidden = NO;
+                         self.modeLabel.hidden = NO;
+                     }
+     ];
+    
+    [self.categoriesTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle
+                                                                animated:YES];
+}
+
+- (void) initLayout
+{
+    self.view.frame = CGRectMake(0, 0, 320, 370);
     
     // Init scroll view
     // 2 charts size: monthly & yearly
     [self.scrollView setContentSize: CGSizeMake(viewWidth*2, viewHeight)];
-    
-    // set self as scroll view delegate: to catch scrollViewDidScroll method
-    self.scrollView.delegate = self;
     
     // view 1: monthly chart
     CGRect frame1 = CGRectMake(0, 0, viewWidth, viewHeight);
@@ -115,58 +231,40 @@ PlotView *page2;
     page2 = [[PlotView alloc] initWithFrame:frame2];
     [self.scrollView addSubview:page2];
     
+
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         [self.scrollView setAlpha:0.0f];
+                         self.modeLabel.hidden = YES;
+                         self.pageControl.hidden = YES;
+                     }
+     ];
     
-    // set default text for labels: these are placeholders for further implementation on feedback on which
-    // category selected and which mode is it(mothly, yearly, etc.)
-    self.modeLabel.text = @"Monthly chart";
-    
-    self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
- 
-    // initialize the layout
-    [self initLayout];
-    
+    [self.categoriesTableView deselectRowAtIndexPath:[self.categoriesTableView indexPathForSelectedRow] animated:NO];
+    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeightInit);
+    self.scrollView.frame = CGRectMake(0, tableHeight, viewWidth, viewHeight);
 }
 
-- (void)didReceiveMemoryWarning
+// LandscapePlotViewController delegate method || Currently not used.
+- (void)LandscapePlotViewDismissedOnInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super willRotateToInterfaceOrientation:orientation duration:duration];
 }
+// END Interface orientation methods
 
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-    
-}
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-
-- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // Not doing anything yet.
-//    if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)){
-//        [self updateLayoutToLandscape];
-//    }
-//    else if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)){
-//        [self updateLayout];
-//    }
-}
-
+// SCROLLVIEW CONTROLLER DELEGATE METHODs
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-
+    
     if([scrollView.restorationIdentifier isEqualToString:@"chartScroll"]){
     
         float roundedValue = round(scrollView.contentOffset.x / viewWidth);
         self.pageControl.currentPage = roundedValue;
     
         // 1st is monthly chart, 2nd is yearly mode.
-        self.modeLabel.text = [chartModes objectAtIndex:roundedValue];
-    
-    
+        if(roundedValue<2){
+            self.modeLabel.text = [chartModes objectAtIndex:roundedValue];
+        }
+        
         modeValue = roundedValue;
     
         // TITLE: Year mode title-> current year, month mode title-> current month
@@ -177,10 +275,12 @@ PlotView *page2;
             self.mainTitle.title = [years objectAtIndex:currentYearIndex];
         }
     
-        //NSLog(@"did scroll:%f",roundedValue);
     }
 }
+// END scrollview Delegate
 
+
+// TABLEVIEW CONTROLLER DELEGATE METHODs
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -204,68 +304,41 @@ PlotView *page2;
     else if(indexPath.row > 0){
         CellIdentifier = @"category";
     }
-//    static NSString *CellIdentifier = @"category";
 
      cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     cell.textLabel.text = [categories objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d%%", arc4random_uniform(90)];
-    
-    // set the first category cell selected and set selectedcategory label accordingly.
-//    if(indexPath.row == 1){
-//        cell.selected = YES;
-//        self.selectedCategoryLabel.text = cell.textLabel.text;
-//    }
-    //NSLog(@"id:%@, rowindex:%d, cell text:%@", CellIdentifier, indexPath.row, cell.textLabel.text);
 
     return cell;
 }
-
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
     if(indexPath.row > 0){
-//        self.selectedCategoryLabel.text = [categories objectAtIndex:indexPath.row];
-//
-//        NSString *selection = [NSString stringWithFormat:@"%@ %@", [categories objectAtIndex:indexPath.row], @"selected"];
-//    
-//        NSLog(@"%@", selection);
-//    
-//        self.selectedCategoryLabel.text = selection;
         [self updateLayout];
         [page1 updateData];
         [page2 updateData];
-    
-        
     }
-    //NSLog(@"row selected method, row:%d", indexPath.row);
 }
+// END tableview Delegate
+
+// DETAIL Categories
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"fromMainStatsToDetail"]){
         StatsDetailAllCategoriesTableViewController *dest = segue.destinationViewController;
         dest.currentMonthIndex = currentMonthIndex;
         dest.currentYearIndex = currentYearIndex;
-        NSLog(@"fromMainStatsToDetail");
     }
     
 }
 
--(void) viewWillDisappear:(BOOL)animated
-{
-    [self initLayout];
-}
 
+// Navigate by month or year next and prev buttons
 - (IBAction)prevTimePeriodButtonTapped:(id)sender {
     
         if(modeValue == 0){
@@ -278,11 +351,9 @@ PlotView *page2;
             [self decrementByYear];
             }
         }
-        NSLog(@" currentMonthIndex:%d and year:%d", currentMonthIndex, currentYearIndex);
     [page1 updateData];
     [page2 updateData];
     
-        //self.mainTitle.title = [months objectAtIndex:currentMonthIndex]
 }
 
 
@@ -346,49 +417,5 @@ PlotView *page2;
         currentYearIndex++;
         self.mainTitle.title = [years objectAtIndex:currentYearIndex];
     }
-}
-
-- (void)updateLayout
-{
-    [UIView animateWithDuration:0.5f
-                     animations:^{
-                         [self.scrollView setAlpha:1.0f];
-                         [self.categoriesTableView setFrame:CGRectMake(0, 0, viewWidth, tableHeight)];
-                         self.pageControl.hidden = NO;
-                         self.modeLabel.hidden = NO;
-                     }
-     ];
-
-    [self.categoriesTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle
-                                                                animated:YES];
-}
-
-- (void) initLayout
-{
-    self.view.frame = CGRectMake(0, 0, 320, 370);
-
-    
-    [UIView animateWithDuration:0.5f
-                     animations:^{
-                         [self.scrollView setAlpha:0.0f];
-                         self.modeLabel.hidden = YES;
-                         self.pageControl.hidden = YES;
-
-                     }
-    ];
-    
-    [self.categoriesTableView deselectRowAtIndexPath:[self.categoriesTableView indexPathForSelectedRow] animated:NO];
-    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeightInit);
-    self.scrollView.frame = CGRectMake(0, tableHeight, viewWidth, viewHeight);
-}
-
-// This Method is not working yet. 
-- (void) updateLayoutToLandscape
-{
-    // Do some crazy stuff to display the Plot in Full screen.
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-    UIViewController *LandscapePlotViewController = [storyboard instantiateViewControllerWithIdentifier:@"LandscapePlotViewController"];
-    
-    [self presentViewController:LandscapePlotViewController animated:YES completion:NULL];
 }
 @end

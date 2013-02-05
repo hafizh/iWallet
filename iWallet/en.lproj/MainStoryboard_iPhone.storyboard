@@ -231,6 +231,7 @@
                         <outlet property="modeLabel" destination="qMd-ZW-emJ" id="m1O-ex-dCO"/>
                         <outlet property="pageControl" destination="QFF-aC-vi7" id="FPh-ed-OZE"/>
                         <outlet property="scrollView" destination="FDo-pM-fUz" id="Fwf-Jf-7UR"/>
+                        <segue destination="YMJ-HH-Wy4" kind="modal" identifier="modalLandscapePlotSegue" id="Vc0-YI-mLT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqd-IK-Dpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -334,32 +335,30 @@
             </objects>
             <point key="canvasLocation" x="2094" y="1219"/>
         </scene>
-        <!--View Controller - LandscapePlotViewController-->
+        <!--Landscape Plot View Controller - LandscapePlotViewController-->
         <scene sceneID="PrO-GU-ukF">
             <objects>
-                <viewController storyboardIdentifier="LandscapePlotViewController" title="LandscapePlotViewController" wantsFullScreenLayout="YES" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YMJ-HH-Wy4" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandscapePlotViewController" title="LandscapePlotViewController" wantsFullScreenLayout="YES" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YMJ-HH-Wy4" customClass="LandscapePlotViewController" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Zy5-ZN-gXr">
                         <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="xDc-se-Ydp" customClass="PlotView">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="300"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="NL6-8A-rnn" customClass="PlotView">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="300"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="Z7W-Gj-bPb">
+                                <rect key="frame" x="237" y="258" width="38" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pageControl>
                         </subviews>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </scrollView>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="pageControl" destination="Z7W-Gj-bPb" id="vl2-sw-5uG"/>
+                        <outlet property="scrollView" destination="Zy5-ZN-gXr" id="5xa-PL-glu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgh-8f-Ril" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="1838"/>
+            <point key="canvasLocation" x="1707" y="1869"/>
         </scene>
         <!--Stats Main Navigation Controller - Statistics-->
         <scene sceneID="o2M-us-cFs">
