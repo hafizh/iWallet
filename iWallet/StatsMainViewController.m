@@ -23,21 +23,22 @@ NSArray *years;
 int currentMonthIndex = 0;
 int currentYearIndex = 1;
 
-int tableHeightInit = 370;
-int tableHeight = 190;
-int viewHeight = 180;
+// view size => default values
+int viewHeight = 370;
 int viewWidth = 320;
+int tableHeight = 190;
+int scrollHeight = 180;
+CGFloat currentScrollViewAlpha = 0.0f;
+
 int modeValue = 0; // 0 or 1, monthly or yearly respectively
-
-// default Landscape plot init
-int lPlotViewHeight = 320;
-int lPlotViewWidth = 460;
-
+CGFloat animationDuration = 0.3f;
 // scrollview pages
 PlotView *page1;
 PlotView *page2;
 
+// used in didRotate... method
 UIInterfaceOrientation toOrientation;
+
 CGRect previousFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -105,8 +106,14 @@ CGRect previousFrame;
     
     self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
  
+    // init sizes
+    [self initSizes];
+    
     // initialize the layout
     [self initLayout];
+    
+    [self initScrollViewWithHeigth:scrollHeight width:viewWidth];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,26 +144,36 @@ CGRect previousFrame;
 {
     if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)){
         toOrientation = toInterfaceOrientation;
-        [self updateLayoutToPortrait];
     }
     else if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation) && !UIInterfaceOrientationIsLandscape(toOrientation)){
         //[self performSegueWithIdentifier:@"modalLandscapePlotSegue" sender:NULL];
         toOrientation = toInterfaceOrientation;
         UIView *tempView = [self.tabBarController.view.subviews objectAtIndex:0];
         previousFrame = tempView.frame;
-        [self updateLayoutToLandscape];
+        
     }
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if(UIInterfaceOrientationIsLandscape(toOrientation) && UIInterfaceOrientationIsPortrait(fromInterfaceOrientation)){
-        [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:CGRectMake(0, 0, 480, 320)];
-        [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:TRUE];
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:CGRectMake(0, 0, 480, 320)];
+                             [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:TRUE];
+                             [self updateLayoutToLandscape];
+
+                         }
+         ];
+
     }
     if(UIInterfaceOrientationIsPortrait(toOrientation)){
-        [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:previousFrame];
-        [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:FALSE];
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:previousFrame];[[self.tabBarController.view.subviews objectAtIndex:1] setHidden:FALSE];
+                                                [self updateLayoutToPortrait];
+                         }
+         ];
     }
 }
 
@@ -164,46 +181,47 @@ CGRect previousFrame;
 - (void) updateLayoutToPortrait
 {
     [self.navigationController setNavigationBarHidden:FALSE animated:FALSE];
-    [self initLayout];
-    //[self updateLayout];
+    [self.categoriesTableView setAlpha:1.0f];
+
+    if(currentScrollViewAlpha >= 0){
+        
+//        [UIView animateWithDuration:animationDuration
+//                         animations:^{
+                             [self resizeScrollViewToHeight:scrollHeight width:viewWidth origin:CGPointMake(0, tableHeight)];
+//                         }
+//         ];
+    }
+    
 }
 
 - (void) updateLayoutToLandscape
 {
     
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.height;
-    CGFloat screenHeight = screenRect.size.width;
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenHeight = screenRect.size.height;
+//    CGFloat screenWidth = screenRect.size.width;
+//    screenHeight -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
-    [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
-    //[[UIApplication sharedApplication] setStatusBarHidden:TRUE withAnimation:FALSE];
-    screenHeight -= [[UIApplication sharedApplication] statusBarFrame].size.height;
-    [self.scrollView setFrame:CGRectMake(0, 0, screenWidth,screenHeight)];
-    // Init scroll view
-    // 2 charts size: monthly & yearly
-    [self.scrollView setContentSize: CGSizeMake(screenWidth*2, screenHeight)];
-    
-    // view 1: monthly chart
-    CGRect frame1 = CGRectMake(0, 0, screenWidth, screenHeight);
-    [page1 setFrame:frame1];
-    
-    // view 2: yearly chart
-    CGRect frame2 = CGRectMake(screenWidth, 0, screenWidth, screenHeight);
-    [page2 setFrame:frame2];
-    
-    [self.scrollView addSubview:page1];
-    [self.scrollView addSubview:page2];
-    
-    [self.scrollView setAlpha:1.0f];
+//    [UIView animateWithDuration:animationDuration
+//                     animations:^{
+                         [self.scrollView setAlpha:currentScrollViewAlpha];
+                         [self.categoriesTableView setAlpha:currentScrollViewAlpha];
+                         // hide navigation bar, but leave status bar
+                         [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
+                         [self resizeScrollViewToHeight:300 width:480 origin:CGPointMake(0, 0)];
+
+//                     }
+//     ];
 }
 
 
-- (void)updateLayout
-{
-    [UIView animateWithDuration:0.5f
+- (void)updateLayoutCategorySelected
+{   currentScrollViewAlpha = 1.0f;
+    [UIView animateWithDuration:animationDuration
                      animations:^{
-                         [self.scrollView setAlpha:1.0f];
+                         [self.scrollView setAlpha:currentScrollViewAlpha];
                          [self.categoriesTableView setFrame:CGRectMake(0, 0, viewWidth, tableHeight)];
+                         [self resizeScrollViewToHeight:scrollHeight width:viewWidth origin:CGPointMake(0, tableHeight)];
                          self.pageControl.hidden = NO;
                          self.modeLabel.hidden = NO;
                      }
@@ -215,36 +233,70 @@ CGRect previousFrame;
 
 - (void) initLayout
 {
-    self.view.frame = CGRectMake(0, 0, 320, 370);
-    
-    // Init scroll view
-    // 2 charts size: monthly & yearly
-    [self.scrollView setContentSize: CGSizeMake(viewWidth*2, viewHeight)];
-    
-    // view 1: monthly chart
-    CGRect frame1 = CGRectMake(0, 0, viewWidth, viewHeight);
-    page1 = [[PlotView alloc] initWithFrame:frame1];
-    [self.scrollView addSubview:page1];
-    
-    // view 2: yearly chart
-    CGRect frame2 = CGRectMake(page1.frame.origin.x+page1.frame.size.width, page1.frame.origin.y, page1.frame.size.width, page1.frame.size.height);
-    page2 = [[PlotView alloc] initWithFrame:frame2];
-    [self.scrollView addSubview:page2];
-    
-
-    [UIView animateWithDuration:0.5f
+    self.view.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+    currentScrollViewAlpha = 0.0f;
+    [self.scrollView setAlpha:currentScrollViewAlpha];
+    // Hide scroll view animated
+    [UIView animateWithDuration:animationDuration
                      animations:^{
-                         [self.scrollView setAlpha:0.0f];
                          self.modeLabel.hidden = YES;
                          self.pageControl.hidden = YES;
                      }
      ];
     
     [self.categoriesTableView deselectRowAtIndexPath:[self.categoriesTableView indexPathForSelectedRow] animated:NO];
-    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, tableHeightInit);
-    self.scrollView.frame = CGRectMake(0, tableHeight, viewWidth, viewHeight);
+    self.categoriesTableView.frame = CGRectMake(0, 0, viewWidth, viewHeight);
 }
 
+// Chart view(scrollView paging enabled) methods: init and resize
+- (void) initScrollViewWithHeigth:(CGFloat)height width:(CGFloat)width
+{
+    // Init scroll view
+    self.scrollView.frame = CGRectMake(0, tableHeight, width, height);
+    
+    // 2 charts size: monthly & yearly
+    [self.scrollView setContentSize: CGSizeMake(width*2, height)];
+    
+    // view 1: monthly chart
+    CGRect frame1 = CGRectMake(0, 0, width, height);
+    page1 = [[PlotView alloc] initWithFrame:frame1];
+    [self.scrollView addSubview:page1];
+    
+    // view 2: yearly chart
+    CGRect frame2 = CGRectMake(frame1.origin.x + width, frame1.origin.y, width, height);
+    page2 = [[PlotView alloc] initWithFrame:frame2];
+    [self.scrollView addSubview:page2];
+}
+
+- (void) resizeScrollViewToHeight:(CGFloat)height width:(CGFloat)width origin:(CGPoint)origin
+{
+    [self.scrollView setFrame:CGRectMake(origin.x, origin.y, width, height)];
+    // Init scroll view
+    // 2 charts size: monthly & yearly
+    [self.scrollView setContentSize: CGSizeMake(width*2, height)];
+    
+    // view 1: monthly chart
+    CGRect frame1 = CGRectMake(0, 0, width, height);
+    [page1 setFrame:frame1];
+    
+    // view 2: yearly chart
+    CGRect frame2 = CGRectMake(width, 0, width, height);
+    [page2 setFrame:frame2];
+}
+
+- (void) initSizes
+{
+    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    CGFloat naviBarHeight = [self.navigationController navigationBar].frame.size.height;
+    CGFloat tabBarHeight = [[self.tabBarController.view.subviews objectAtIndex:1] frame].size.height;
+    
+    viewHeight = [[UIScreen mainScreen] bounds].size.height - (statusBarHeight + naviBarHeight + tabBarHeight) + 2;
+    viewWidth = [[UIScreen mainScreen] bounds].size.width + 2;
+
+    tableHeight = viewHeight*0.5135 + 1;
+    scrollHeight = viewHeight - tableHeight;
+
+}
 // LandscapePlotViewController delegate method || Currently not used.
 - (void)LandscapePlotViewDismissedOnInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
@@ -319,7 +371,7 @@ CGRect previousFrame;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row > 0){
-        [self updateLayout];
+        [self updateLayoutCategorySelected];
         [page1 updateData];
         [page2 updateData];
     }
