@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Welcome : UIView
+@interface Welcome : UIView{
+    IBOutlet UIPickerView *pickerView;
+    NSMutableArray *list;
+    IBOutlet UILabel *pickLabel;
+}
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIPickerView *currencyBox;
 @property (weak, nonatomic) IBOutlet UITextField *budgetLabel;
 
 
 - (IBAction)saveSettings:(id)sender;
+
 
 @end
