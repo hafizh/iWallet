@@ -210,7 +210,6 @@ CGRect previousFrame;
     [self resizeScrollViewToHeight:300 width:480 origin:CGPointMake(0, 0)];
     
     if(self.pageControl.currentPage == 1){
-        NSLog(@"%d", self.pageControl.currentPage);
         [self.scrollView scrollRectToVisible:CGRectMake(480, tableHeight, 480, 300) animated:NO];
     }
 }
@@ -312,7 +311,6 @@ CGRect previousFrame;
     
         float roundedValue = round(scrollView.contentOffset.x / page1.frame.size.width);
         self.pageControl.currentPage = roundedValue;
-        NSLog(@"%f, %f", scrollView.contentOffset.x, roundedValue);
         // 1st is monthly chart, 2nd is yearly mode.
         if(roundedValue<2){
             self.modeLabel.text = [chartModes objectAtIndex:roundedValue];
