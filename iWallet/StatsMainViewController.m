@@ -385,7 +385,6 @@ CGRect previousFrame;
         dest.currentMonthIndex = currentMonthIndex;
         dest.currentYearIndex = currentYearIndex;
     }
-    
 }
 
 
@@ -422,10 +421,11 @@ CGRect previousFrame;
     NSLog(@" currentMonthIndex:%d and year:%d", currentMonthIndex, currentYearIndex);
     [page1 updateData];
     [page2 updateData];
-  
-    //self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
 }
 
+
+// TODO: More OO Way of doing this. Use Strategy or State design pattern(Maybe kind of
+// an iterator object which can iterate by year or month)
 - (void)decrementByMonth
 {
     if(currentMonthIndex > 0){

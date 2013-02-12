@@ -303,9 +303,9 @@
         <!--Stats Detail Category Table View Controller-->
         <scene sceneID="CSc-4v-CJK">
             <objects>
-                <tableViewController id="VHw-1N-1qT" customClass="StatsDetailCategoryTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qDH-Rl-KzC">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="VHw-1N-1qT" customClass="StatsDetailCategoryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qDH-Rl-KzC">
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
