@@ -202,16 +202,17 @@ CGRect previousFrame;
 //    CGFloat screenWidth = screenRect.size.width;
 //    screenHeight -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
-//    [UIView animateWithDuration:animationDuration
-//                     animations:^{
-                         [self.scrollView setAlpha:currentScrollViewAlpha];
-                         [self.categoriesTableView setAlpha:currentScrollViewAlpha];
-                         // hide navigation bar, but leave status bar
-                         [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
-                         [self resizeScrollViewToHeight:300 width:480 origin:CGPointMake(0, 0)];
-
-//                     }
-//     ];
+    [self.scrollView setAlpha:currentScrollViewAlpha];
+    [self.categoriesTableView setAlpha:currentScrollViewAlpha];
+    
+    // hide navigation bar, but leave status bar
+    [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
+    [self resizeScrollViewToHeight:300 width:480 origin:CGPointMake(0, 0)];
+    
+    if(self.pageControl.currentPage == 1){
+        NSLog(@"%d", self.pageControl.currentPage);
+        [self.scrollView scrollRectToVisible:CGRectMake(480, tableHeight, 480, 300) animated:NO];
+    }
 }
 
 
@@ -309,9 +310,9 @@ CGRect previousFrame;
     
     if([scrollView.restorationIdentifier isEqualToString:@"chartScroll"]){
     
-        float roundedValue = round(scrollView.contentOffset.x / viewWidth);
+        float roundedValue = round(scrollView.contentOffset.x / page1.frame.size.width);
         self.pageControl.currentPage = roundedValue;
-    
+        NSLog(@"%f, %f", scrollView.contentOffset.x, roundedValue);
         // 1st is monthly chart, 2nd is yearly mode.
         if(roundedValue<2){
             self.modeLabel.text = [chartModes objectAtIndex:roundedValue];
