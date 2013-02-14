@@ -13,7 +13,7 @@
 
 @interface EntityController : NSObject
 {
-    id <DataAccessLayer> delegate;
+    
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;

@@ -7,17 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EntityController.h"
+//TODO: Architecture
 @protocol DataAccessLayer <NSObject>
--(void)addCategory: Category: cat;
+
 -(void)deleteCategory: NSString: name;
 -(NSArray*)getCategories;
 
--(void)addSpending: Spendings: spending;
+
 -(void)deleteSpending: Spendings: spending;
 -(NSArray*)getSpendingsInMonth:NSDate:date;
-
+-(NSArray*)getSpendingInMonth:(NSDate*)date withDescription:(NSString*)desc andPrice:(double)price;
 @end
 
-@interface DataAccessLayer : NSObject <DataAccessLayer>
+@protocol EnitityControllerDelegate <NSObject>
+@optional
+- (NSManagedObjectContext *) managedObjectContext;
+-(void)saveContext;
+@end
 
+@interface DataAccessLayer : NSObject <DataAccessLayer,EnitityControllerDelegate>
+{
+    id <EnitityControllerDelegate> delegate;
+}
+@property (retain) id delegate;
 @end
