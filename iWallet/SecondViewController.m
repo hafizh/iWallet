@@ -137,6 +137,8 @@
     _cancelbutton.hidden = NO;
     _category.hidden = NO;
     _categoryLabel.hidden = NO;
+    
+    [_textfield becomeFirstResponder];
 
 }
 
@@ -158,6 +160,8 @@
     _cancelbutton.hidden = YES;
     _category.hidden = YES;
     _categoryLabel.hidden = YES;
+    
+    [_textfield resignFirstResponder];
     
 }
 
