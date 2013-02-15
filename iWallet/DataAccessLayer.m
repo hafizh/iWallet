@@ -10,7 +10,7 @@
 #import "Categories.h"
 
 @implementation DataAccessLayer
-
+@synthesize delegate;
 -(id)init {
    self = [super init];
    
@@ -18,28 +18,27 @@
 }
 
 
--(void)addCategory: Category: cat {
-    
-    
-    
-    
-    
-    NSLog(@"Category %@",[cat name]);
-    
-    
-}
-
 -(void)deleteCategory: NSString: name  {
+    Categories *category;
+    for (Categories *cat in [self getCategories]) {
+        if ([cat.name isEqualToString:name])
+            category = cat;
+    }
     
+    [[[self delegate] managedObjectContext] deleteObject:category];
 }
 
 -(NSArray*)getCategories  {
-    return nil;
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Categories" inManagedObjectContext:[[self delegate] managedObjectContext]];
+    [request setEntity:entity];
+    NSArray *fetchedObjects = [[[self delegate] managedObjectContext]
+                                    executeFetchRequest:request error:&error];
+
+    return fetchedObjects;
 }
 
--(void)addSpending: Spendings: spending {
-    
-}
 
 -(void)deleteSpending: Spendings: spending {
     
@@ -48,6 +47,8 @@
 -(NSArray*)getSpendingsInMonth:NSDate:date {
     return nil;
 }
-
+-(NSArray *)getSpendingInMonth:(NSDate *)date withDescription:(NSString *)desc andPrice:(double)price {
+    return nil;
+}
 
 @end
