@@ -146,7 +146,6 @@ CGRect previousFrame;
         toOrientation = toInterfaceOrientation;
     }
     else if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation) && !UIInterfaceOrientationIsLandscape(toOrientation)){
-        //[self performSegueWithIdentifier:@"modalLandscapePlotSegue" sender:NULL];
         toOrientation = toInterfaceOrientation;
         UIView *tempView = [self.tabBarController.view.subviews objectAtIndex:0];
         previousFrame = tempView.frame;
@@ -297,11 +296,7 @@ CGRect previousFrame;
     scrollHeight = viewHeight - tableHeight;
 
 }
-// LandscapePlotViewController delegate method || Currently not used.
-- (void)LandscapePlotViewDismissedOnInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:orientation duration:duration];
-}
+
 // END Interface orientation methods
 
 // SCROLLVIEW CONTROLLER DELEGATE METHODs

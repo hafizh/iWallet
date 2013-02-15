@@ -7,7 +7,6 @@
 //
 
 #import "StatsMainNavigationController.h"
-#import "LandscapePlotViewController.h"
 
 @interface StatsMainNavigationController ()
 
