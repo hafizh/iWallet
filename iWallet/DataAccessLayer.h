@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EntityController.h"
+//TODO: Architecture
 
 @protocol DataAccessLayer <NSObject>
 
