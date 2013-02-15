@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 
-#import "Factory.h"
+#import "EntityFactory.h"
 #import "CoreData/NSEntityDescription.h"
 #import "CoreData/NSManagedObjectContext.h"
 
-@interface Factory (PrivateMethod)
+@interface EntityFactory (PrivateMethod)
 -(NSObject*)createEntity: (NSString*) entity;
 @end
 
 
-@implementation Factory
+@implementation EntityFactory
 @synthesize context;
 - (id)initWithContext:(NSManagedObjectContext*)c
 {

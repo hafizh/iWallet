@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @protocol DataAccessLayer <NSObject>
+
 -(void)addCategory: Category: cat;
 -(void)deleteCategory: NSString: name;
 -(NSArray*)getCategories;

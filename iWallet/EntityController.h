@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Factory.h"
+#import "EntityFactory.h"
 
 #import "DataAccessLayer.h"
 
@@ -17,7 +17,7 @@
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    Factory *factory;
+    EntityFactory *factory;
 
 }
 
@@ -26,6 +26,6 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (nonatomic, retain, readonly) Factory *factory;
+@property (nonatomic, retain, readonly) EntityFactory *factory;
 
 @end

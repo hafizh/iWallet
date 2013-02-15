@@ -30,7 +30,7 @@
 		0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */; };
 		0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */; };
 		0F4E539716CD3DA500ABDB93 /* DataAccessLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539216CD3DA500ABDB93 /* DataAccessLayer.m */; };
-		0F4E539816CD3DA500ABDB93 /* Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539416CD3DA500ABDB93 /* Factory.m */; };
+		0F4E539816CD3DA500ABDB93 /* EntityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539416CD3DA500ABDB93 /* EntityFactory.m */; };
 		0F4E539916CD3DA500ABDB93 /* EntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539616CD3DA500ABDB93 /* EntityController.m */; };
 		0F4E539C16CD3DCE00ABDB93 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539A16CD3DCE00ABDB93 /* Model.xcdatamodeld */; };
 		0F4E539F16CD3DFB00ABDB93 /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539E16CD3DFB00ABDB93 /* Categories.m */; };
@@ -97,8 +97,8 @@
 		0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsDetailCategoryTableViewController.m; sourceTree = "<group>"; };
 		0F4E539116CD3DA500ABDB93 /* DataAccessLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccessLayer.h; sourceTree = "<group>"; };
 		0F4E539216CD3DA500ABDB93 /* DataAccessLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccessLayer.m; sourceTree = "<group>"; };
-		0F4E539316CD3DA500ABDB93 /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
-		0F4E539416CD3DA500ABDB93 /* Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Factory.m; sourceTree = "<group>"; };
+		0F4E539316CD3DA500ABDB93 /* EntityFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityFactory.h; sourceTree = "<group>"; };
+		0F4E539416CD3DA500ABDB93 /* EntityFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityFactory.m; sourceTree = "<group>"; };
 		0F4E539516CD3DA500ABDB93 /* EntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityController.h; sourceTree = "<group>"; };
 		0F4E539616CD3DA500ABDB93 /* EntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityController.m; sourceTree = "<group>"; };
 		0F4E539B16CD3DCE00ABDB93 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -181,7 +181,6 @@
 		0F159F5A16AF160A00DE596E /* iWallet */ = {
 			isa = PBXGroup;
 			children = (
-				0F4E538F16CD3D6200ABDB93 /* Database */,
 				7651677416BD6C7E005EB96E /* third.png */,
 				7651677516BD6C7E005EB96E /* third@2x.png */,
 				0F159F6316AF160B00DE596E /* AppDelegate.h */,
@@ -200,6 +199,7 @@
 				0F9F5B5E16BFFE93002F8C26 /* Welcome.m */,
 				0F1D2A7216C00D97007031A3 /* MainTabBarController.h */,
 				0F1D2A7316C00D97007031A3 /* MainTabBarController.m */,
+				0F4E538F16CD3D6200ABDB93 /* Database */,
 				0F1D2A7716C01375007031A3 /* Statistics */,
 				7651674B16BD44B2005EB96E /* Categories */,
 				0F159F5B16AF160A00DE596E /* Supporting Files */,
@@ -250,8 +250,8 @@
 				0F4E539E16CD3DFB00ABDB93 /* Categories.m */,
 				0F4E539116CD3DA500ABDB93 /* DataAccessLayer.h */,
 				0F4E539216CD3DA500ABDB93 /* DataAccessLayer.m */,
-				0F4E539316CD3DA500ABDB93 /* Factory.h */,
-				0F4E539416CD3DA500ABDB93 /* Factory.m */,
+				0F4E539316CD3DA500ABDB93 /* EntityFactory.h */,
+				0F4E539416CD3DA500ABDB93 /* EntityFactory.m */,
 				0F4E539516CD3DA500ABDB93 /* EntityController.h */,
 				0F4E539616CD3DA500ABDB93 /* EntityController.m */,
 			);
@@ -387,7 +387,7 @@
 				0F1D2A7416C00D97007031A3 /* MainTabBarController.m in Sources */,
 				0FE4B46216C10EEB0015B499 /* LandscapePlotViewController.m in Sources */,
 				0F4E539716CD3DA500ABDB93 /* DataAccessLayer.m in Sources */,
-				0F4E539816CD3DA500ABDB93 /* Factory.m in Sources */,
+				0F4E539816CD3DA500ABDB93 /* EntityFactory.m in Sources */,
 				0F4E539916CD3DA500ABDB93 /* EntityController.m in Sources */,
 				0F4E539C16CD3DCE00ABDB93 /* Model.xcdatamodeld in Sources */,
 				0F4E539F16CD3DFB00ABDB93 /* Categories.m in Sources */,

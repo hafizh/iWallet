@@ -10,7 +10,7 @@
 #import "CoreData/NSManagedObjectContext.h"
 #import "Categories.h"
 #import "Spendings.h"
-@interface Factory : NSObject
+@interface EntityFactory : NSObject
 @property (nonatomic, retain) NSManagedObjectContext* context;
 - (id)initWithContext:(NSManagedObjectContext*)c;
 -(Categories*)createCategory;

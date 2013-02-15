@@ -34,12 +34,12 @@
     }
 }
 
--(Factory*)factory {
+-(EntityFactory*)factory {
     if (factory != nil) {
         return factory;
     }
     
-    factory = [[Factory alloc] initWithContext:[self managedObjectContext]];
+    factory = [[EntityFactory alloc] initWithContext:[self managedObjectContext]];
 
     return factory;
 }
