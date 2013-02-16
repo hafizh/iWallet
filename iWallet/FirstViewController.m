@@ -31,13 +31,15 @@
     
     dateFormatter.dateFormat=@"MMMM";
     NSString * monthString = [[dateFormatter stringFromDate:date] capitalizedString];
-    [currentMonthLabel setText: [@"Current month: 	" stringByAppendingString:monthString]];
+   // [currentMonthLabel setText: [@"Current month: 	" stringByAppendingString:monthString]];
+    [currentMonthLabel setText: monthString];
+
     // NSLog(@"month: %@", monthString);
     
 }
 -(void) moneyLeft{
     //get value from settings
-    double monthlyBudget = 1000;
+    double monthlyBudget = 100;
     [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f", monthlyBudget]];
 
     //get sum of spent money
@@ -46,6 +48,11 @@
     
     double moneyLeft = monthlyBudget - spentMoney;
     [moneyLeftLabel setText: [NSString stringWithFormat:@"%.2f", moneyLeft]];
+    if (moneyLeft > 0) {
+        moneyLeftLabel.textColor = [UIColor greenColor];
+    }
+    else
+        moneyLeftLabel.textColor = [UIColor redColor];
     
     
  
