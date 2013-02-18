@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface OverviewViewController : UIViewController
 
 -(void) currentMonth;
 -(void) moneyLeft;

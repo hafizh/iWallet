@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface MainViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *b1;
 @property (weak, nonatomic) IBOutlet UIButton *b2;

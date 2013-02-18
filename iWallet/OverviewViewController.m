@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "OverviewViewController.h"
 
-@interface FirstViewController ()
+@interface OverviewViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation OverviewViewController
 
 @synthesize currentMonthLabel;
 

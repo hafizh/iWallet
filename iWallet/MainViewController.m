@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "MainViewController.h"
 
-@interface SecondViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation MainViewController
 
 - (void)viewDidLoad
 {
