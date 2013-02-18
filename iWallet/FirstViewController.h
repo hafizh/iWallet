@@ -12,9 +12,22 @@
 
 -(void) currentMonth;
 -(void) moneyLeft;
+-(void) changeStatus:(NSString *)information;
+
+- (IBAction)setDollar:(id)sender;
+- (IBAction)setEuro:(id)sender;
+- (IBAction)setPound:(id)sender;
+- (IBAction)setBudget:(id)sender;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *currentMonthLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *monthlyBudgetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneySpentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLeftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *budgetField;
+
+
 @end

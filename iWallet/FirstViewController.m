@@ -19,6 +19,11 @@
 @synthesize monthlyBudgetLabel;
 @synthesize moneySpentLabel;
 @synthesize moneyLeftLabel;
+@synthesize statusLabel;
+@synthesize budgetField;
+
+
+NSString *currency =@""; //load from settings
 
 -(void) currentMonth{
     
@@ -56,6 +61,39 @@
     
     
  
+}
+
+- (IBAction)setEuro:(id)sender{
+    currency = @"€";
+    [self changeStatus:@"Currency set to euro"];
+    
+}
+
+- (IBAction)setDollar:(id)sender {
+    currency = @"$";
+    [self changeStatus:@"Currency set to dollar"];
+}
+
+
+- (IBAction)setPound:(id)sender {
+    currency = @"£";
+    [self changeStatus:@"Currency set to pound"];
+}
+
+- (IBAction)setBudget:(id)sender {
+   
+
+    NSString *string1 = @"Budget set to ";
+    NSString *string2 = [budgetField text];
+    
+    string1 = [string1 stringByAppendingString:string2];
+    
+   [self changeStatus:string1];
+}
+
+-(void)changeStatus:(NSString *)information{
+    
+    [statusLabel setText:information];
 }
 
 

@@ -131,7 +131,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="qyA-Nx-PvV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="999" borderStyle="roundedRect" minimumFontSize="17" id="qyA-Nx-PvV">
                                 <rect key="frame" x="98" y="273" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -155,6 +155,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="setEuro:" destination="2" eventType="touchUpInside" id="Xz7-r8-Ngv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PZE-Dj-Gyt">
                                 <rect key="frame" x="125" y="316" width="43" height="44"/>
@@ -167,6 +170,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="setDollar:" destination="2" eventType="touchUpInside" id="Uw4-OP-jUp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vi1-As-Mlk">
                                 <rect key="frame" x="247" y="316" width="43" height="44"/>
@@ -179,6 +185,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="setPound:" destination="2" eventType="touchUpInside" id="khV-nl-AJf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cof-yt-M1F">
                                 <rect key="frame" x="238" y="273" width="60" height="31"/>
@@ -191,9 +200,12 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="setBudget:" destination="2" eventType="touchUpInside" id="hOX-w5-rj4"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bMx-wq-mZP">
-                                <rect key="frame" x="139" y="370" width="46" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bMx-wq-mZP">
+                                <rect key="frame" x="37" y="370" width="261" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -204,10 +216,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Overview" image="first" id="7"/>
                     <connections>
+                        <outlet property="budgetField" destination="qyA-Nx-PvV" id="kVy-Kr-t6c"/>
                         <outlet property="currentMonthLabel" destination="3tg-OX-yBE" id="3xW-hS-406"/>
                         <outlet property="moneyLeftLabel" destination="VfI-pN-uto" id="Tzq-qd-ueB"/>
                         <outlet property="moneySpentLabel" destination="jfe-Ku-dC6" id="97u-FP-LWz"/>
                         <outlet property="monthlyBudgetLabel" destination="YjN-XR-cr9" id="eyF-el-gF9"/>
+                        <outlet property="statusLabel" destination="bMx-wq-mZP" id="i6z-Sv-cGm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
@@ -700,10 +714,16 @@
         <class className="FirstViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
             <relationships>
+                <relationship kind="action" name="setBudget:"/>
+                <relationship kind="action" name="setDollar:"/>
+                <relationship kind="action" name="setEuro:"/>
+                <relationship kind="action" name="setPound:"/>
+                <relationship kind="outlet" name="budgetField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="currentMonthLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="moneyLeftLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="moneySpentLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="monthlyBudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="statusLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="MainTabBarController" superclassName="UITabBarController">
