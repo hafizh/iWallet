@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDecimalNumber * priority;
-@property (nonatomic, retain) Spendings *item;
+@property (nonatomic, retain) Spendings *spendings;
 
 @end

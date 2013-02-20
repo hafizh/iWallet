@@ -7,12 +7,31 @@
 //
 
 #import "AppDelegate.h"
-
+#import "EntityController.h"
+#import "DataAccessLayer.h"
+#import "EntityFactory.h"
+#import "Categories.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    /*
+     
+     TODO:make database accessable for all viewControllers
+     
     // Override point for customization after application launch.
+    EntityController *entityController = [[EntityController alloc] init];
+    DataAccessLayer *dal = [[DataAccessLayer alloc] initWithContext:[entityController managedObjectContext]];
+    EntityFactory *factory = [[EntityFactory alloc] initWithContext:[entityController managedObjectContext]];
+    
+    Categories *cat = factory.createCategory;
+    [cat setName:@"Test3"];
+    [cat setDesc:@"Das ist die Beschreibung"];
+    [dal saveContext];
+    NSLog([dal.getCategories description]);
+    
+    */
     return YES;
 }
 							

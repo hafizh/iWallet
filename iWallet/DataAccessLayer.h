@@ -12,25 +12,20 @@
 
 @protocol DataAccessLayer <NSObject>
 
--(void)addCategory: Category: cat;
 -(void)deleteCategory: NSString: name;
 -(NSArray*)getCategories;
 
 
 -(void)deleteSpending: Spendings: spending;
--(NSArray*)getSpendingsInMonth:NSDate:date;
--(NSArray*)getSpendingInMonth:(NSDate*)date withDescription:(NSString*)desc andPrice:(double)price;
-@end
+-(NSArray*)getSpendingsWithFilter:(NSPredicate*)predicate andSortDescriptor: (NSSortDescriptor*)descriptor;
 
-@protocol EnitityControllerDelegate <NSObject>
-@optional
-- (NSManagedObjectContext *) managedObjectContext;
 -(void)saveContext;
 @end
 
-@interface DataAccessLayer : NSObject <DataAccessLayer,EnitityControllerDelegate>
-{
-    id <EnitityControllerDelegate> delegate;
-}
-@property (retain) id delegate;
+@interface DataAccessLayer : NSObject <DataAccessLayer>
+
+-(id)initWithContext: (NSManagedObjectContext*)context;
+
+@property (retain) NSManagedObjectContext* managedObjectContext;
+
 @end

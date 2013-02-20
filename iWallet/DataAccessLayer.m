@@ -10,12 +10,15 @@
 #import "Categories.h"
 
 @implementation DataAccessLayer
-@synthesize delegate;
--(id)init {
+@synthesize managedObjectContext;
+-(id)initWithContext: (NSManagedObjectContext*)context{
    self = [super init];
     
-    return self;
+    if (self) {
+        [self setManagedObjectContext:context];
+    }
     
+   return self;
 }
 
 
@@ -26,15 +29,15 @@
             category = cat;
     }
     
-    [[[self delegate] managedObjectContext] deleteObject:category];
+    [[self managedObjectContext]  deleteObject:category];
 }
 
 -(NSArray*)getCategories  {
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Categories" inManagedObjectContext:[[self delegate] managedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Categories" inManagedObjectContext:[self managedObjectContext]];
     [request setEntity:entity];
-    NSArray *fetchedObjects = [[[self delegate] managedObjectContext]
+    NSArray *fetchedObjects = [[self managedObjectContext]
                                     executeFetchRequest:request error:&error];
 
     return fetchedObjects;
@@ -43,13 +46,42 @@
 
 -(void)deleteSpending: Spendings: spending {
     
+        [[self managedObjectContext]  deleteObject:spending];
+    
 }
 
--(NSArray*)getSpendingsInMonth:NSDate:date {
-    return nil;
+-(NSArray*)getSpendingsWithFilter:(NSPredicate*)predicate andSortDescriptor: (NSSortDescriptor*)descriptor {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity =
+    [NSEntityDescription entityForName:@"Spendings"
+                inManagedObjectContext:[self managedObjectContext]];
+    [request setEntity:entity];
+    
+    [request setPredicate:predicate];
+    
+    [request setSortDescriptors:@[descriptor]];
+    
+    NSError *error;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    if (array != nil) {
+      
+    }
+    else {
+        // error handling
+        
+    }
+    
+    return array;
+    
 }
--(NSArray *)getSpendingInMonth:(NSDate *)date withDescription:(NSString *)desc andPrice:(double)price {
-    return nil;
+
+
+-(void)saveContext {
+    NSError *error;
+    if (![[self managedObjectContext] save:&error]) {
+       // NSLog([error localizedDescription]);
+    }
 }
 
 @end

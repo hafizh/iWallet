@@ -15,6 +15,6 @@
 @dynamic desc;
 @dynamic name;
 @dynamic priority;
-@dynamic item;
+@dynamic spendings;
 
 @end

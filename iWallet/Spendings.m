@@ -15,6 +15,6 @@
 @dynamic date;
 @dynamic desc;
 @dynamic price;
-@dynamic item;
+@dynamic category;
 
 @end

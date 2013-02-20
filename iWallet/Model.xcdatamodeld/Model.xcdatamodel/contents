@@ -21,6 +21,6 @@
     <elements>
         <element name="Categories" positionX="-54" positionY="282" width="128" height="105"/>
         <element name="Currencies" positionX="277" positionY="375" width="128" height="75"/>
-        <element name="Spendings" positionX="178" positionY="162" width="128" height="105"/>
+        <element name="Spendings" positionX="126" positionY="516" width="128" height="105"/>
     </elements>
 </model>

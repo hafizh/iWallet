@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSNumber * price;
-@property (nonatomic, retain) Categories *item;
+@property (nonatomic, retain) Categories *category;
 
 @end
