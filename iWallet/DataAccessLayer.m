@@ -7,7 +7,7 @@
 //
 
 #import "DataAccessLayer.h"
-#import "Categories.h"
+#import "Category.h"
 
 @implementation DataAccessLayer
 @synthesize managedObjectContext;
@@ -23,8 +23,8 @@
 
 
 -(void)deleteCategory: NSString: name  {
-    Categories *category;
-    for (Categories *cat in [self getCategories]) {
+    Category *category;
+    for (Category *cat in [self getCategories]) {
         if ([cat.name isEqualToString:name])
             category = cat;
     }

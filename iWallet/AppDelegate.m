@@ -10,7 +10,7 @@
 #import "EntityController.h"
 #import "DataAccessLayer.h"
 #import "EntityFactory.h"
-#import "Categories.h"
+#import "Category.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

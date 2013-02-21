@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "CoreData/NSManagedObjectContext.h"
-#import "Categories.h"
-#import "Spendings.h"
+#import "Category.h"
+#import "SpendingItem.h"
 @interface EntityFactory : NSObject
 @property (nonatomic, retain) NSManagedObjectContext* context;
 - (id)initWithContext:(NSManagedObjectContext*)c;
--(Categories*)createCategory;
--(Spendings*)createSpendings;
+-(Category*)createCategory;
+-(SpendingItem*)createSpendings;
 @end

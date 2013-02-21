@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 
-#import "Spendings.h"
-#import "Categories.h"
+#import "SpendingItem.h"
+#import "Category.h"
 
 
-@implementation Spendings
+@implementation SpendingItem
 
 @dynamic date;
 @dynamic desc;

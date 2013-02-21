@@ -1,5 +1,5 @@
 //
-//  MOL.m
+//  EntityController.m
 //  Test
 //
 //  Created by lab on 1/31/13.
@@ -14,6 +14,46 @@
 
 @implementation EntityController
 @synthesize managedObjectContext, delegate, managedObjectModel, persistentStoreCoordinator, factory;
+
+// Singleton methods
+static EntityController *entityControllerSingleton = NULL;
+
++ (EntityController *)getInstance
+{
+
+    @synchronized([EntityController class])
+	{
+		if (!entityControllerSingleton){
+			entityControllerSingleton = [[self alloc] init];
+        }
+	
+        return entityControllerSingleton;
+	}
+    
+	return nil;
+}
+
++(id)alloc
+{
+	@synchronized([EntityController class])
+	{
+		NSAssert(entityControllerSingleton == nil, @"Attempted to allocate a second instance of a singleton.");
+		entityControllerSingleton = [super alloc];
+		return entityControllerSingleton;
+	}
+    
+	return nil;
+}
+
+-(id)init {
+	self = [super init];
+	if (self != nil) {
+		// initialize stuff here
+	}
+    
+	return self;
+}
+// END SINGLETON
 
 /**
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.

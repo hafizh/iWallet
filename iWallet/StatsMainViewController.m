@@ -114,6 +114,10 @@ CGRect previousFrame;
     
     [self initScrollViewWithHeigth:scrollHeight width:viewWidth];
     
+    entityController = [[EntityController alloc] init];
+    dataAccessLayer = [[DataAccessLayer alloc] initWithContext:[entityController managedObjectContext]];
+    
+    //[dataAccessLayer getSpendingsWithFilter:<#(NSPredicate *)#> andSortDescriptor:<#(NSSortDescriptor *)#>]
 }
 
 - (void)didReceiveMemoryWarning

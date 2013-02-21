@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Spendings;
+@class SpendingItem;
 
-@interface Categories : NSManagedObject
+@interface Category : NSManagedObject
 
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDecimalNumber * priority;
-@property (nonatomic, retain) Spendings *spendings;
+@property (nonatomic, retain) SpendingItem *spendingItem;
 
 @end

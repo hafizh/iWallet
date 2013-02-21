@@ -33,8 +33,8 @@
 		0F4E539816CD3DA500ABDB93 /* EntityFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539416CD3DA500ABDB93 /* EntityFactory.m */; };
 		0F4E539916CD3DA500ABDB93 /* EntityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539616CD3DA500ABDB93 /* EntityController.m */; };
 		0F4E539C16CD3DCE00ABDB93 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539A16CD3DCE00ABDB93 /* Model.xcdatamodeld */; };
-		0F4E539F16CD3DFB00ABDB93 /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539E16CD3DFB00ABDB93 /* Categories.m */; };
-		0F4E53A216CD3E1C00ABDB93 /* Spendings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E53A116CD3E1C00ABDB93 /* Spendings.m */; };
+		0F4E539F16CD3DFB00ABDB93 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539E16CD3DFB00ABDB93 /* Category.m */; };
+		0F4E53A216CD3E1C00ABDB93 /* SpendingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E53A116CD3E1C00ABDB93 /* SpendingItem.m */; };
 		0F4E53A416CD3E7D00ABDB93 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4E53A316CD3E7D00ABDB93 /* CoreData.framework */; };
 		0F4E53AF16D53A8200ABDB93 /* DataQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E53AE16D53A8200ABDB93 /* DataQueries.m */; };
 		0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F537A8416B0593F006F00FD /* StatsMainViewController.m */; };
@@ -102,10 +102,10 @@
 		0F4E539516CD3DA500ABDB93 /* EntityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityController.h; sourceTree = "<group>"; };
 		0F4E539616CD3DA500ABDB93 /* EntityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityController.m; sourceTree = "<group>"; };
 		0F4E539B16CD3DCE00ABDB93 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		0F4E539D16CD3DFB00ABDB93 /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
-		0F4E539E16CD3DFB00ABDB93 /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
-		0F4E53A016CD3E1C00ABDB93 /* Spendings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spendings.h; sourceTree = "<group>"; };
-		0F4E53A116CD3E1C00ABDB93 /* Spendings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spendings.m; sourceTree = "<group>"; };
+		0F4E539D16CD3DFB00ABDB93 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		0F4E539E16CD3DFB00ABDB93 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		0F4E53A016CD3E1C00ABDB93 /* SpendingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingItem.h; sourceTree = "<group>"; };
+		0F4E53A116CD3E1C00ABDB93 /* SpendingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingItem.m; sourceTree = "<group>"; };
 		0F4E53A316CD3E7D00ABDB93 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0F4E53AD16D53A8100ABDB93 /* DataQueries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataQueries.h; sourceTree = "<group>"; };
 		0F4E53AE16D53A8200ABDB93 /* DataQueries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataQueries.m; sourceTree = "<group>"; };
@@ -153,7 +153,6 @@
 		0F159F4516AF160A00DE596E = {
 			isa = PBXGroup;
 			children = (
-				0F4E53A316CD3E7D00ABDB93 /* CoreData.framework */,
 				0F159F5A16AF160A00DE596E /* iWallet */,
 				0F159F5316AF160A00DE596E /* Frameworks */,
 				0F159F5116AF160A00DE596E /* Products */,
@@ -171,6 +170,7 @@
 		0F159F5316AF160A00DE596E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F4E53A316CD3E7D00ABDB93 /* CoreData.framework */,
 				0F159F5416AF160A00DE596E /* UIKit.framework */,
 				0F159F5616AF160A00DE596E /* Foundation.framework */,
 				0F159F5816AF160A00DE596E /* CoreGraphics.framework */,
@@ -242,10 +242,10 @@
 			isa = PBXGroup;
 			children = (
 				0F4E539A16CD3DCE00ABDB93 /* Model.xcdatamodeld */,
-				0F4E53A016CD3E1C00ABDB93 /* Spendings.h */,
-				0F4E53A116CD3E1C00ABDB93 /* Spendings.m */,
-				0F4E539D16CD3DFB00ABDB93 /* Categories.h */,
-				0F4E539E16CD3DFB00ABDB93 /* Categories.m */,
+				0F4E53A016CD3E1C00ABDB93 /* SpendingItem.h */,
+				0F4E53A116CD3E1C00ABDB93 /* SpendingItem.m */,
+				0F4E539D16CD3DFB00ABDB93 /* Category.h */,
+				0F4E539E16CD3DFB00ABDB93 /* Category.m */,
 				0F4E539116CD3DA500ABDB93 /* DataAccessLayer.h */,
 				0F4E539216CD3DA500ABDB93 /* DataAccessLayer.m */,
 				0F4E539316CD3DA500ABDB93 /* EntityFactory.h */,
@@ -389,8 +389,8 @@
 				0F4E539816CD3DA500ABDB93 /* EntityFactory.m in Sources */,
 				0F4E539916CD3DA500ABDB93 /* EntityController.m in Sources */,
 				0F4E539C16CD3DCE00ABDB93 /* Model.xcdatamodeld in Sources */,
-				0F4E539F16CD3DFB00ABDB93 /* Categories.m in Sources */,
-				0F4E53A216CD3E1C00ABDB93 /* Spendings.m in Sources */,
+				0F4E539F16CD3DFB00ABDB93 /* Category.m in Sources */,
+				0F4E53A216CD3E1C00ABDB93 /* SpendingItem.m in Sources */,
 				0F4E53AF16D53A8200ABDB93 /* DataQueries.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

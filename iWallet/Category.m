@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 
-#import "Categories.h"
-#import "Spendings.h"
+#import "Category.h"
+#import "SpendingItem.h"
 
 
-@implementation Categories
+@implementation Category
 
 @dynamic desc;
 @dynamic name;
 @dynamic priority;
-@dynamic spendings;
+@dynamic spendingItem;
 
 @end

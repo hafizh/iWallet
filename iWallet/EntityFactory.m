@@ -34,12 +34,12 @@
     return o;
 }
 
--(Categories*)createCategory {
-   return (Categories*)[self createEntity:@"Categories"];
+-(Category*)createCategory {
+   return (Category*)[self createEntity:@"Categories"];
 }
 
--(Spendings*)createSpendings {
-    return (Spendings*)[self createEntity:@"Spendings"];
+-(SpendingItem*)createSpendings {
+    return (SpendingItem*)[self createEntity:@"Spendings"];
 }
 
 @end

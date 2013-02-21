@@ -1,6 +1,6 @@
 //
-//  DAL.h
-//  Test
+//  EntityController.h
+//  
 //
 //  Created by lab on 1/21/13.
 //  Copyright (c) 2013 lab. All rights reserved.
@@ -18,7 +18,6 @@
     NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     EntityFactory *factory;
-
 }
 
 @property (retain) id delegate;
@@ -28,4 +27,5 @@
 
 @property (nonatomic, retain, readonly) EntityFactory *factory;
 
++ (EntityController *)getInstance;
 @end
