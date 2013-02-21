@@ -14,5 +14,5 @@
 @property (nonatomic, retain) NSManagedObjectContext* context;
 - (id)initWithContext:(NSManagedObjectContext*)c;
 -(Category*)createCategory;
--(SpendingItem*)createSpendings;
+-(SpendingItem*)createSpendingItem;
 @end

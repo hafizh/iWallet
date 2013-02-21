@@ -35,11 +35,11 @@
 }
 
 -(Category*)createCategory {
-   return (Category*)[self createEntity:@"Categories"];
+   return (Category*)[self createEntity:@"Category"];
 }
 
--(SpendingItem*)createSpendings {
-    return (SpendingItem*)[self createEntity:@"Spendings"];
+-(SpendingItem*)createSpendingItem {
+    return (SpendingItem*)[self createEntity:@"SpendingItem"];
 }
 
 @end

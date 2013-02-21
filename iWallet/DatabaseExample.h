@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface DatabaseExample : NSObject
+#import "DataAccessLayer.h"
+#import "EntityFactory.h"
+@interface DatabaseExample : NSObject {
+    DataAccessLayer *dal;
+    EntityFactory *factory;
+}
 
 @end
