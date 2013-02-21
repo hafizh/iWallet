@@ -7,24 +7,21 @@
 //
 
 #import "DatabaseExample.h"
-
+#import "EntityController.h"
 @implementation DatabaseExample
 -(id)init {
     self = [super init];
     
     if (self) {
-        /*
+       
          
-         TODO:make database accessable for all viewControllers
-         */
-        // Override point for customization after application launch.
         
-        /*   EntityController *entityController = [[EntityController alloc] init];
-         DataAccessLayer *dal = [[DataAccessLayer alloc] initWithContext:[entityController managedObjectContext]];
-         EntityFactory *factory = [[EntityFactory alloc] initWithContext:[entityController managedObjectContext]];
-         NSMutableArray *a ;*/
+        EntityController *entityController = [EntityController getInstance];
+         DataAccessLayer *dal = [entityController dataAccessLayer];
+         
+         NSMutableArray *a ;
         
-       // Categories *cat;
+      /*  // Categories *cat;
         /* for (int i = 0; i < 10; i++) {
          cat = factory.createCategory;
          [cat setName:[[NSArray arrayWithObjects: @"Test ",[NSNumber numberWithInt:i], nil] componentsJoinedByString:@" " ]];

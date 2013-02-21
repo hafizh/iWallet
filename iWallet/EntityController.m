@@ -13,7 +13,7 @@
 #import "CoreData/NSPersistentStoreCoordinator.h"
 
 @implementation EntityController
-@synthesize managedObjectContext, delegate, managedObjectModel, persistentStoreCoordinator, factory;
+@synthesize managedObjectContext, delegate, managedObjectModel, persistentStoreCoordinator, factory, dataAccessLayer;
 
 // Singleton methods
 static EntityController *entityControllerSingleton = NULL;
@@ -84,6 +84,14 @@ static EntityController *entityControllerSingleton = NULL;
     return factory;
 }
 
+-(DataAccessLayer*)dataAccessLayer {
+    if (dataAccessLayer != nil) {
+        return dataAccessLayer;
+    }
+        dataAccessLayer = [[DataAccessLayer alloc] initWithContext:[self managedObjectContext]];
+    
+    return dataAccessLayer;
+}
 
 #pragma mark -
 #pragma mark Core Data stack

@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EntityController.h"
-//TODO: Architecture
+#import "SpendingItem.h"
 
-@protocol DataAccessLayer <NSObject>
+@protocol DAL <NSObject>
 
 -(void)deleteCategory: (NSString*) name;
 -(NSArray*)getCategories;
@@ -22,7 +21,7 @@
 -(void)saveContext;
 @end
 
-@interface DataAccessLayer : NSObject <DataAccessLayer>
+@interface DataAccessLayer : NSObject <DAL>
 
 -(id)initWithContext: (NSManagedObjectContext*)context;
 

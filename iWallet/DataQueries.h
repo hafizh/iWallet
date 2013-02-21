@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "DataAccessLayer.h"
-@interface DataQueries : NSObject
+@interface DataQueries : NSObject {
+   DataAccessLayer *dal; 
+}
 -(NSArray*)getSpendingsFrom:(NSDate*)start Till:(NSDate*)end withSortDescriptor:(NSSortDescriptor*)descriptor;
 -(NSArray*)getSpendingsInYear:(NSDateComponents*)year withSortDescriptor:(NSSortDescriptor*)descriptor;
 -(NSArray*)getSpendingsForMonth:(NSDateComponents*)month withSortDescriptor:(NSSortDescriptor*)descriptor;
 @end
-DataAccessLayer *dal;

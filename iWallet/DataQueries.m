@@ -19,9 +19,9 @@
     self = [super init];
     
     if (self) {
-        EntityController *entityController = [[EntityController alloc] init];
-        dal = [[DataAccessLayer alloc] initWithContext:[entityController managedObjectContext]];
-        
+        EntityController *entityController = [EntityController getInstance];
+
+        dal = [entityController dataAccessLayer];
     }
     
     return self;
