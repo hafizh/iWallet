@@ -4,7 +4,7 @@
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="priority" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="item" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SpendingItem" inverseName="item" inverseEntity="SpendingItem" syncable="YES"/>
+        <relationship name="spending" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SpendingItem" inverseName="category" inverseEntity="SpendingItem" syncable="YES"/>
     </entity>
     <entity name="Currencies" syncable="YES">
         <attribute name="rate" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -14,13 +14,13 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="item" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="item" inverseEntity="Category" syncable="YES"/>
+        <relationship name="category" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="spending" inverseEntity="Category" syncable="YES"/>
     </entity>
     <fetchRequest name="getSpending" entity="SpendingItem" predicateString="date == CAST(382553512.584984, &quot;NSDate&quot;) AND price == 0 AND desc CONTAINS &quot;&quot;"/>
     <fetchRequest name="Spendings" entity="SpendingItem" predicateString="date >= CAST(381080214.943686, &quot;NSDate&quot;) AND date &lt;= CAST(381080214.943686, &quot;NSDate&quot;)"/>
     <elements>
-        <element name="Category" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Currencies" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SpendingItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Category" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Currencies" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="SpendingItem" positionX="0" positionY="0" width="128" height="105"/>
     </elements>
 </model>

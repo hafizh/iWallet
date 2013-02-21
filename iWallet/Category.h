@@ -1,8 +1,8 @@
 //
-//  Categories.h
+//  Category.h
 //  iWallet
 //
-//  Created by lab on 2/14/13.
+//  Created by lab on 2/21/13.
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 
@@ -16,6 +16,14 @@
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDecimalNumber * priority;
-@property (nonatomic, retain) SpendingItem *spendingItem;
+@property (nonatomic, retain) NSSet *spending;
+@end
+
+@interface Category (CoreDataGeneratedAccessors)
+
+- (void)addSpendingObject:(SpendingItem *)value;
+- (void)removeSpendingObject:(SpendingItem *)value;
+- (void)addSpending:(NSSet *)values;
+- (void)removeSpending:(NSSet *)values;
 
 @end

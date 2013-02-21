@@ -12,41 +12,47 @@
 @implementation DataAccessLayer
 @synthesize managedObjectContext;
 -(id)initWithContext: (NSManagedObjectContext*)context{
-   self = [super init];
+    self = [super init];
     
     if (self) {
         [self setManagedObjectContext:context];
     }
     
-   return self;
+    return self;
 }
 
 
--(void)deleteCategory: NSString: name  {
+-(void)deleteCategory: (NSString*) name  {
     Category *category;
+    
     for (Category *cat in [self getCategories]) {
         if ([cat.name isEqualToString:name])
             category = cat;
     }
     
-    [[self managedObjectContext]  deleteObject:category];
+    if (category != nil) {
+        [[self managedObjectContext]  deleteObject:category];
+    } else {
+        //error handling
+        NSLog(@"Category doesn't exist");
+    }
 }
 
 -(NSArray*)getCategories  {
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Categories" inManagedObjectContext:[self managedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:[self managedObjectContext]];
     [request setEntity:entity];
     NSArray *fetchedObjects = [[self managedObjectContext]
-                                    executeFetchRequest:request error:&error];
-
+                               executeFetchRequest:request error:&error];
+    
     return fetchedObjects;
 }
 
 
--(void)deleteSpending: Spendings: spending {
+-(void)deleteSpending: (SpendingItem*) spending {
     
-        [[self managedObjectContext]  deleteObject:spending];
+    [[self managedObjectContext]  deleteObject:spending];
     
 }
 
@@ -54,18 +60,20 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity =
-    [NSEntityDescription entityForName:@"Spendings"
+    [NSEntityDescription entityForName:@"SpendingItem"
                 inManagedObjectContext:[self managedObjectContext]];
     [request setEntity:entity];
     
-    [request setPredicate:predicate];
+    if (predicate != nil)
+        [request setPredicate:predicate];
     
-    [request setSortDescriptors:@[descriptor]];
+    if (descriptor != nil)
+        [request setSortDescriptors:@[descriptor]];
     
     NSError *error;
     NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
     if (array != nil) {
-      
+        
     }
     else {
         // error handling
@@ -80,7 +88,7 @@
 -(void)saveContext {
     NSError *error;
     if (![[self managedObjectContext] save:&error]) {
-       // NSLog([error localizedDescription]);
+        // NSLog([error localizedDescription]);
     }
 }
 

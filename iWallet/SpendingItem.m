@@ -1,8 +1,8 @@
 //
-//  Spendings.m
+//  SpendingItem.m
 //  iWallet
 //
-//  Created by lab on 2/14/13.
+//  Created by lab on 2/21/13.
 //  Copyright (c) 2013 lab. All rights reserved.
 //
 

@@ -12,11 +12,11 @@
 
 @protocol DataAccessLayer <NSObject>
 
--(void)deleteCategory: NSString: name;
+-(void)deleteCategory: (NSString*) name;
 -(NSArray*)getCategories;
 
 
--(void)deleteSpending: Spendings: spending;
+-(void)deleteSpending: (SpendingItem*) spending;
 -(NSArray*)getSpendingsWithFilter:(NSPredicate*)predicate andSortDescriptor: (NSSortDescriptor*)descriptor;
 
 -(void)saveContext;
