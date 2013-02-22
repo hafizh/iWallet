@@ -18,6 +18,7 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     EntityFactory *factory;
     DataAccessLayer *dataAccessLayer;
+    
 }
 
 @property (retain) id delegate;

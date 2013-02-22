@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DataAccessLayer.h"
+#import "EntityController.h"
+#import "SpendingItem.h"
+#import "DataQueries.h"
+#import "DatabaseExample.h"
 
 @interface StatsMainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *categoriesTableView;

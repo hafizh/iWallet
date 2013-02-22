@@ -12,6 +12,8 @@
 @interface DatabaseExample : NSObject {
     DataAccessLayer *dal;
     EntityFactory *factory;
+    NSArray *categories;
 }
 
+-(void)addCategories;
 @end

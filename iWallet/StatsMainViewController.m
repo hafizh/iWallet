@@ -36,6 +36,8 @@ CGFloat animationDuration = 0.3f;
 PlotView *page1;
 PlotView *page2;
 
+DataQueries *dbLayer;
+
 // used in didRotate... method
 UIInterfaceOrientation toOrientation;
 
@@ -55,20 +57,33 @@ CGRect previousFrame;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
+    dbLayer = [[DataQueries alloc] init];
+    //[dbLayer ]
+    
+    EntityController *controller = [EntityController getInstance];
+
+    if([[controller dataAccessLayer] getCategories].count<=0){
+        DatabaseExample *dbEx = [[DatabaseExample alloc] init];
+        [dbEx addCategories];
+        categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
+    }else{
+        categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
+    }
+    
     //*************** Init DUMMY arrays *******************
     
-    categories = [[NSArray alloc] initWithObjects:
-                  @"Detail...",
-                  @"All",
-                  @"Food & Groceries",
-                  @"Houshold & Rent",
-                  @"Clothing",
-                  @"Going Out",
-                  @"Sports & Hobbies",
-                  @"Study Costs",
-                  @"Health Care & Cosmetics",
-                  @"Transportation & Travel",
-                  @"Other", nil];
+//    categories = [[NSArray alloc] initWithObjects:
+//                  @"Detail...",
+//                  @"All",
+//                  @"Food & Groceries",
+//                  @"Houshold & Rent",
+//                  @"Clothing",
+//                  @"Going Out",
+//                  @"Sports & Hobbies",
+//                  @"Study Costs",
+//                  @"Health Care & Cosmetics",
+//                  @"Transportation & Travel",
+//                  @"Other", nil];
 
     // charts text. // Later should be actual charts
     chartModes = [[NSArray alloc] initWithObjects:@"Monthly Chart", @"Yearly Chart", nil];
@@ -347,18 +362,19 @@ CGRect previousFrame;
     
     if (indexPath.row == 0) {
         CellIdentifier = @"detailCell";
-        
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.textLabel.text = @"Detail...";
     }
     else if(indexPath.row > 0){
         CellIdentifier = @"category";
-    }
-
-     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
-    cell.textLabel.text = [categories objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d%%", arc4random_uniform(90)];
+        // Configure the cell...
+        Category *cat = [categories objectAtIndex:indexPath.row];
+        cell.textLabel.text = cat.name;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d%%", arc4random_uniform(90)];
 
+    }
     return cell;
 }
 

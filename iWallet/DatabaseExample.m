@@ -28,20 +28,34 @@
          [self priceFilterAndSort];
          [self printQuery];
         */
+            categories = [[NSArray alloc] initWithObjects:
+                          @"All",
+                          @"Food & Groceries",
+                          @"Houshold & Rent",
+                          @"Clothing",
+                          @"Going Out",
+                          @"Sports & Hobbies",
+                          @"Study Costs",
+                          @"Health Care & Cosmetics",
+                          @"Transportation & Travel",
+                          @"Other", nil];
+
+        
     }
     
     return self;
 }
 
 -(void)addCategories {
-    Category *cat;
-    for (int i = 90; i < 100; i++) {
-        cat = factory.createCategory;
-        [cat setName:[[NSArray arrayWithObjects: @"Test",[NSNumber numberWithInt:i], nil] componentsJoinedByString:@" " ]];
-        [cat setDesc:@"Das ist die Beschreibung"];
-        
-    }
+    // clear all old test categories before adding some new ones
+    [self clearAllCategories];
     
+    Category *cat;
+    for (int i = 0; i < categories.count; i++) {
+        cat = factory.createCategory;
+        [cat setName:[categories objectAtIndex:i]];
+        [cat setDesc:@"Das ist die Beschreibung"];
+    }
     
     [dal saveContext];
     
@@ -90,5 +104,14 @@
         if (spending.category != nil)
             NSLog(@"%@",spending.category.name);
     }
+}
+
+-(void)clearAllCategories {
+    NSArray *currentCategories = [[NSArray alloc] initWithArray:[dal getCategories]];
+    
+    for(Category *cat in currentCategories){
+        [dal deleteCategory:cat.name];
+    }
+    [dal saveContext];
 }
 @end
