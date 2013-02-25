@@ -78,6 +78,8 @@
         
         
     }
+    
+     [dal saveContext];
 }
 
 -(void)printQuery {
