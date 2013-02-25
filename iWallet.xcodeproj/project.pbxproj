@@ -38,6 +38,8 @@
 		0F4E53AF16D53A8200ABDB93 /* DataQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E53AE16D53A8200ABDB93 /* DataQueries.m */; };
 		0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F537A8416B0593F006F00FD /* StatsMainViewController.m */; };
 		0F9F5B5F16BFFE93002F8C26 /* Welcome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9F5B5E16BFFE93002F8C26 /* Welcome.m */; };
+		0FD6F78116DBB3F30011DDB5 /* MonthlyNavigationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */; };
+		0FD6F78416DBB41F0011DDB5 /* YearlyNavigationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */; };
 		0FDD20F016D68476003F0AA1 /* SpendingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD20EF16D68476003F0AA1 /* SpendingItem.m */; };
 		0FDD20F316D68607003F0AA1 /* DatabaseExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD20F216D68607003F0AA1 /* DatabaseExample.m */; };
 		7651674F16BD459E005EB96E /* clothing.png in Resources */ = {isa = PBXBuildFile; fileRef = 7651674D16BD459E005EB96E /* clothing.png */; };
@@ -112,6 +114,11 @@
 		0F537A8416B0593F006F00FD /* StatsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsMainViewController.m; sourceTree = "<group>"; };
 		0F9F5B5D16BFFE93002F8C26 /* Welcome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Welcome.h; sourceTree = "<group>"; };
 		0F9F5B5E16BFFE93002F8C26 /* Welcome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Welcome.m; sourceTree = "<group>"; };
+		0FD6F77B16DBB3000011DDB5 /* DateNavigationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateNavigationStrategy.h; sourceTree = "<group>"; };
+		0FD6F77F16DBB3F30011DDB5 /* MonthlyNavigationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyNavigationStrategy.h; sourceTree = "<group>"; };
+		0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyNavigationStrategy.m; sourceTree = "<group>"; };
+		0FD6F78216DBB41F0011DDB5 /* YearlyNavigationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearlyNavigationStrategy.h; sourceTree = "<group>"; };
+		0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YearlyNavigationStrategy.m; sourceTree = "<group>"; };
 		0FDD20EE16D68476003F0AA1 /* SpendingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingItem.h; sourceTree = "<group>"; };
 		0FDD20EF16D68476003F0AA1 /* SpendingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingItem.m; sourceTree = "<group>"; };
 		0FDD20F116D68607003F0AA1 /* DatabaseExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseExample.h; sourceTree = "<group>"; };
@@ -237,6 +244,11 @@
 				0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */,
 				0F3D06E816B82A7400BC7850 /* PlotView.h */,
 				0F3D06E916B82A7500BC7850 /* PlotView.m */,
+				0FD6F77B16DBB3000011DDB5 /* DateNavigationStrategy.h */,
+				0FD6F77F16DBB3F30011DDB5 /* MonthlyNavigationStrategy.h */,
+				0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */,
+				0FD6F78216DBB41F0011DDB5 /* YearlyNavigationStrategy.h */,
+				0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */,
 			);
 			name = Statistics;
 			sourceTree = "<group>";
@@ -398,6 +410,8 @@
 				0FDD20F016D68476003F0AA1 /* SpendingItem.m in Sources */,
 				0FDD20F316D68607003F0AA1 /* DatabaseExample.m in Sources */,
 				0F366CBE16D688BE008FC803 /* Category.m in Sources */,
+				0FD6F78116DBB3F30011DDB5 /* MonthlyNavigationStrategy.m in Sources */,
+				0FD6F78416DBB41F0011DDB5 /* YearlyNavigationStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

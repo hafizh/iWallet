@@ -12,6 +12,7 @@
 #import "SpendingItem.h"
 #import "DataQueries.h"
 #import "DatabaseExample.h"
+#import "DateNavigationStrategy.h"
 
 @interface StatsMainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *categoriesTableView;
@@ -20,6 +21,7 @@
 //@property (weak, nonatomic) IBOutlet UILabel *selectedCategoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modeLabel;
 @property (weak, nonatomic) IBOutlet UINavigationItem *mainTitle;
+@property id<DateNavigationStrategy> naviStrategy;
 
 - (IBAction)prevTimePeriodButtonTapped:(id)sender;
 - (IBAction)nextTimePeriodButtonTapped:(id)sender;

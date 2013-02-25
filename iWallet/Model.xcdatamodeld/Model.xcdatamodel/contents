@@ -20,7 +20,7 @@
     <fetchRequest name="Spendings" entity="SpendingItem" predicateString="date >= CAST(381080214.943686, &quot;NSDate&quot;) AND date &lt;= CAST(381080214.943686, &quot;NSDate&quot;)"/>
     <elements>
         <element name="Category" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Currencies" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Currencies" positionX="-189" positionY="414" width="128" height="75"/>
         <element name="SpendingItem" positionX="-477" positionY="3" width="128" height="105"/>
     </elements>
 </model>

@@ -20,7 +20,7 @@
 
 -(float) getSumAmountForMonth:(NSDateComponents*)month
 {
-//    float sum = 0;
+    // TODO: Filter spending items by date.
     NSNumber *sum = [self.spending valueForKeyPath:@"@sum.price"];
     return [sum floatValue];
 }

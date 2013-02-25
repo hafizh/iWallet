@@ -70,7 +70,7 @@ CGRect previousFrame;
         categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
     }
 
-    // charts text. // Later should be actual charts
+    // charts text.
     chartModes = [[NSArray alloc] initWithObjects:@"Monthly Chart", @"Yearly Chart", nil];
     
     // later will be extracted from db.
