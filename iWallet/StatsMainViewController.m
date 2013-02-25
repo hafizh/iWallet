@@ -69,21 +69,6 @@ CGRect previousFrame;
     }else{
         categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
     }
-    
-    //*************** Init DUMMY arrays *******************
-    
-//    categories = [[NSArray alloc] initWithObjects:
-//                  @"Detail...",
-//                  @"All",
-//                  @"Food & Groceries",
-//                  @"Houshold & Rent",
-//                  @"Clothing",
-//                  @"Going Out",
-//                  @"Sports & Hobbies",
-//                  @"Study Costs",
-//                  @"Health Care & Cosmetics",
-//                  @"Transportation & Travel",
-//                  @"Other", nil];
 
     // charts text. // Later should be actual charts
     chartModes = [[NSArray alloc] initWithObjects:@"Monthly Chart", @"Yearly Chart", nil];
@@ -128,9 +113,6 @@ CGRect previousFrame;
     [self initLayout];
     
     [self initScrollViewWithHeigth:scrollHeight width:viewWidth];
-
-    
-    //[dataAccessLayer getSpendingsWithFilter:<#(NSPredicate *)#> andSortDescriptor:<#(NSSortDescriptor *)#>]
 }
 
 - (void)didReceiveMemoryWarning
@@ -372,7 +354,7 @@ CGRect previousFrame;
         // Configure the cell...
         Category *cat = [categories objectAtIndex:indexPath.row];
         cell.textLabel.text = cat.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d%%", arc4random_uniform(90)];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%lf%%", [cat getSumAmountForMonth:nil]/10];
 
     }
     return cell;

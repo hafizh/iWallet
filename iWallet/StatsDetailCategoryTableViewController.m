@@ -37,17 +37,10 @@ NSMutableArray *sectionsHeaders;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    localCategories = [[NSArray alloc] initWithObjects:
-                  @"All",
-                  @"Food & Groceries",
-                  @"Houshold & Rent",
-                  @"Clothing",
-                  @"Going Out",
-                  @"Sports & Hobbies",
-                  @"Study Costs",
-                  @"Health Care & Cosmetics",
-                  @"Transportation & Travel",
-                  @"Other", nil];
+    
+    //*************** Init categories *******************
+    EntityController *controller = [EntityController getInstance];
+    localCategories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
 
     // later will be extracted from db.
     months = [[NSArray alloc] initWithObjects:
@@ -83,14 +76,7 @@ NSMutableArray *sectionsHeaders;
 
     }
     
-    if(self.selectedCategoryID < 0){
-        self.mainTitle.title = @"Unknown category!";
-    }
-    else{
-        self.mainTitle.title = [localCategories objectAtIndex:self.selectedCategoryID];
-    }
-NSLog(@"currentYear: %d", self.currentYearIndex);
-
+    self.mainTitle.title = self.selectedCategory;
     
 }
 

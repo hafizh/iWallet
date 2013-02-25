@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EntityController.h"
 
 @interface StatsDetailCategoryTableViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *mainTitle;
-@property int selectedCategoryID;
+@property NSString *selectedCategory;
 @property int currentMonthIndex;
 @property int currentYearIndex;
 @end

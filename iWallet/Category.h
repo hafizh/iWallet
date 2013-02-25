@@ -17,6 +17,8 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDecimalNumber * priority;
 @property (nonatomic, retain) NSSet *spending;
+
+-(float) getSumAmountForMonth:(NSDateComponents*)month ;
 @end
 
 @interface Category (CoreDataGeneratedAccessors)

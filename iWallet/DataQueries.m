@@ -28,15 +28,15 @@
 }
 
 
--(NSArray*)getSpendingsFrom:(NSDate*)start Till:(NSDate*)end withSortDescriptor:(NSSortDescriptor*)descriptor {
+-(NSArray*)getSpendingsForCategory:(Category *)cat from:(NSDate*)start Till:(NSDate*)end withSortDescriptor:(NSSortDescriptor*)descriptor {
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date >= %@ AND date <= %@", start, end];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@ AND (date >= %@ AND date <= %@)",cat, start, end];
     
     return [dal getSpendingsWithFilter:predicate andSortDescriptor:descriptor];
     
 }
 
--(NSArray*)getSpendingsInYear:(NSDateComponents*)year withSortDescriptor:(NSSortDescriptor*)descriptor{
+-(NSArray*)getSpendingsForCategory:(Category *)cat inYear:(NSDateComponents*)year withSortDescriptor:(NSSortDescriptor*)descriptor{
     NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
     [year setDay:1];
@@ -49,7 +49,21 @@
     
     NSDate *end =[calendar dateFromComponents:year];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date >= %@ AND date <= %@", start, end];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@ AND (date >= %@ AND date <= %@)",cat, start, end];
+    
+    return [dal getSpendingsWithFilter:predicate andSortDescriptor:descriptor];
+}
+
+-(NSArray*)getSpendingsForCategory:(Category *)cat forMonth:(NSDateComponents*)month withSortDescriptor:(NSSortDescriptor*)descriptor {
+    NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [month setDay:1];
+    
+    
+    NSDate *start = [calendar dateFromComponents:month];
+    [month setMonth:[month month]+1];
+    NSDate *end =[[calendar dateFromComponents:month] dateByAddingTimeInterval:-86400];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@ AND (date >= %@ AND date <= %@)",cat, start, end];
     
     return [dal getSpendingsWithFilter:predicate andSortDescriptor:descriptor];
 }
@@ -66,6 +80,18 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date >= %@ AND date <= %@", start, end];
     
     return [dal getSpendingsWithFilter:predicate andSortDescriptor:descriptor];
+}
+
+-(NSArray*)getSpendings
+{
+    return [dal getSpendingsWithFilter:nil andSortDescriptor:nil];
+}
+
+-(NSArray*)getSpendingsForCategory:(Category*)cat
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", cat];
+    
+    return [dal getSpendingsWithFilter:predicate andSortDescriptor:nil];
 }
 
 @end

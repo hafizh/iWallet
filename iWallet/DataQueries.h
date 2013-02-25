@@ -11,7 +11,10 @@
 @interface DataQueries : NSObject {
    DataAccessLayer *dal; 
 }
--(NSArray*)getSpendingsFrom:(NSDate*)start Till:(NSDate*)end withSortDescriptor:(NSSortDescriptor*)descriptor;
--(NSArray*)getSpendingsInYear:(NSDateComponents*)year withSortDescriptor:(NSSortDescriptor*)descriptor;
+-(NSArray*)getSpendingsForCategory:(Category *)cat from:(NSDate*)start Till:(NSDate*)end withSortDescriptor:(NSSortDescriptor*)descriptor;
+-(NSArray*)getSpendingsForCategory:(Category *)cat inYear:(NSDateComponents*)year withSortDescriptor:(NSSortDescriptor*)descriptor;
+-(NSArray*)getSpendingsForCategory:(Category *)cat forMonth:(NSDateComponents*)month withSortDescriptor:(NSSortDescriptor*)descriptor;
 -(NSArray*)getSpendingsForMonth:(NSDateComponents*)month withSortDescriptor:(NSSortDescriptor*)descriptor;
+-(NSArray*)getSpendings;
+-(NSArray*)getSpendingsForCategory:(Category*)cat;
 @end

@@ -16,4 +16,6 @@
 }
 
 -(void)addCategories;
+-(void)addSpendings;
+
 @end

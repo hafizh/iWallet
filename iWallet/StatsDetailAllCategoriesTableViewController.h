@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EntityController.h"
 
 @interface StatsDetailAllCategoriesTableViewController : UITableViewController
 

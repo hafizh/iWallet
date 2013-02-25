@@ -17,4 +17,11 @@
 @dynamic priority;
 @dynamic spending;
 
+
+-(float) getSumAmountForMonth:(NSDateComponents*)month
+{
+//    float sum = 0;
+    NSNumber *sum = [self.spending valueForKeyPath:@"@sum.price"];
+    return [sum floatValue];
+}
 @end

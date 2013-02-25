@@ -114,4 +114,13 @@
     }
     [dal saveContext];
 }
+
+-(void)clearAllSpendings {
+    NSArray *currentSpendings = [[NSArray alloc] initWithArray:[dal getSpendingsWithFilter:nil andSortDescriptor:nil]];
+    
+    for (SpendingItem *si in currentSpendings) {
+        [dal deleteSpending:si];
+    }
+    [dal saveContext];
+}
 @end

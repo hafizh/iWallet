@@ -37,19 +37,10 @@ NSArray *localCategories;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //*************** Init DUMMY arrays *******************
+    //*************** Init categories *******************
+    EntityController *controller = [EntityController getInstance];
+    localCategories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
     
-    localCategories = [[NSArray alloc] initWithObjects:
-                  @"Food & Groceries",
-                  @"Houshold & Rent",
-                  @"Clothing",
-                  @"Going Out",
-                  @"Sports & Hobbies",
-                  @"Study Costs",
-                  @"Health Care & Cosmetics",
-                  @"Transportation & Travel",
-                  @"Other", nil];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +78,7 @@ NSArray *localCategories;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [localCategories objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[localCategories objectAtIndex:indexPath.row] name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d€", arc4random_uniform(150)];
     return cell;
 }
@@ -150,7 +141,7 @@ NSArray *localCategories;
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         StatsDetailCategoryTableViewController *categoryTableView = segue.destinationViewController;
-        categoryTableView.selectedCategoryID = indexPath.row;
+        categoryTableView.selectedCategory = [[localCategories objectAtIndex:indexPath.row] name];
         categoryTableView.currentMonthIndex = self.currentMonthIndex;
         categoryTableView.currentYearIndex = self.currentYearIndex;
         NSLog(@"fromCategoriesToCategory");
