@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DateNavigationStrategy.h"
+#import "EntityController.h"
+#import "DataQueries.h"
 
 @interface YearlyNavigationStrategy : NSObject<DateNavigationStrategy>
 

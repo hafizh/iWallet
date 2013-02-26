@@ -333,7 +333,9 @@
                         <outlet property="categoriesTableView" destination="vKM-Af-9o0" id="Uo1-zm-efi"/>
                         <outlet property="mainTitle" destination="2mg-J8-ZCl" id="Hea-2D-7Qb"/>
                         <outlet property="modeLabel" destination="qMd-ZW-emJ" id="m1O-ex-dCO"/>
+                        <outlet property="nextButton" destination="8SA-1E-Z4A" id="1QE-fU-I0m"/>
                         <outlet property="pageControl" destination="QFF-aC-vi7" id="FPh-ed-OZE"/>
+                        <outlet property="prevButton" destination="VRA-sU-qXn" id="4vi-dd-laY"/>
                         <outlet property="scrollView" destination="FDo-pM-fUz" id="Fwf-Jf-7UR"/>
                     </connections>
                 </viewController>

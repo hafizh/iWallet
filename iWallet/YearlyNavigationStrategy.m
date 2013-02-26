@@ -10,24 +10,105 @@
 
 @implementation YearlyNavigationStrategy
 
--(NSDate*)getNext
+NSCalendar *calendar;
+
+/// firstDate <= prevDate <= currentDate >= nextDate >= lastDate
+NSDateComponents *firstDateComp;
+//NSDateComponents *prevDate;
+//NSDateComponents *currentDate;
+//NSDateComponents *nextDate;
+NSDateComponents *lastDateComp;
+int prev, next, current;
+NSDateComponents *currentComp;
+NSArray *allSpendingItems;
+
+-(id)init
 {
-    return nil;
+    [self superclass];
+    if(self != nil){
+        // get All spendings
+        DataQueries *queries = [[DataQueries alloc] init];
+        allSpendingItems = [[NSArray alloc] initWithArray:[queries getSpendings]];
+        NSDate *firstDate = [allSpendingItems valueForKeyPath:@"@min.date"];
+        
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        
+        firstDateComp = [calendar components:(NSYearCalendarUnit) fromDate:firstDate];
+        NSDate *lastDate = [NSDate date];
+        lastDateComp = [calendar components:(NSYearCalendarUnit) fromDate:lastDate];
+        currentComp = [calendar components:(NSYearCalendarUnit) fromDate:lastDate];
+        current = [lastDateComp year];
+        NSLog(@"firstDateComp year:%d", [firstDateComp year]);
+
+        NSLog(@"currentComp year:%d", [currentComp year]);
+
+        // calculate next and prev dates to check
+        next = current + 1;
+        prev = current - 1;
+        
+        NSLog(@"prev: %d, currendD:%d, nextDate:%d", prev, current,next);
+
+    }
+    return self;
 }
 
--(NSDate*)getPrevious
+-(NSDateComponents*)getNext
 {
-    return nil;
+    if([self checkNext]){
+        prev = current;
+        current = next;
+        [currentComp setYear:current];
+        
+        next += 1;
+         NSLog(@"prev: %d, currendD:%d, nextDate:%d", prev, current,next);
+    }
+    
+    return currentComp;
+}
+
+-(NSString *)getNextTitle
+{
+    return [NSString stringWithFormat:@"%d", next];
+}
+
+-(NSDateComponents*)getCurrent
+{
+    return currentComp;
+}
+
+-(NSString *)getCurrentTitle
+{
+    return [NSString stringWithFormat:@"%d", current];
+
+}
+
+-(NSDateComponents*)getPrevious
+{
+    if([self checkPrevious]){
+        next = current;
+        current = prev;
+        [currentComp setYear:current];
+        
+        prev -= 1;
+         NSLog(@"prev: %d, currendD:%d, nextDate:%d", prev, current,next);
+    }
+    
+    return currentComp;
+}
+
+-(NSString *)getPreviousTitle
+{
+    return [NSString stringWithFormat:@"%d", prev];
 }
 
 -(BOOL) checkNext
 {
-    return YES;
+    return next <= [lastDateComp year];
 }
 
 -(BOOL) checkPrevious
 {
-    return YES;
+    return prev >= [firstDateComp year];
 }
 
 @end

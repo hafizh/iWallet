@@ -20,8 +20,6 @@ NSArray *categories;
 NSArray *chartModes;
 NSArray *months;
 NSArray *years;
-int currentMonthIndex = 0;
-int currentYearIndex = 1;
 
 // view size => default values
 int viewHeight = 370;
@@ -42,6 +40,10 @@ DataQueries *dbLayer;
 UIInterfaceOrientation toOrientation;
 
 CGRect previousFrame;
+
+// Navigation strategies
+YearlyNavigationStrategy *yearlyNaviStrategy;
+MonthlyNavigationStrategy *monthlyNaviStrategy;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,9 +90,7 @@ CGRect previousFrame;
               @"November",
               @"December", nil];
     
-    years = [[NSArray alloc] initWithObjects:@"2012", @"2013", nil];
-    
-    //******************* DUMMY FINISH *********************
+    //******************* DATA INIT FINISH *********************
     
     // set this view controller(self) as tableview delegate and data source
     self.categoriesTableView.delegate = self;
@@ -104,8 +104,18 @@ CGRect previousFrame;
     // category selected and which mode is it(mothly, yearly, etc.)
     self.modeLabel.text = @"Monthly chart";
     
-    self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
- 
+    // Init navi strategies
+    yearlyNaviStrategy = [[YearlyNavigationStrategy alloc] init];
+    monthlyNaviStrategy = [[MonthlyNavigationStrategy alloc] init];
+    
+    // in default, strategy is set to monthly
+    self.naviStrategy = monthlyNaviStrategy;
+    [self.nextButton setEnabled:[self.naviStrategy checkNext]];
+    [self.prevButton setEnabled:[self.naviStrategy checkPrevious]];
+    self.mainTitle.title = [self.naviStrategy getCurrentTitle];
+    self.nextButton.title = [self.naviStrategy getNextTitle];
+    self.prevButton.title = [self.naviStrategy getPreviousTitle];
+    
     // init sizes
     [self initSizes];
     
@@ -160,7 +170,6 @@ CGRect previousFrame;
                              [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:CGRectMake(0, 0, 480, 320)];
                              [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:TRUE];
                              [self updateLayoutToLandscape];
-
                          }
          ];
 
@@ -182,23 +191,13 @@ CGRect previousFrame;
     [self.categoriesTableView setAlpha:1.0f];
 
     if(currentScrollViewAlpha >= 0){
-        
-//        [UIView animateWithDuration:animationDuration
-//                         animations:^{
-                             [self resizeScrollViewToHeight:scrollHeight width:viewWidth origin:CGPointMake(0, tableHeight)];
-//                         }
-//         ];
+        [self resizeScrollViewToHeight:scrollHeight width:viewWidth origin:CGPointMake(0, tableHeight)];
     }
     
 }
 
 - (void) updateLayoutToLandscape
 {
-    
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-//    CGFloat screenHeight = screenRect.size.height;
-//    CGFloat screenWidth = screenRect.size.width;
-//    screenHeight -= [[UIApplication sharedApplication] statusBarFrame].size.height;
     
     [self.scrollView setAlpha:currentScrollViewAlpha];
     [self.categoriesTableView setAlpha:currentScrollViewAlpha];
@@ -314,11 +313,18 @@ CGRect previousFrame;
     
         // TITLE: Year mode title-> current year, month mode title-> current month
         if(modeValue == 0){
-            self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
+            self.naviStrategy = monthlyNaviStrategy;
         }
         else{
-            self.mainTitle.title = [years objectAtIndex:currentYearIndex];
+            self.naviStrategy = yearlyNaviStrategy;
         }
+        
+        self.mainTitle.title = [self.naviStrategy getCurrentTitle];
+        self.nextButton.title = [self.naviStrategy getNextTitle];
+        self.prevButton.title = [self.naviStrategy getPreviousTitle];
+        self.nextButton.enabled = [self.naviStrategy checkNext];
+        self.prevButton.enabled = [self.naviStrategy checkPrevious];
+
     
     }
 }
@@ -377,91 +383,44 @@ CGRect previousFrame;
 {
     if([segue.identifier isEqualToString:@"fromMainStatsToDetail"]){
         StatsDetailAllCategoriesTableViewController *dest = segue.destinationViewController;
-        dest.currentMonthIndex = currentMonthIndex;
-        dest.currentYearIndex = currentYearIndex;
+     //   dest.currentMonthIndex = currentMonthIndex;
+     //   dest.currentYearIndex = currentYearIndex;
     }
 }
 
 
 // Navigate by month or year next and prev buttons
 - (IBAction)prevTimePeriodButtonTapped:(id)sender {
+
+    // TODO: Used to query db according to month or year
+    NSDateComponents *tempComp = [self.naviStrategy getPrevious];
+    self.mainTitle.title = [self.naviStrategy getCurrentTitle];
+    self.nextButton.title = [self.naviStrategy getNextTitle];
+    self.prevButton.title = [self.naviStrategy getPreviousTitle];
+
+
+    [self.prevButton setEnabled:[self.naviStrategy checkPrevious]];
+    [self.nextButton setEnabled:[self.naviStrategy checkNext]];
     
-        if(modeValue == 0){
-            if(currentYearIndex>=0){
-            [self decrementByMonth];
-            }
-        }
-        else{
-            if(currentYearIndex>0){
-            [self decrementByYear];
-            }
-        }
     [page1 updateData];
     [page2 updateData];
     
 }
-
 
 - (IBAction)nextTimePeriodButtonTapped:(id)sender {
 
-    if(currentMonthIndex<months.count && currentYearIndex<years.count-1){
-        if(modeValue == 0){
-            [self incrementByMonth];
-        }
-        else{
-            [self incrementByYear];
-        }
-    }
+    // TODO: Used to query db according to month or year
+    NSDateComponents *tempComp = [self.naviStrategy getNext];
+    self.mainTitle.title = [self.naviStrategy getCurrentTitle];
+    self.nextButton.title = [self.naviStrategy getNextTitle];
+    self.prevButton.title = [self.naviStrategy getPreviousTitle];
+
+   
+     //NSLog(@" month:%@ and year:%d", [months objectAtIndex:[tempComp month]-1], [tempComp year]);
+    [self.nextButton setEnabled:[self.naviStrategy checkNext]];
+    [self.prevButton setEnabled:[self.naviStrategy checkPrevious]];
     
-    NSLog(@" currentMonthIndex:%d and year:%d", currentMonthIndex, currentYearIndex);
     [page1 updateData];
     [page2 updateData];
-}
-
-
-// TODO: More OO Way of doing this. Use Strategy or State design pattern(Maybe kind of
-// an iterator object which can iterate by year or month)
-- (void)decrementByMonth
-{
-    if(currentMonthIndex > 0){
-        currentMonthIndex--;
-    }
-    else if(currentYearIndex > 0){
-        currentYearIndex--;
-        currentMonthIndex = months.count-1;
-    }
-    
-    self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
-}
-
-- (void)decrementByYear
-{
-    if(currentYearIndex >= 0){
-        currentYearIndex--;
-         self.mainTitle.title = [years objectAtIndex:currentYearIndex];
-    }
-}
-
-- (void)incrementByMonth
-{
-    if(currentMonthIndex > months.count-2){
-        currentMonthIndex = 0;
-        
-        if(currentYearIndex < 1){
-            currentYearIndex++;
-        }
-    }
-    else{
-        currentMonthIndex++;
-    }
-    self.mainTitle.title = [months objectAtIndex:currentMonthIndex];
-}
-
-- (void)incrementByYear
-{
-    if(currentYearIndex<years.count-1){
-        currentYearIndex++;
-        self.mainTitle.title = [years objectAtIndex:currentYearIndex];
-    }
 }
 @end

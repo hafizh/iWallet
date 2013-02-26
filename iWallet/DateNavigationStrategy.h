@@ -9,9 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @protocol DateNavigationStrategy
+/**
+ Navigation protocol to navigate by month or by year depending on classes that comply to this protocol.
+ */
 
--(NSDate*) getNext;
--(NSDate*) getPrevious;
+-(NSDateComponents*) getNext;
+-(NSString*) getNextTitle;
+-(NSDateComponents*) getPrevious;
+-(NSString*)getPreviousTitle;
+-(NSDateComponents*) getCurrent;
+-(NSString*)getCurrentTitle;
 -(BOOL) checkNext;
 -(BOOL) checkPrevious;
 
