@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSSet *spending;
 
 -(float) getSumAmountForMonth:(NSDateComponents*)month ;
+-(float) getSumAmountForYear:(NSDateComponents*)year;
+
 @end
 
 @interface Category (CoreDataGeneratedAccessors)

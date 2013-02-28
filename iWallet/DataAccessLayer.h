@@ -13,7 +13,8 @@
 
 -(void)deleteCategory: (NSString*) name;
 -(NSArray*)getCategories;
-
+-(NSArray*)getCategoryNames;
+-(Category *)getCategoryWithName:(NSString*)name;
 
 -(void)deleteSpending: (SpendingItem*) spending;
 -(NSArray*)getSpendingsWithFilter:(NSPredicate*)predicate andSortDescriptor: (NSSortDescriptor*)descriptor;

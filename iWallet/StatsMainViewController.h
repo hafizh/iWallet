@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *mainTitle;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *prevButton;
-@property id<DateNavigationStrategy> naviStrategy;
 
 - (IBAction)prevTimePeriodButtonTapped:(id)sender;
 - (IBAction)nextTimePeriodButtonTapped:(id)sender;

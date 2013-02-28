@@ -7,19 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Category.h"
 
 @protocol DateNavigationStrategy
 /**
  Navigation protocol to navigate by month or by year depending on classes that comply to this protocol.
  */
 
--(NSDateComponents*) getNext;
+-(NSDateComponents*) calculateNext;
 -(NSString*) getNextTitle;
--(NSDateComponents*) getPrevious;
+-(NSDateComponents*) calculatePrevious;
 -(NSString*)getPreviousTitle;
 -(NSDateComponents*) getCurrent;
 -(NSString*)getCurrentTitle;
+-(float) getCurrentSumAmountforCategory:(Category*)cat;
 -(BOOL) checkNext;
 -(BOOL) checkPrevious;
 
+/**
+ * KNOWN Probable ISSUES:
+ * 1. Current variable should be synchronized between navigation strategies.
+ *      When on month navigation year is 2012 it should be 2012 in Year navigation too.
+ */
 @end

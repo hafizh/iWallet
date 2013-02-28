@@ -18,7 +18,7 @@
 
 NSArray *categories;
 NSArray *chartModes;
-NSArray *months;
+NSArray *monthsFull;
 NSArray *years;
 
 // view size => default values
@@ -34,6 +34,7 @@ CGFloat animationDuration = 0.3f;
 PlotView *page1;
 PlotView *page2;
 
+id<DateNavigationStrategy> naviStrategy;
 DataQueries *dbLayer;
 
 // used in didRotate... method
@@ -59,6 +60,18 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
+    // Init navi strategies
+    yearlyNaviStrategy = [[YearlyNavigationStrategy alloc] init];
+    monthlyNaviStrategy = [[MonthlyNavigationStrategy alloc] init];
+    
+    // in default, strategy is set to monthly
+    naviStrategy = monthlyNaviStrategy;
+    [self.nextButton setEnabled:[naviStrategy checkNext]];
+    [self.prevButton setEnabled:[naviStrategy checkPrevious]];
+    self.mainTitle.title = [naviStrategy getCurrentTitle];
+    self.nextButton.title = [naviStrategy getNextTitle];
+    self.prevButton.title = [naviStrategy getPreviousTitle];
+
     dbLayer = [[DataQueries alloc] init];
     //[dbLayer ]
     
@@ -76,7 +89,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     chartModes = [[NSArray alloc] initWithObjects:@"Monthly Chart", @"Yearly Chart", nil];
     
     // later will be extracted from db.
-    months = [[NSArray alloc] initWithObjects:
+    monthsFull = [[NSArray alloc] initWithObjects:
               @"January",
               @"February",
               @"March",
@@ -103,18 +116,6 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     // set default text for labels: these are placeholders for further implementation on feedback on which
     // category selected and which mode is it(mothly, yearly, etc.)
     self.modeLabel.text = @"Monthly chart";
-    
-    // Init navi strategies
-    yearlyNaviStrategy = [[YearlyNavigationStrategy alloc] init];
-    monthlyNaviStrategy = [[MonthlyNavigationStrategy alloc] init];
-    
-    // in default, strategy is set to monthly
-    self.naviStrategy = monthlyNaviStrategy;
-    [self.nextButton setEnabled:[self.naviStrategy checkNext]];
-    [self.prevButton setEnabled:[self.naviStrategy checkPrevious]];
-    self.mainTitle.title = [self.naviStrategy getCurrentTitle];
-    self.nextButton.title = [self.naviStrategy getNextTitle];
-    self.prevButton.title = [self.naviStrategy getPreviousTitle];
     
     // init sizes
     [self initSizes];
@@ -313,18 +314,18 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     
         // TITLE: Year mode title-> current year, month mode title-> current month
         if(modeValue == 0){
-            self.naviStrategy = monthlyNaviStrategy;
+            naviStrategy = monthlyNaviStrategy;
         }
         else{
-            self.naviStrategy = yearlyNaviStrategy;
+            naviStrategy = yearlyNaviStrategy;
         }
         
-        self.mainTitle.title = [self.naviStrategy getCurrentTitle];
-        self.nextButton.title = [self.naviStrategy getNextTitle];
-        self.prevButton.title = [self.naviStrategy getPreviousTitle];
-        self.nextButton.enabled = [self.naviStrategy checkNext];
-        self.prevButton.enabled = [self.naviStrategy checkPrevious];
-
+        self.mainTitle.title = [naviStrategy getCurrentTitle];
+        self.nextButton.title = [naviStrategy getNextTitle];
+        self.prevButton.title = [naviStrategy getPreviousTitle];
+        self.nextButton.enabled = [naviStrategy checkNext];
+        self.prevButton.enabled = [naviStrategy checkPrevious];
+        [self.categoriesTableView reloadData];
     
     }
 }
@@ -360,8 +361,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         // Configure the cell...
         Category *cat = [categories objectAtIndex:indexPath.row];
         cell.textLabel.text = cat.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%lf%%", [cat getSumAmountForMonth:nil]/10];
-
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f %%", [naviStrategy getCurrentSumAmountforCategory:cat]/10];
     }
     return cell;
 }
@@ -383,8 +383,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 {
     if([segue.identifier isEqualToString:@"fromMainStatsToDetail"]){
         StatsDetailAllCategoriesTableViewController *dest = segue.destinationViewController;
-     //   dest.currentMonthIndex = currentMonthIndex;
-     //   dest.currentYearIndex = currentYearIndex;
+        dest.naviStrategy = naviStrategy;
     }
 }
 
@@ -393,14 +392,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 - (IBAction)prevTimePeriodButtonTapped:(id)sender {
 
     // TODO: Used to query db according to month or year
-    NSDateComponents *tempComp = [self.naviStrategy getPrevious];
-    self.mainTitle.title = [self.naviStrategy getCurrentTitle];
-    self.nextButton.title = [self.naviStrategy getNextTitle];
-    self.prevButton.title = [self.naviStrategy getPreviousTitle];
-
-
-    [self.prevButton setEnabled:[self.naviStrategy checkPrevious]];
-    [self.nextButton setEnabled:[self.naviStrategy checkNext]];
+    [naviStrategy calculatePrevious];
+    self.mainTitle.title = [naviStrategy getCurrentTitle];
+    self.nextButton.title = [naviStrategy getNextTitle];
+    self.prevButton.title = [naviStrategy getPreviousTitle];
+    
+    [self.prevButton setEnabled:[naviStrategy checkPrevious]];
+    [self.nextButton setEnabled:[naviStrategy checkNext]];
+    
+    [self.categoriesTableView reloadData];
     
     [page1 updateData];
     [page2 updateData];
@@ -410,15 +410,17 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 - (IBAction)nextTimePeriodButtonTapped:(id)sender {
 
     // TODO: Used to query db according to month or year
-    NSDateComponents *tempComp = [self.naviStrategy getNext];
-    self.mainTitle.title = [self.naviStrategy getCurrentTitle];
-    self.nextButton.title = [self.naviStrategy getNextTitle];
-    self.prevButton.title = [self.naviStrategy getPreviousTitle];
+    [naviStrategy calculateNext];
+    self.mainTitle.title = [naviStrategy getCurrentTitle];
+    self.nextButton.title = [naviStrategy getNextTitle];
+    self.prevButton.title = [naviStrategy getPreviousTitle];
 
    
      //NSLog(@" month:%@ and year:%d", [months objectAtIndex:[tempComp month]-1], [tempComp year]);
-    [self.nextButton setEnabled:[self.naviStrategy checkNext]];
-    [self.prevButton setEnabled:[self.naviStrategy checkPrevious]];
+    [self.nextButton setEnabled:[naviStrategy checkNext]];
+    [self.prevButton setEnabled:[naviStrategy checkPrevious]];
+    
+    [self.categoriesTableView reloadData];
     
     [page1 updateData];
     [page2 updateData];

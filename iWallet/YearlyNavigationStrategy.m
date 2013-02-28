@@ -14,10 +14,8 @@ NSCalendar *calendar;
 
 /// firstDate <= prevDate <= currentDate >= nextDate >= lastDate
 NSDateComponents *firstDateComp;
-//NSDateComponents *prevDate;
-//NSDateComponents *currentDate;
-//NSDateComponents *nextDate;
 NSDateComponents *lastDateComp;
+
 int prev, next, current;
 NSDateComponents *currentComp;
 NSArray *allSpendingItems;
@@ -38,21 +36,17 @@ NSArray *allSpendingItems;
         lastDateComp = [calendar components:(NSYearCalendarUnit) fromDate:lastDate];
         currentComp = [calendar components:(NSYearCalendarUnit) fromDate:lastDate];
         current = [lastDateComp year];
-        NSLog(@"firstDateComp year:%d", [firstDateComp year]);
-
-        NSLog(@"currentComp year:%d", [currentComp year]);
 
         // calculate next and prev dates to check
         next = current + 1;
         prev = current - 1;
         
-        NSLog(@"prev: %d, currendD:%d, nextDate:%d", prev, current,next);
 
     }
     return self;
 }
 
--(NSDateComponents*)getNext
+-(NSDateComponents*)calculateNext
 {
     if([self checkNext]){
         prev = current;
@@ -60,7 +54,6 @@ NSArray *allSpendingItems;
         [currentComp setYear:current];
         
         next += 1;
-         NSLog(@"prev: %d, currendD:%d, nextDate:%d", prev, current,next);
     }
     
     return currentComp;
@@ -78,11 +71,15 @@ NSArray *allSpendingItems;
 
 -(NSString *)getCurrentTitle
 {
-    return [NSString stringWithFormat:@"%d", current];
-
+    return [NSString stringWithFormat:@"%d", [currentComp year]];
 }
 
--(NSDateComponents*)getPrevious
+-(float) getCurrentSumAmountforCategory:(Category*)cat
+{
+    return [cat getSumAmountForYear:currentComp];
+}
+
+-(NSDateComponents*)calculatePrevious
 {
     if([self checkPrevious]){
         next = current;
@@ -90,7 +87,6 @@ NSArray *allSpendingItems;
         [currentComp setYear:current];
         
         prev -= 1;
-         NSLog(@"prev: %d, currendD:%d, nextDate:%d", prev, current,next);
     }
     
     return currentComp;

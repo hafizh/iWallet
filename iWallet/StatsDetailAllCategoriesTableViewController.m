@@ -78,8 +78,9 @@ NSArray *localCategories;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [[localCategories objectAtIndex:indexPath.row] name];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d€", arc4random_uniform(150)];
+    Category *cat = [localCategories objectAtIndex:indexPath.row];
+    cell.textLabel.text = [cat name];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f€", [self.naviStrategy getCurrentSumAmountforCategory:cat]];
     return cell;
 }
 
@@ -142,9 +143,6 @@ NSArray *localCategories;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         StatsDetailCategoryTableViewController *categoryTableView = segue.destinationViewController;
         categoryTableView.selectedCategory = [[localCategories objectAtIndex:indexPath.row] name];
-        categoryTableView.currentMonthIndex = self.currentMonthIndex;
-        categoryTableView.currentYearIndex = self.currentYearIndex;
-        NSLog(@"fromCategoriesToCategory");
     }
     
 }

@@ -14,10 +14,10 @@
 
 @implementation StatsDetailCategoryTableViewController
 
-NSArray *localCategories;
 NSArray *months;
-NSArray *years;
-NSMutableArray *sectionsHeaders;
+//NSMutableArray *sectionsHeaders;
+//NSMutableDictionary *sectionHeadersDictionary;
+NSArray *spendingItems;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,46 +38,60 @@ NSMutableArray *sectionsHeaders;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //*************** Init categories *******************
+    //*************** Init spending items for selected category *******************
     EntityController *controller = [EntityController getInstance];
-    localCategories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
-
-    // later will be extracted from db.
-    months = [[NSArray alloc] initWithObjects:
-              @"January",
-              @"February",
-              @"March",
-              @"April",
-              @"May",
-              @"June",
-              @"July",
-              @"August",
-              @"September",
-              @"October",
-              @"November",
-              @"December", nil];
+    //self.selectedCategory = @"Other";
+    Category *category = [[controller dataAccessLayer] getCategoryWithName:self.selectedCategory];
+    DataQueries *queries = [[DataQueries alloc] init];
+    spendingItems = [queries getSpendingsForCategory:category];
     
-    years = [[NSArray alloc] initWithObjects: @"2012", @"2013", nil];
+    //
+    //localCategories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] get]];
 
-    // DUMMY section headers
+    // Centralize months array in one object
+//    months = [[NSArray alloc] initWithObjects:
+//              @"January",
+//              @"February",
+//              @"March",
+//              @"April",
+//              @"May",
+//              @"June",
+//              @"July",
+//              @"August",
+//              @"September",
+//              @"October",
+//              @"November",
+//              @"December", nil];
     
-    sectionsHeaders = [[NSMutableArray alloc] init];
-    int sectionCount = (years.count - self.currentYearIndex)*(months.count - self.currentMonthIndex)+1;
-    for(int i = 0; i < sectionCount; i++){
-        [sectionsHeaders addObject:[NSString stringWithFormat:@"%@ %@", [months objectAtIndex:self.currentMonthIndex],[years objectAtIndex:self.currentYearIndex]]];
-        
-        if(self.currentMonthIndex > 0){
-            self.currentMonthIndex--;
-        }
-        else {
-            self.currentMonthIndex = months.count - 1;
-            self.currentYearIndex--;
-        }
-
-    }
+//    sectionHeadersDictionary = [[NSMutableDictionary alloc] init];
+//    NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    for (SpendingItem *item in spendingItems) {
+//        NSDateComponents *monthAyear = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:item.date];
+//        
+//        [sectionHeadersDictionary setValue:item forKey:[NSString stringWithFormat:@"%d",[monthAyear month]+[monthAyear year]]];
+//    }
     
     self.mainTitle.title = self.selectedCategory;
     
+}
+
+// difference in months
+- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar rangeOfUnit:NSMonthCalendarUnit startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSMonthCalendarUnit startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    NSDateComponents *difference = [calendar components:NSMonthCalendarUnit
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    return [difference month];
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,12 +115,12 @@ NSMutableArray *sectionsHeaders;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return sectionsHeaders.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return spendingItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -114,16 +128,16 @@ NSMutableArray *sectionsHeaders;
     static NSString *CellIdentifier = @"item";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d€", arc4random_uniform(150)];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",@"Some date in",[sectionsHeaders objectAtIndex:indexPath.section]];
+    NSNumber *spentAmount = [[spendingItems objectAtIndex:indexPath.row] price];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f €", [spentAmount doubleValue]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[spendingItems objectAtIndex:indexPath.row] date]];
     
     return cell;
 }
-int k = 0;
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [sectionsHeaders objectAtIndex:section];
-}
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    return [sectionsHeaders objectAtIndex:section];
+//}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

@@ -67,12 +67,11 @@ NSArray *months;
         [aMonth setMonth:-1];
         prevDate = [calendar dateByAddingComponents:aMonth toDate:currentDate options:0];
         
-        NSLog(@"prev: %@, currendD:%@, nextDate:%@", prevDate, currentDate,nextDate);
     }
     return self;
 }
 
--(NSDateComponents*)getNext
+-(NSDateComponents*)calculateNext
 {
     if([self checkNext]){
         NSDateComponents *oneMonth = [[NSDateComponents alloc] init];
@@ -105,7 +104,13 @@ NSArray *months;
 {
     return [NSString stringWithFormat:@"%@/%d",[months objectAtIndex:[currentComp month]-1], [currentComp year]];
 }
--(NSDateComponents*)getPrevious
+
+-(float) getCurrentSumAmountforCategory:(Category*)cat
+{
+    return [cat getSumAmountForMonth:currentComp];
+}
+
+-(NSDateComponents*)calculatePrevious
 {
     if([self checkPrevious]){
         NSDateComponents *oneMonth = [[NSDateComponents alloc] init];

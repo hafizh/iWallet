@@ -49,6 +49,31 @@
     return fetchedObjects;
 }
 
+-(Category *)getCategoryWithName:(NSString*)name
+{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:[self managedObjectContext]];
+    [request setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    [request setPredicate:predicate];
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    
+    return [fetchedObjects objectAtIndex:0];
+}
+
+-(NSArray*)getCategoryNames  {
+    
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:[self managedObjectContext]];
+    [request setEntity:entity];
+    
+    NSArray *fetchedObjects = [[self managedObjectContext]
+                               executeFetchRequest:request error:&error];
+    fetchedObjects = [fetchedObjects valueForKey:@"name"];
+    return fetchedObjects;
+}
 
 -(void)deleteSpending: (SpendingItem*) spending {
     
