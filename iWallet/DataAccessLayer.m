@@ -113,7 +113,7 @@
 -(void)saveContext {
     NSError *error;
     if (![[self managedObjectContext] save:&error]) {
-        // NSLog([error localizedDescription]);
+        NSLog(@"SEVERE: could not save the context!!!");
     }
 }
 

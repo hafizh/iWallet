@@ -110,6 +110,11 @@ NSArray *months;
     return [cat getSumAmountForMonth:currentComp];
 }
 
+-(NSArray*) classifyCurrentForCategory:(Category*)cat
+{
+    return [cat classifySpendingsByDateForMonth:currentComp];
+}
+
 -(NSDateComponents*)calculatePrevious
 {
     if([self checkPrevious]){

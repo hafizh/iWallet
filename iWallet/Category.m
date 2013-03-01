@@ -46,6 +46,35 @@
     return filteredItems;
 }
 
+-(NSMutableSet*)filterSpendingItems:(NSSet*)spendintItems byDay:(NSDateComponents*)dayComp
+{
+    NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSMutableSet *filteredItems = [[NSMutableSet alloc] init];
+    
+    for (SpendingItem *item in spendintItems) {
+        NSDateComponents *itemsDayComp = [calendar components:(NSDayCalendarUnit) fromDate:item.date];
+        if([itemsDayComp day]==[dayComp day]){
+            [filteredItems addObject: item];
+        }
+    }
+    
+    return filteredItems;
+}
+-(NSArray*) classifySpendingsByDateForMonth:(NSDateComponents*)month
+{   NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+    NSMutableSet *filteredSpendings = [self filterSpendingItems:self.spending byMonth:month];
+    
+    NSMutableArray *classifiedSpendings = [[NSMutableArray alloc] init];
+    
+    for(SpendingItem *item in filteredSpendings) {
+        NSDateComponents *oneDay = [calendar components:(NSDayCalendarUnit) fromDate:item.date];
+        [classifiedSpendings setValue:[[self filterSpendingItems:filteredSpendings byDay:oneDay] valueForKeyPath:@"@sum.price"] forKey:[NSString stringWithFormat:@"%d",[oneDay day]]];
+    }
+    
+    return classifiedSpendings;
+}
+
 -(NSMutableSet*)filterSpendingItems:(NSSet*)spendintItems byYear:(NSDateComponents*)yearComp
 {
     NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -60,5 +89,21 @@
     
     return filteredItems;
 }
+
+-(NSArray*) classifySpendingsByMonthForYear:(NSDateComponents*)year
+{   NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSMutableSet *filteredSpendings = [self filterSpendingItems:self.spending byYear:year];
+    
+    NSMutableArray *classifiedSpendings = [[NSMutableArray alloc] init];
+    
+    for(SpendingItem *item in filteredSpendings) {
+        NSDateComponents *oneMonth = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:item.date];
+        [classifiedSpendings setValue:[[self filterSpendingItems:filteredSpendings byMonth:oneMonth] valueForKeyPath:@"@sum.price"] forKey:[NSString stringWithFormat:@"%d",[oneMonth month]]];
+    }
+    
+    return classifiedSpendings;
+}
+
 
 @end

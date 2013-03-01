@@ -21,6 +21,7 @@
 -(NSDateComponents*) getCurrent;
 -(NSString*)getCurrentTitle;
 -(float) getCurrentSumAmountforCategory:(Category*)cat;
+-(NSArray*) classifyCurrentForCategory:(Category*)cat;
 -(BOOL) checkNext;
 -(BOOL) checkPrevious;
 

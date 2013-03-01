@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataQueries.h"
+#import "DateNavigationStrategy.h"
 
 @interface PlotView : UIView
 
 - (void) updateData;
+
+@property id<DateNavigationStrategy> plotNaviStrategy;
+@property Category *plotCategory;
 
 @end

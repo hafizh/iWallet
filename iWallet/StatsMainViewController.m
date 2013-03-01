@@ -372,7 +372,12 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 {
     if(indexPath.row > 0){
         [self updateLayoutCategorySelected];
+        [page1 setPlotCategory:[categories objectAtIndex:indexPath.row]];
+        [page1 setPlotNaviStrategy:naviStrategy];
         [page1 updateData];
+        
+        [page2 setPlotCategory:[categories objectAtIndex:indexPath.row]];
+        [page2 setPlotNaviStrategy:naviStrategy];
         [page2 updateData];
     }
 }

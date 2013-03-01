@@ -20,6 +20,8 @@
 
 -(float) getSumAmountForMonth:(NSDateComponents*)month ;
 -(float) getSumAmountForYear:(NSDateComponents*)year;
+-(NSArray*) classifySpendingsByDateForMonth:(NSDateComponents*)month;
+-(NSArray*) classifySpendingsByMonthForYear:(NSDateComponents*)year;
 
 @end
 

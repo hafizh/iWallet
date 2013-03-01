@@ -79,6 +79,11 @@ NSArray *allSpendingItems;
     return [cat getSumAmountForYear:currentComp];
 }
 
+-(NSArray*) classifyCurrentForCategory:(Category*)cat
+{
+    return [cat classifySpendingsByMonthForYear:currentComp];
+}
+
 -(NSDateComponents*)calculatePrevious
 {
     if([self checkPrevious]){

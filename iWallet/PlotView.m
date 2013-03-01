@@ -14,7 +14,7 @@ int paddingH = 10;
 int paddingV = 15;
 int plotWidth = 320;
 int plotHeight;
-NSMutableArray *dummyData;
+NSArray *plotSpendings;
 
 CGColorRef CreateDeviceGrayColor(CGFloat w, CGFloat a)
 {
@@ -30,7 +30,7 @@ CGColorRef graphBackgroundColor()
 	static CGColorRef c = NULL;
 	if(c == NULL)
 	{
-		c = CreateDeviceGrayColor(0.7, 1.0);
+		c = CreateDeviceGrayColor(0.0, 1.0);
 	}
 	return c;
 }
@@ -40,7 +40,7 @@ CGColorRef graphLineColor()
 	static CGColorRef c = NULL;
 	if(c == NULL)
 	{
-		c = CreateDeviceGrayColor(0.4, 1.0);
+		c = CreateDeviceGrayColor(0.8, 1.0);
 	}
 	return c;
 }
@@ -59,7 +59,7 @@ CGColorRef graphLineColor()
     
     // ******** INIT DUMMY DATA *****************//
     
-    dummyData = [[NSMutableArray alloc]init];
+    plotSpendings = [[NSArray alloc]init];
     [self updateData];
     // ********* FINISH DUMMY ******************//
     return self;
@@ -67,12 +67,17 @@ CGColorRef graphLineColor()
 
 - (void) updateData
 {
-    [dummyData removeAllObjects];
-    
+    plotSpendings = nil;
+
+    // get Spendings for Current month; 
+    //DataQueries *plotQueries = [[DataQueries alloc] init];
+    //[plotQueries getSpendingsForCategory:self.plotCategory forMonth:[self.plotNaviStrategy getCurrent] withSortDescriptor:<#(NSSortDescriptor *)#>]
     // generate random data
-    for(int i = 0; i <=30; i++){
-        [dummyData addObject:[NSString stringWithFormat:@"%d€", arc4random_uniform(75)]];
-    }
+//    for(int i = 0; i <=30; i++){
+//        [plotSpendings addObject:[NSString stringWithFormat:@"%d€", arc4random_uniform(75)]];
+//    }
+
+    plotSpendings = [self.plotNaviStrategy classifyCurrentForCategory:self.plotCategory];
     
     // update view
     [self setNeedsDisplay];
@@ -85,6 +90,7 @@ CGColorRef graphLineColor()
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
+    CGContextSetStrokeColorWithColor(context, graphLineColor());
     // draw y axis
     CGContextBeginPath(context);
 	CGContextMoveToPoint(context, paddingV, paddingH);
@@ -94,7 +100,7 @@ CGColorRef graphLineColor()
     // draw gridlines
     //NSLog(@"plotHeight:%d", plotHeight);
     for (int i = 10; i < plotHeight; i+= 10) {
-		CGContextSetStrokeColorWithColor(context, graphLineColor());
+		
 		
 		CGContextMoveToPoint(context, paddingV, i);
 		CGContextAddLineToPoint(context, plotWidth, i);
@@ -145,7 +151,7 @@ CGColorRef graphLineColor()
                                                  alignment:NSTextAlignmentLeft];
     
     
-    for (NSString *str in dummyData) {
+    for (NSString *str in plotSpendings) {
         float xValue = [str floatValue];
         // draw 1 data line
         [self drawLineInContext:context
@@ -180,7 +186,7 @@ CGColorRef graphLineColor()
     float destX = originx;
     int counter = 1;
     
-    for (NSString *str in dummyData) {
+    for (NSString *str in plotSpendings) {
         float xValue = [str floatValue];
         // draw 1 data line
         [self drawLineInContext:context
