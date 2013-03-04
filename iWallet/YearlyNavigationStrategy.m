@@ -80,10 +80,14 @@ NSArray *allSpendingItems;
 }
 
 -(NSArray*) classifyCurrentForCategory:(Category*)cat
-{
+{//NSLog(@"YearNavi: cat:%@", cat.name);
     return [cat classifySpendingsByMonthForYear:currentComp];
 }
 
+-(NSString*) getNaviType
+{
+    return @"Yearly Navi";
+}
 -(NSDateComponents*)calculatePrevious
 {
     if([self checkPrevious]){

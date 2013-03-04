@@ -42,7 +42,6 @@
             [filteredItems addObject: item];
         }
     }
-    
     return filteredItems;
 }
 
@@ -50,14 +49,14 @@
 {
     NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSMutableSet *filteredItems = [[NSMutableSet alloc] init];
-    
+     
     for (SpendingItem *item in spendintItems) {
         NSDateComponents *itemsDayComp = [calendar components:(NSDayCalendarUnit) fromDate:item.date];
         if([itemsDayComp day]==[dayComp day]){
             [filteredItems addObject: item];
         }
     }
-    
+    //NSLog(@"classified by day #: %d Cat:%@",filteredItems.count, self.name);
     return filteredItems;
 }
 -(NSArray*) classifySpendingsByDateForMonth:(NSDateComponents*)month
@@ -65,13 +64,19 @@
 
     NSMutableSet *filteredSpendings = [self filterSpendingItems:self.spending byMonth:month];
     
+    NSRange days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[calendar dateFromComponents:month]];
+    
     NSMutableArray *classifiedSpendings = [[NSMutableArray alloc] init];
+
+    for (int i = 0; i<= days.length; i++) {
+        [classifiedSpendings addObject:[NSNumber numberWithFloat:0]];
+    }
     
     for(SpendingItem *item in filteredSpendings) {
         NSDateComponents *oneDay = [calendar components:(NSDayCalendarUnit) fromDate:item.date];
-        [classifiedSpendings setValue:[[self filterSpendingItems:filteredSpendings byDay:oneDay] valueForKeyPath:@"@sum.price"] forKey:[NSString stringWithFormat:@"%d",[oneDay day]]];
+        [classifiedSpendings replaceObjectAtIndex:[oneDay day] withObject:[[self filterSpendingItems:filteredSpendings byDay:oneDay] valueForKeyPath:@"@sum.price"]];
     }
-    
+    //NSLog(@"classified #: %d Cat:%@",classifiedSpendings.count, self.name);
     return classifiedSpendings;
 }
 
@@ -95,13 +100,18 @@
     
     NSMutableSet *filteredSpendings = [self filterSpendingItems:self.spending byYear:year];
     
+    NSRange months = [calendar rangeOfUnit:NSMonthCalendarUnit inUnit:NSYearCalendarUnit forDate:[calendar dateFromComponents:year]];
     NSMutableArray *classifiedSpendings = [[NSMutableArray alloc] init];
+    NSLog(@" months:%d in year:%d", months.length, [year year]);
+    for (int i = 0; i<= months.length; i++) {
+        [classifiedSpendings addObject:[NSNumber numberWithFloat:0]];
+    }
     
     for(SpendingItem *item in filteredSpendings) {
         NSDateComponents *oneMonth = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:item.date];
-        [classifiedSpendings setValue:[[self filterSpendingItems:filteredSpendings byMonth:oneMonth] valueForKeyPath:@"@sum.price"] forKey:[NSString stringWithFormat:@"%d",[oneMonth month]]];
+        [classifiedSpendings replaceObjectAtIndex:[oneMonth month] withObject:[[self filterSpendingItems:filteredSpendings byMonth:oneMonth] valueForKeyPath:@"@sum.price"]];
     }
-    
+
     return classifiedSpendings;
 }
 

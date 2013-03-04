@@ -258,11 +258,13 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     // view 1: monthly chart
     CGRect frame1 = CGRectMake(0, 0, width, height);
     page1 = [[PlotView alloc] initWithFrame:frame1];
+    [page1 setPlotNaviStrategy:monthlyNaviStrategy];
     [self.scrollView addSubview:page1];
     
     // view 2: yearly chart
     CGRect frame2 = CGRectMake(frame1.origin.x + width, frame1.origin.y, width, height);
     page2 = [[PlotView alloc] initWithFrame:frame2];
+    [page2 setPlotNaviStrategy:yearlyNaviStrategy];
     [self.scrollView addSubview:page2];
 }
 
@@ -325,8 +327,19 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         self.prevButton.title = [naviStrategy getPreviousTitle];
         self.nextButton.enabled = [naviStrategy checkNext];
         self.prevButton.enabled = [naviStrategy checkPrevious];
+
+        
+//        [page1 updateData];
+//        [page2 updateData];
+
+        NSIndexPath *selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
+        //NSLog(@"selected:%d", selectedIndexPath.row);
         [self.categoriesTableView reloadData];
-    
+        if(selectedIndexPath.row != 0){
+            [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+//            [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row]];
+//            [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row]];
+        }
     }
 }
 // END scrollview Delegate
@@ -372,13 +385,11 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 {
     if(indexPath.row > 0){
         [self updateLayoutCategorySelected];
-        [page1 setPlotCategory:[categories objectAtIndex:indexPath.row]];
-        [page1 setPlotNaviStrategy:naviStrategy];
-        [page1 updateData];
+        //[page1 setPlotCategory:[categories objectAtIndex:indexPath.row]];
+        [page1 updateDataByCategory:[categories objectAtIndex:indexPath.row]];
         
-        [page2 setPlotCategory:[categories objectAtIndex:indexPath.row]];
-        [page2 setPlotNaviStrategy:naviStrategy];
-        [page2 updateData];
+//        [page2 setPlotCategory:[categories objectAtIndex:indexPath.row]];
+        [page2 updateDataByCategory:[categories objectAtIndex:indexPath.row]];
     }
 }
 // END tableview Delegate
@@ -405,10 +416,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     [self.prevButton setEnabled:[naviStrategy checkPrevious]];
     [self.nextButton setEnabled:[naviStrategy checkNext]];
     
+    NSIndexPath *selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
+    //NSLog(@"selected:%d", selectedIndexPath.row);
     [self.categoriesTableView reloadData];
+    if(selectedIndexPath.row != 0){
+        [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    }
     
-    [page1 updateData];
-    [page2 updateData];
+    [page1 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
+    [page2 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
     
 }
 
@@ -425,9 +441,14 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     [self.nextButton setEnabled:[naviStrategy checkNext]];
     [self.prevButton setEnabled:[naviStrategy checkPrevious]];
     
+    NSIndexPath *selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
+    //NSLog(@"selected:%d", selectedIndexPath.row);
     [self.categoriesTableView reloadData];
+    if(selectedIndexPath.row != 0){
+        [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+    }
     
-    [page1 updateData];
-    [page2 updateData];
+    [page1 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
+    [page2 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
 }
 @end

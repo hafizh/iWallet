@@ -25,6 +25,8 @@
 -(BOOL) checkNext;
 -(BOOL) checkPrevious;
 
+-(NSString*) getNaviType;
+
 /**
  * KNOWN Probable ISSUES:
  * 1. Current variable should be synchronized between navigation strategies.

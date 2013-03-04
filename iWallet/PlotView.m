@@ -30,7 +30,7 @@ CGColorRef graphBackgroundColor()
 	static CGColorRef c = NULL;
 	if(c == NULL)
 	{
-		c = CreateDeviceGrayColor(0.0, 1.0);
+		c = CreateDeviceGrayColor(0.0, 0.85);
 	}
 	return c;
 }
@@ -59,26 +59,18 @@ CGColorRef graphLineColor()
     
     // ******** INIT DUMMY DATA *****************//
     
-    plotSpendings = [[NSArray alloc]init];
-    [self updateData];
+//    plotSpendings = [[NSArray alloc]init];
+//    [self updateData];
     // ********* FINISH DUMMY ******************//
     return self;
 }
 
-- (void) updateData
+- (void) updateDataByCategory:(Category *)cat;
 {
     plotSpendings = nil;
 
-    // get Spendings for Current month; 
-    //DataQueries *plotQueries = [[DataQueries alloc] init];
-    //[plotQueries getSpendingsForCategory:self.plotCategory forMonth:[self.plotNaviStrategy getCurrent] withSortDescriptor:<#(NSSortDescriptor *)#>]
-    // generate random data
-//    for(int i = 0; i <=30; i++){
-//        [plotSpendings addObject:[NSString stringWithFormat:@"%d€", arc4random_uniform(75)]];
-//    }
-
-    plotSpendings = [self.plotNaviStrategy classifyCurrentForCategory:self.plotCategory];
-    
+    plotSpendings = [self.plotNaviStrategy classifyCurrentForCategory:cat];
+    NSLog(@"plotspendings #: %d Cat:%@, navi:%@",plotSpendings.count, cat.name, [self.plotNaviStrategy getNaviType]);
     // update view
     [self setNeedsDisplay];
 }

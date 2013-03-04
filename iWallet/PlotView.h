@@ -12,9 +12,8 @@
 
 @interface PlotView : UIView
 
-- (void) updateData;
+- (void) updateDataByCategory:(Category *)cat;
 
 @property id<DateNavigationStrategy> plotNaviStrategy;
-@property Category *plotCategory;
 
 @end
