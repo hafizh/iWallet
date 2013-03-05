@@ -24,6 +24,7 @@
 
 
 NSString *currency =@""; //load from settings
+double monthlyBudget;
 
 -(void) currentMonth{
     
@@ -44,7 +45,7 @@ NSString *currency =@""; //load from settings
 }
 -(void) moneyLeft{
     //get value from settings
-    double monthlyBudget = 100;
+    //monthlyBudget = 100;
     
     [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f%@", monthlyBudget, currency]];
 
@@ -67,21 +68,21 @@ NSString *currency =@""; //load from settings
 - (IBAction)setEuro:(id)sender{
     currency = @"€";
     [self changeStatus:@"Currency set to euro"];
-    [self saveCurrencyToNSUserDefaults:currency];
+    [self saveToNSUserDefaults];
     
 }
 
 - (IBAction)setDollar:(id)sender {
     currency = @"$";
     [self changeStatus:@"Currency set to dollar"];
-    [self saveCurrencyToNSUserDefaults:currency];
+    [self saveToNSUserDefaults];
 }
 
 
 - (IBAction)setPound:(id)sender {
     currency = @"£";
     [self changeStatus:@"Currency set to pound"];
-    [self saveCurrencyToNSUserDefaults:currency];
+    [self saveToNSUserDefaults];
 }
 
 - (IBAction)setBudget:(id)sender {
@@ -93,11 +94,14 @@ NSString *currency =@""; //load from settings
     string1 = [string1 stringByAppendingString:string2];
     
    [self changeStatus:string1];
+    monthlyBudget = [[budgetField text] doubleValue];
+   [self saveToNSUserDefaults];
 }
 
--(void)saveCurrencyToNSUserDefaults:(NSString*) currency {
+-(void)saveToNSUserDefaults {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:currency forKey:@"currency"];
+    [prefs setFloat:monthlyBudget forKey:@"Monthly budget"];
     [self moneyLeft];
     //[self viewDidLoad];
 }
@@ -107,6 +111,7 @@ NSString *currency =@""; //load from settings
     
     // getting an NSString
     currency = [prefs stringForKey:@"currency"];
+    monthlyBudget = [prefs floatForKey:@"Monthly budget"];
 
 }
 
@@ -115,6 +120,11 @@ NSString *currency =@""; //load from settings
     [statusLabel setText:information];
 }
 
+-(IBAction)textFieldReturn:(id)sender
+{
+    [budgetField resignFirstResponder];
+    NSLog(@"return");
+}
 
 - (void)viewDidLoad
 {

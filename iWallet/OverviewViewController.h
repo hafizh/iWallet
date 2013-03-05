@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OverviewViewController : UIViewController
+@interface OverviewViewController : UIViewController{
+    UITextField  *budgetField;
+}
 
 -(void) currentMonth;
 -(void) moneyLeft;
@@ -18,7 +20,7 @@
 - (IBAction)setEuro:(id)sender;
 - (IBAction)setPound:(id)sender;
 
-- (void)saveCurrencyToNSUserDefaults:(NSString*) currency;
+- (void)saveToNSUserDefaults;
 
 - (IBAction)setBudget:(id)sender;
 
@@ -31,7 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *moneyLeftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
-@property (weak, nonatomic) IBOutlet UITextField *budgetField;
+@property (strong, nonatomic) IBOutlet UITextField *budgetField;
+-(IBAction)textFieldReturn:(id)sender;	
 
 
 @end
