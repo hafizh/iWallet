@@ -34,7 +34,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @property (strong, nonatomic) IBOutlet UITextField *budgetField;
--(IBAction)textFieldReturn:(id)sender;	
+
+-(IBAction)backgroundTouched:(id)sender;
 
 
 @end
