@@ -111,7 +111,7 @@ NSArray *months;
 }
 
 -(NSArray*) classifyCurrentForCategory:(Category*)cat
-{   //NSLog(@"MonthNavi: cat:%@", cat.name);
+{   
     return [cat classifySpendingsByDateForMonth:currentComp];
 }
 

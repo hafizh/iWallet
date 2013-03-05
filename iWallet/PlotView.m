@@ -8,13 +8,20 @@
 
 #import "PlotView.h"
 
+@interface PlotView() {
+    
+    NSArray *plotSpendings;
+}
+
+@end
+
+
 @implementation PlotView
 
 int paddingH = 10;
 int paddingV = 15;
 int plotWidth = 320;
 int plotHeight;
-NSArray *plotSpendings;
 
 CGColorRef CreateDeviceGrayColor(CGFloat w, CGFloat a)
 {
@@ -40,7 +47,7 @@ CGColorRef graphLineColor()
 	static CGColorRef c = NULL;
 	if(c == NULL)
 	{
-		c = CreateDeviceGrayColor(0.8, 1.0);
+		c = CreateDeviceGrayColor(0.0, 1.0);
 	}
 	return c;
 }
@@ -52,8 +59,15 @@ CGColorRef graphLineColor()
         // Initialization code
     }
     // Initialization code
-    self.backgroundColor = [UIColor colorWithCGColor: graphBackgroundColor()];
-    
+    self.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+//    CALayer *layer = [[CALayer alloc] init];
+//    layer.frame = CGRectMake(3, 3, self.frame.size.width - 8, self.frame.size.height - 8);
+//    layer.borderWidth = 1.0f;
+//    layer.cornerRadius = 5;
+//    layer.backgroundColor = [UIColor colorWithRed:236.0/255 green:229.0/255 blue:182.0/255 alpha:1.0].CGColor;
+//    layer.borderColor = [UIColor redColor].CGColor;
+//    
+//    [self.layer addSublayer:layer];
     plotWidth = self.frame.size.width-paddingV;
     plotHeight = self.frame.size.height-paddingH;
     
@@ -70,7 +84,6 @@ CGColorRef graphLineColor()
     plotSpendings = nil;
 
     plotSpendings = [self.plotNaviStrategy classifyCurrentForCategory:cat];
-    NSLog(@"plotspendings #: %d Cat:%@, navi:%@",plotSpendings.count, cat.name, [self.plotNaviStrategy getNaviType]);
     // update view
     [self setNeedsDisplay];
 }
@@ -87,12 +100,16 @@ CGColorRef graphLineColor()
     CGContextBeginPath(context);
 	CGContextMoveToPoint(context, paddingV, paddingH);
 	CGContextAddLineToPoint(context, paddingV, plotHeight - paddingH);
+    CGContextSetLineWidth(context, 1.0);
 	CGContextStrokePath(context);
     
     // draw gridlines
-    //NSLog(@"plotHeight:%d", plotHeight);
+    // get max spending
+    
+    //float yGridLineRange = (plotHeight / maxSpending)
+    plotSpendings = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-2*paddingH];
+
     for (int i = 10; i < plotHeight; i+= 10) {
-		
 		
 		CGContextMoveToPoint(context, paddingV, i);
 		CGContextAddLineToPoint(context, plotWidth, i);
@@ -173,19 +190,19 @@ CGColorRef graphLineColor()
 - (void) drawDataColumnPlot:(CGContextRef)context
 {
     // init variables
-    float xAxisLength = (plotWidth - 2*paddingV)/30; // 30 days in monthly mode
+    float xAxisLength = (plotWidth - 2*paddingV)/(plotSpendings.count-1);
     float originx = paddingV+xAxisLength/2; float originy = plotHeight - paddingH;
     float destX = originx;
     int counter = 1;
-    
-    for (NSString *str in plotSpendings) {
+
+    for (NSNumber *str in plotSpendings) {
         float xValue = [str floatValue];
         // draw 1 data line
         [self drawLineInContext:context
                         originX:originx
                         originY:originy
                           destX:destX
-                          destY:(plotHeight - paddingH) - xValue*2
+                          destY:(plotHeight - paddingH) - xValue
                           width:xAxisLength - 0.5];
         
         
@@ -213,6 +230,27 @@ CGColorRef graphLineColor()
         CGContextAddLineToPoint(context, x2, y2);
         CGContextSetLineWidth(context, width);
         CGContextStrokePath(context);
+}
+
+-(NSArray*) normalizeValues:(NSArray*)array intoRangeFrom:(float)x to:(float)y
+{
+    
+    float maxValue = [[array valueForKeyPath:@"@max.floatValue"] floatValue];
+    float minValue = [[array valueForKeyPath:@"@min.floatValue"] floatValue];
+    float range = maxValue - minValue;
+    
+    NSMutableArray *normalizedArray = [[NSMutableArray alloc] init];
+    
+    for (id value in array) {
+        [normalizedArray addObject:[NSNumber numberWithFloat:([value floatValue] - minValue)/range]];
+    }
+    
+    float range2 = y - x;
+    for (int i = 0; i< normalizedArray.count; i++) {
+        [normalizedArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:([[normalizedArray objectAtIndex:i] floatValue]*range2 + x)]];
+    }
+
+    return normalizedArray;
 }
 
 

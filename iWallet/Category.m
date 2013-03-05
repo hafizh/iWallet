@@ -56,7 +56,6 @@
             [filteredItems addObject: item];
         }
     }
-    //NSLog(@"classified by day #: %d Cat:%@",filteredItems.count, self.name);
     return filteredItems;
 }
 -(NSArray*) classifySpendingsByDateForMonth:(NSDateComponents*)month
@@ -102,7 +101,6 @@
     
     NSRange months = [calendar rangeOfUnit:NSMonthCalendarUnit inUnit:NSYearCalendarUnit forDate:[calendar dateFromComponents:year]];
     NSMutableArray *classifiedSpendings = [[NSMutableArray alloc] init];
-    NSLog(@" months:%d in year:%d", months.length, [year year]);
     for (int i = 0; i<= months.length; i++) {
         [classifiedSpendings addObject:[NSNumber numberWithFloat:0]];
     }

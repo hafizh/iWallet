@@ -372,7 +372,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
         // Configure the cell...
-        Category *cat = [categories objectAtIndex:indexPath.row];
+        Category *cat = [categories objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = cat.name;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f %%", [naviStrategy getCurrentSumAmountforCategory:cat]/10];
     }
@@ -386,10 +386,10 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     if(indexPath.row > 0){
         [self updateLayoutCategorySelected];
         //[page1 setPlotCategory:[categories objectAtIndex:indexPath.row]];
-        [page1 updateDataByCategory:[categories objectAtIndex:indexPath.row]];
+        [page1 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]];
         
 //        [page2 setPlotCategory:[categories objectAtIndex:indexPath.row]];
-        [page2 updateDataByCategory:[categories objectAtIndex:indexPath.row]];
+        [page2 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]];
     }
 }
 // END tableview Delegate
