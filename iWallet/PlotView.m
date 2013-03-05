@@ -107,7 +107,7 @@ CGColorRef graphLineColor()
     // get max spending
     
     //float yGridLineRange = (plotHeight / maxSpending)
-    plotSpendings = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-paddingH];
+    plotSpendings = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-2*paddingH];
 
     for (int i = 10; i < plotHeight; i+= 10) {
 		
@@ -202,7 +202,7 @@ CGColorRef graphLineColor()
                         originX:originx
                         originY:originy
                           destX:destX
-                          destY:(plotHeight - paddingH) - xValue*2
+                          destY:(plotHeight - paddingH) - xValue
                           width:xAxisLength - 0.5];
         
         
