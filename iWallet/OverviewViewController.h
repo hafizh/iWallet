@@ -17,7 +17,11 @@
 - (IBAction)setDollar:(id)sender;
 - (IBAction)setEuro:(id)sender;
 - (IBAction)setPound:(id)sender;
+
+- (void)saveCurrencyToNSUserDefaults:(NSString*) currency;
+
 - (IBAction)setBudget:(id)sender;
+
 
 
 @property (weak, nonatomic) IBOutlet UILabel *currentMonthLabel;

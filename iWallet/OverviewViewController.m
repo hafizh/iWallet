@@ -45,14 +45,15 @@ NSString *currency =@""; //load from settings
 -(void) moneyLeft{
     //get value from settings
     double monthlyBudget = 100;
-    [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f", monthlyBudget]];
+    
+    [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f%@", monthlyBudget, currency]];
 
     //get sum of spent money
     double spentMoney = 333.45;
-    [moneySpentLabel setText: [NSString stringWithFormat:@"%.2f", spentMoney]];
+    [moneySpentLabel setText: [NSString stringWithFormat:@"%.2f%@", spentMoney, currency]];
     
     double moneyLeft = monthlyBudget - spentMoney;
-    [moneyLeftLabel setText: [NSString stringWithFormat:@"%.2f", moneyLeft]];
+    [moneyLeftLabel setText: [NSString stringWithFormat:@"%.2f%@", moneyLeft, currency]];
     if (moneyLeft > 0) {
         moneyLeftLabel.textColor = [UIColor greenColor];
     }
@@ -66,18 +67,21 @@ NSString *currency =@""; //load from settings
 - (IBAction)setEuro:(id)sender{
     currency = @"€";
     [self changeStatus:@"Currency set to euro"];
+    [self saveCurrencyToNSUserDefaults:currency];
     
 }
 
 - (IBAction)setDollar:(id)sender {
     currency = @"$";
     [self changeStatus:@"Currency set to dollar"];
+    [self saveCurrencyToNSUserDefaults:currency];
 }
 
 
 - (IBAction)setPound:(id)sender {
     currency = @"£";
     [self changeStatus:@"Currency set to pound"];
+    [self saveCurrencyToNSUserDefaults:currency];
 }
 
 - (IBAction)setBudget:(id)sender {
@@ -91,6 +95,21 @@ NSString *currency =@""; //load from settings
    [self changeStatus:string1];
 }
 
+-(void)saveCurrencyToNSUserDefaults:(NSString*) currency {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:currency forKey:@"currency"];
+    [self moneyLeft];
+    //[self viewDidLoad];
+}
+
+-(void)loadCurrencyFromNSUserDefaults {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    // getting an NSString
+    currency = [prefs stringForKey:@"currency"];
+
+}
+
 -(void)changeStatus:(NSString *)information{
     
     [statusLabel setText:information];
@@ -102,6 +121,7 @@ NSString *currency =@""; //load from settings
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self currentMonth];
+    [self loadCurrencyFromNSUserDefaults];
     [self moneyLeft];
 }
 
