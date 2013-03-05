@@ -132,6 +132,7 @@ double monthlyBudget;
     [self currentMonth];
     [self loadCurrencyFromNSUserDefaults];
     [self moneyLeft];
+    //[budgetField setText:[NSString stringWithFormat:@"%.2f", monthlyBudget]];
 }
 
 - (void)didReceiveMemoryWarning

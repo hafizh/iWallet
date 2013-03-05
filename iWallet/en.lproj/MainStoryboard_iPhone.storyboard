@@ -131,7 +131,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="999" borderStyle="roundedRect" minimumFontSize="17" id="qyA-Nx-PvV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="qyA-Nx-PvV">
                                 <rect key="frame" x="98" y="273" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -763,7 +763,6 @@
                 <relationship kind="action" name="setDollar:"/>
                 <relationship kind="action" name="setEuro:"/>
                 <relationship kind="action" name="setPound:"/>
-                <relationship kind="action" name="textFieldReturn:"/>
                 <relationship kind="outlet" name="budgetField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="currentMonthLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="moneyLeftLabel" candidateClass="UILabel"/>
