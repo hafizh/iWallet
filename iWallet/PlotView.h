@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DataQueries.h"
 #import "DateNavigationStrategy.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PlotView : UIView
 

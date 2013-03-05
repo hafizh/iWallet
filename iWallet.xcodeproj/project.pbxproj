@@ -38,6 +38,7 @@
 		0F4E53AF16D53A8200ABDB93 /* DataQueries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E53AE16D53A8200ABDB93 /* DataQueries.m */; };
 		0F537A8516B0593F006F00FD /* StatsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F537A8416B0593F006F00FD /* StatsMainViewController.m */; };
 		0F9F5B5F16BFFE93002F8C26 /* Welcome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9F5B5E16BFFE93002F8C26 /* Welcome.m */; };
+		0FAE1B7516E63D1C004569F5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FAE1B7416E63D1C004569F5 /* QuartzCore.framework */; };
 		0FD6F78116DBB3F30011DDB5 /* MonthlyNavigationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */; };
 		0FD6F78416DBB41F0011DDB5 /* YearlyNavigationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */; };
 		0FDD20F016D68476003F0AA1 /* SpendingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD20EF16D68476003F0AA1 /* SpendingItem.m */; };
@@ -114,6 +115,7 @@
 		0F537A8416B0593F006F00FD /* StatsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsMainViewController.m; sourceTree = "<group>"; };
 		0F9F5B5D16BFFE93002F8C26 /* Welcome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Welcome.h; sourceTree = "<group>"; };
 		0F9F5B5E16BFFE93002F8C26 /* Welcome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Welcome.m; sourceTree = "<group>"; };
+		0FAE1B7416E63D1C004569F5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0FD6F77B16DBB3000011DDB5 /* DateNavigationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateNavigationStrategy.h; sourceTree = "<group>"; };
 		0FD6F77F16DBB3F30011DDB5 /* MonthlyNavigationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyNavigationStrategy.h; sourceTree = "<group>"; };
 		0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyNavigationStrategy.m; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FAE1B7516E63D1C004569F5 /* QuartzCore.framework in Frameworks */,
 				0F4E53A416CD3E7D00ABDB93 /* CoreData.framework in Frameworks */,
 				0F159F5516AF160A00DE596E /* UIKit.framework in Frameworks */,
 				0F159F5716AF160A00DE596E /* Foundation.framework in Frameworks */,
@@ -163,6 +166,7 @@
 		0F159F4516AF160A00DE596E = {
 			isa = PBXGroup;
 			children = (
+				0FAE1B7416E63D1C004569F5 /* QuartzCore.framework */,
 				0F159F5A16AF160A00DE596E /* iWallet */,
 				0F159F5316AF160A00DE596E /* Frameworks */,
 				0F159F5116AF160A00DE596E /* Products */,
