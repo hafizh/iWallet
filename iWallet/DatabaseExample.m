@@ -39,8 +39,6 @@
                           @"Health Care & Cosmetics",
                           @"Transportation & Travel",
                           @"Other", nil];
-
-        
     }
     
     return self;
@@ -55,6 +53,7 @@
         cat = factory.createCategory;
         [cat setName:[categories objectAtIndex:i]];
         [cat setDesc:@"Das ist die Beschreibung"];
+        [cat setPriority:(NSDecimalNumber*)[NSDecimalNumber numberWithInt:i]];
     }
     
     [dal saveContext];

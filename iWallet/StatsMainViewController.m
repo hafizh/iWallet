@@ -10,11 +10,7 @@
 #import "StatsDetailAllCategoriesTableViewController.h"
 #import "PlotView.h"
 
-@interface StatsMainViewController ()
-
-@end
-
-@implementation StatsMainViewController
+@interface StatsMainViewController (){
 
 NSArray *categories;
 NSArray *chartModes;
@@ -22,14 +18,14 @@ NSArray *monthsFull;
 NSArray *years;
 
 // view size => default values
-int viewHeight = 370;
-int viewWidth = 320;
-int tableHeight = 190;
-int scrollHeight = 180;
-CGFloat currentScrollViewAlpha = 0.0f;
+int viewHeight;
+int viewWidth;
+int tableHeight;
+int scrollHeight;
+CGFloat currentScrollViewAlpha;
 
-int modeValue = 0; // 0 or 1, monthly or yearly respectively
-CGFloat animationDuration = 0.3f;
+int modeValue; // 0 or 1, monthly or yearly respectively
+CGFloat animationDuration;
 // scrollview pages
 PlotView *page1;
 PlotView *page2;
@@ -45,6 +41,12 @@ CGRect previousFrame;
 // Navigation strategies
 YearlyNavigationStrategy *yearlyNaviStrategy;
 MonthlyNavigationStrategy *monthlyNaviStrategy;
+}
+
+@end
+
+@implementation StatsMainViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +61,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
+    viewHeight = 370;
+    viewWidth = 320;
+    tableHeight = 190;
+    scrollHeight = 180;
+    currentScrollViewAlpha = 0.0f;
+    
+    modeValue = 0; // 0 or 1, monthly or yearly respectively
+    animationDuration = 0.3f;
 
     // Init navi strategies
     yearlyNaviStrategy = [[YearlyNavigationStrategy alloc] init];
@@ -354,7 +365,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return categories.count;
+    return categories.count+1; // +1 for detail...
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
