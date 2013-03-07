@@ -27,7 +27,7 @@
 @synthesize currencyLabel;
 
 
-NSString *currency =@""; //load from settings
+NSString *currency; //load from settings
 double monthlyBudget;
 NSUserDefaults *prefs;
 
@@ -49,17 +49,28 @@ NSUserDefaults *prefs;
     
 }
 -(void) moneyLeft{
-    //get value from settings
-    //monthlyBudget = 100;
+  
     
-    [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f%@", monthlyBudget, currency]];
 
-    //get sum of spent money
+    //get sum of spent money of this month
     double spentMoney = 333.45;
-    [moneySpentLabel setText: [NSString stringWithFormat:@"%.2f%@", spentMoney, currency]];
+    
+    if (currency==nil) {
+        currency =@"€";
+    }
     
     double moneyLeft = monthlyBudget - spentMoney;
+    if ([currency isEqualToString: @"$"] || [currency isEqualToString: @"£"])  {
+        [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%@%.2f", currency, monthlyBudget]];
+        [moneySpentLabel setText: [NSString stringWithFormat:@"%@%.2f", currency, spentMoney]];
+        [moneyLeftLabel setText: [NSString stringWithFormat:@"%@%.2f", currency, moneyLeft]];
+    }
+    else{
+    [monthlyBudgetLabel setText: [NSString stringWithFormat:@"%.2f%@", monthlyBudget, currency]];
+    [moneySpentLabel setText: [NSString stringWithFormat:@"%.2f%@", spentMoney, currency]];
     [moneyLeftLabel setText: [NSString stringWithFormat:@"%.2f%@", moneyLeft, currency]];
+    }
+    
     if (moneyLeft > 0) {
         moneyLeftLabel.textColor = [UIColor greenColor];
     }
@@ -253,7 +264,7 @@ NSUserDefaults *prefs;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-      NSLog(@"view did appear");
+      NSLog(@"view will appear");
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow)
@@ -264,6 +275,9 @@ NSUserDefaults *prefs;
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    [self loadCurrencyFromNSUserDefaults];
+    [self currencyBar];
+    [self moneyLeft];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
