@@ -7,6 +7,9 @@
 //
 
 #import "OverviewViewController.h"
+#import "DatabaseExample.h"
+#import "DataQueries.h"
+#import "EntityController.h"
 
 @interface OverviewViewController ()
 
@@ -50,6 +53,16 @@ NSUserDefaults *prefs;
 }
 -(void) moneyLeft{
   
+///HERE
+    //EntityController *en = [UIViewController getInstance()] ;
+    //DataAccessLayer *dal = [en dataAccessLayer];
+    
+    //NSDateComponents *Smonth = [[NSDateComponents alloc] init];
+    //[month setMonth:MONTH];
+    //[month setYear: YEAR];
+    
+    //NSArray *filteredItems = [d getSpendingsForMonth:month withSortDescriptor:nil];
+    //NSNumber *totalSpendingAmount = [filteredItems valueForKeyPath:@"@sum.price"];
     
 
     //get sum of spent money of this month
