@@ -159,6 +159,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="euroActive:" destination="2" eventType="touchUpInside" id="w2C-X8-97r"/>
                                     <action selector="setEuro:" destination="2" eventType="touchUpInside" id="Xz7-r8-Ngv"/>
                                 </connections>
                             </button>
@@ -174,6 +175,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="dollarActive:" destination="2" eventType="touchUpInside" id="IDB-7c-M54"/>
                                     <action selector="setDollar:" destination="2" eventType="touchUpInside" id="Uw4-OP-jUp"/>
                                 </connections>
                             </button>
@@ -189,6 +191,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="poundActive:" destination="2" eventType="touchUpInside" id="gfh-xb-owV"/>
                                     <action selector="setPound:" destination="2" eventType="touchUpInside" id="khV-nl-AJf"/>
                                 </connections>
                             </button>
@@ -223,10 +226,14 @@
                     <tabBarItem key="tabBarItem" title="Overview" image="first" id="7"/>
                     <connections>
                         <outlet property="budgetField" destination="qyA-Nx-PvV" id="kVy-Kr-t6c"/>
+                        <outlet property="currencyLabel" destination="Boq-6s-bX4" id="IOb-Jl-RE5"/>
                         <outlet property="currentMonthLabel" destination="3tg-OX-yBE" id="3xW-hS-406"/>
+                        <outlet property="dollar" destination="PZE-Dj-Gyt" id="o2v-4d-G5q"/>
+                        <outlet property="euro" destination="yIq-FB-lke" id="2Vo-8v-H4a"/>
                         <outlet property="moneyLeftLabel" destination="VfI-pN-uto" id="Tzq-qd-ueB"/>
                         <outlet property="moneySpentLabel" destination="jfe-Ku-dC6" id="97u-FP-LWz"/>
                         <outlet property="monthlyBudgetLabel" destination="YjN-XR-cr9" id="eyF-el-gF9"/>
+                        <outlet property="pound" destination="vi1-As-Mlk" id="Bnr-Fe-LhG"/>
                         <outlet property="statusLabel" destination="bMx-wq-mZP" id="i6z-Sv-cGm"/>
                     </connections>
                 </viewController>
@@ -720,95 +727,6 @@
         <image name="third" width="16" height="16"/>
         <image name="transportation.png" width="57" height="57"/>
     </resources>
-    <classes>
-        <class className="MainTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarController.h"/>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="b1Action:"/>
-                <relationship kind="action" name="b2Action:"/>
-                <relationship kind="action" name="b3Action:"/>
-                <relationship kind="action" name="b4Action:"/>
-                <relationship kind="action" name="b5Action:"/>
-                <relationship kind="action" name="b6Action:"/>
-                <relationship kind="action" name="b7Action:"/>
-                <relationship kind="action" name="b8Action:"/>
-                <relationship kind="action" name="b9Action:"/>
-                <relationship kind="action" name="cancelAction:"/>
-                <relationship kind="action" name="saveAction:"/>
-                <relationship kind="action" name="textAction:"/>
-                <relationship kind="outlet" name="b1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b4" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b5" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b6" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b7" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b8" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="b9" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cancelbutton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="category" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="savebutton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="textfield" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="OverviewViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OverviewViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backgroundTouched:"/>
-                <relationship kind="action" name="setBudget:"/>
-                <relationship kind="action" name="setDollar:"/>
-                <relationship kind="action" name="setEuro:"/>
-                <relationship kind="action" name="setPound:"/>
-                <relationship kind="outlet" name="budgetField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="currentMonthLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="moneyLeftLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="moneySpentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="monthlyBudgetLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="statusLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="StatsDetailAllCategoriesTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatsDetailAllCategoriesTableViewController.h"/>
-        </class>
-        <class className="StatsDetailCategoryTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatsDetailCategoryTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainTitle" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-        <class className="StatsMainNavigationController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatsMainNavigationController.h"/>
-        </class>
-        <class className="StatsMainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StatsMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="nextTimePeriodButtonTapped:"/>
-                <relationship kind="action" name="prevTimePeriodButtonTapped:"/>
-                <relationship kind="outlet" name="categoriesTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="mainTitle" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nextButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="prevButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="Welcome" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/Welcome.h"/>
-            <relationships>
-                <relationship kind="action" name="saveSettings:"/>
-                <relationship kind="outlet" name="budgetLabel" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="continueButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="currencyBox" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="pickLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

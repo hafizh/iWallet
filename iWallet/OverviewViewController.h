@@ -16,14 +16,18 @@
 -(void) moneyLeft;
 -(void) changeStatus:(NSString *)information;
 
-- (IBAction)setDollar:(id)sender;
-- (IBAction)setEuro:(id)sender;
-- (IBAction)setPound:(id)sender;
+- (IBAction)dollarActive:(id)sender;
+- (IBAction)euroActive:(id)sender;
+- (IBAction)poundActive:(id)sender;
 
 - (void)saveToNSUserDefaults;
 
 - (IBAction)setBudget:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *dollar;
+@property (weak, nonatomic) IBOutlet UIButton *euro;
+@property (weak, nonatomic) IBOutlet UIButton *pound;
+@property (weak, nonatomic) IBOutlet UILabel *currencyLabel;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *currentMonthLabel;

@@ -21,10 +21,15 @@
 @synthesize moneyLeftLabel;
 @synthesize statusLabel;
 @synthesize budgetField;
+@synthesize dollar;
+@synthesize pound;
+@synthesize euro;
+@synthesize currencyLabel;
 
 
 NSString *currency =@""; //load from settings
 double monthlyBudget;
+NSUserDefaults *prefs;
 
 -(void) currentMonth{
     
@@ -65,24 +70,34 @@ double monthlyBudget;
  
 }
 
-- (IBAction)setEuro:(id)sender{
+- (IBAction)euroActive:(id)sender{
     currency = @"€";
     [self changeStatus:@"Currency set to euro"];
     [self saveToNSUserDefaults];
     
+    [prefs setBool:NO forKey:@"currencyBOOL"];
+    [self currencyBar];
+    
 }
 
-- (IBAction)setDollar:(id)sender {
+- (IBAction)dollarActive:(id)sender {
     currency = @"$";
     [self changeStatus:@"Currency set to dollar"];
     [self saveToNSUserDefaults];
+    
+    [prefs setBool:NO forKey:@"currencyBOOL"];
+    [self currencyBar];
+    
 }
 
 
-- (IBAction)setPound:(id)sender {
+- (IBAction)poundActive:(id)sender {
     currency = @"£";
     [self changeStatus:@"Currency set to pound"];
     [self saveToNSUserDefaults];
+    
+    [prefs setBool:NO forKey:@"currencyBOOL"];
+    [self currencyBar];
 }
 
 - (IBAction)setBudget:(id)sender {
@@ -100,11 +115,12 @@ double monthlyBudget;
 }
 
 -(void)saveToNSUserDefaults {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:currency forKey:@"currency"];
     [prefs setFloat:monthlyBudget forKey:@"Monthly budget"];
+
     [self moneyLeft];
-    //[self viewDidLoad];
+
 }
 
 -(void)loadCurrencyFromNSUserDefaults {
@@ -128,20 +144,46 @@ double monthlyBudget;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
+    prefs = [NSUserDefaults standardUserDefaults];
 	// Do any additional setup after loading the view, typically from a nib.
     [self currentMonth];
     [self loadCurrencyFromNSUserDefaults];
     [self moneyLeft];
     //[budgetField setText:[NSString stringWithFormat:@"%.2f", monthlyBudget]];
+    [self currencyBar];
+    NSLog(@"START");
 }
+
+
+
+-(void) currencyBar{
+
+    BOOL currencySettings = [prefs boolForKey:@"currencyBOOL"];
+    NSLog(currencySettings ? @"currency settings is on" : @"currency settings is off");
+    
+    if(currencySettings == NO) {
+        dollar.hidden = YES;
+        euro.hidden = YES;
+        pound.hidden = YES;
+        currencyLabel.hidden = YES;
+    }
+    else {
+        dollar.hidden = NO;
+        euro.hidden = NO;
+        pound.hidden = NO;
+        currencyLabel.hidden = NO;
+    }
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 //keyboard
 #define kOFFSET_FOR_KEYBOARD 180.0
@@ -188,11 +230,13 @@ double monthlyBudget;
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
     CGRect rect = self.view.frame;
+
+    
     if (movedUp)
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+     		   rect.origin.y -= kOFFSET_FOR_KEYBOARD;
         rect.size.height += kOFFSET_FOR_KEYBOARD;
     }
     else
@@ -209,6 +253,7 @@ double monthlyBudget;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+      NSLog(@"view did appear");
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow)
@@ -223,7 +268,7 @@ double monthlyBudget;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // unregister for keyboard notifications while not visible.
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];

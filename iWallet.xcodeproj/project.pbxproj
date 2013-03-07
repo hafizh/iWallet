@@ -41,6 +41,7 @@
 		0FAE1B7516E63D1C004569F5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FAE1B7416E63D1C004569F5 /* QuartzCore.framework */; };
 		0FD6F78116DBB3F30011DDB5 /* MonthlyNavigationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */; };
 		0FD6F78416DBB41F0011DDB5 /* YearlyNavigationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */; };
+		0FD9930B16E77D9E00469755 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0FD9930A16E77D9E00469755 /* Settings.bundle */; };
 		0FDD20F016D68476003F0AA1 /* SpendingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD20EF16D68476003F0AA1 /* SpendingItem.m */; };
 		0FDD20F316D68607003F0AA1 /* DatabaseExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDD20F216D68607003F0AA1 /* DatabaseExample.m */; };
 		7651674F16BD459E005EB96E /* clothing.png in Resources */ = {isa = PBXBuildFile; fileRef = 7651674D16BD459E005EB96E /* clothing.png */; };
@@ -121,6 +122,7 @@
 		0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyNavigationStrategy.m; sourceTree = "<group>"; };
 		0FD6F78216DBB41F0011DDB5 /* YearlyNavigationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearlyNavigationStrategy.h; sourceTree = "<group>"; };
 		0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YearlyNavigationStrategy.m; sourceTree = "<group>"; };
+		0FD9930A16E77D9E00469755 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0FDD20EE16D68476003F0AA1 /* SpendingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingItem.h; sourceTree = "<group>"; };
 		0FDD20EF16D68476003F0AA1 /* SpendingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingItem.m; sourceTree = "<group>"; };
 		0FDD20F116D68607003F0AA1 /* DatabaseExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseExample.h; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				0F159F5D16AF160B00DE596E /* InfoPlist.strings */,
 				0F159F6016AF160B00DE596E /* main.m */,
 				0F159F6216AF160B00DE596E /* iWallet-Prefix.pch */,
+				0FD9930A16E77D9E00469755 /* Settings.bundle */,
 				0F159F6616AF160B00DE596E /* Default.png */,
 				0F159F6816AF160B00DE596E /* Default@2x.png */,
 				0F159F6A16AF160B00DE596E /* Default-568h@2x.png */,
@@ -385,6 +388,7 @@
 				7651677016BD45F8005EB96E /* transportation@2x.png in Resources */,
 				7651677616BD6C7E005EB96E /* third.png in Resources */,
 				7651677716BD6C7E005EB96E /* third@2x.png in Resources */,
+				0FD9930B16E77D9E00469755 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
