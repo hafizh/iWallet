@@ -13,6 +13,7 @@
     DataAccessLayer *dal;
     EntityFactory *factory;
     NSArray *categories;
+    NSArray *dates;
 }
 
 -(void)addCategories;

@@ -39,6 +39,19 @@
                           @"Health Care & Cosmetics",
                           @"Transportation & Travel",
                           @"Other", nil];
+        
+        NSLog(@"%@", [NSDate date]);
+        dates = [[NSArray alloc] initWithObjects:
+                 @"2012-02-07",
+                 @"2013-03-06",
+                 @"2011-07-08",
+                 @"2012-11-09",
+                 @"2013-01-15",
+                 @"2011-10-23",
+                 @"2013-01-11",
+                 @"2011-08-05",
+                 @"2012-12-25",
+                 @"2013-02-14", nil];
     }
     
     return self;
@@ -66,18 +79,25 @@
 }
 
 -(void)addSpendings {
-    Category *cat = [dal.getCategories objectAtIndex:2];
+ 
+    [self clearAllSpendings];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+
+    for (int j=0; j<10; j++) {
+
+    Category *cat = [dal.getCategories objectAtIndex:arc4random_uniform(9)];
+ 
     SpendingItem *spending;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
         spending = factory.createSpendingItem;
         [spending setDesc:[[NSArray arrayWithObjects: @"Spending",[NSNumber numberWithInt:i], nil]     componentsJoinedByString:@" " ]];
-        [spending setDate:[NSDate new]];
+        [spending setDate:[dateFormatter dateFromString:[dates objectAtIndex:i]]];
         [spending setCategory:cat];
-        [spending setPrice:[NSNumber numberWithFloat:(float)rand() / RAND_MAX]];
-        
-        
+        [spending setPrice:[NSNumber numberWithFloat:arc4random_uniform(90)]];
     }
-    
+    }
      [dal saveContext];
 }
 

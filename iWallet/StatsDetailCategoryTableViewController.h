@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "EntityController.h"
 #import "DataQueries.h"
+#import "CustomCell.h"
 
 @interface StatsDetailCategoryTableViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *mainTitle;
 @property NSString *selectedCategory;
+
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F08742916E8D58800190EB5 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F08742816E8D58800190EB5 /* CustomCell.m */; };
 		0F159F5516AF160A00DE596E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F159F5416AF160A00DE596E /* UIKit.framework */; };
 		0F159F5716AF160A00DE596E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F159F5616AF160A00DE596E /* Foundation.framework */; };
 		0F159F5916AF160A00DE596E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F159F5816AF160A00DE596E /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F08742716E8D58800190EB5 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		0F08742816E8D58800190EB5 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		0F159F5016AF160A00DE596E /* iWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F159F5416AF160A00DE596E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0F159F5616AF160A00DE596E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -168,7 +171,6 @@
 		0F159F4516AF160A00DE596E = {
 			isa = PBXGroup;
 			children = (
-				0FAE1B7416E63D1C004569F5 /* QuartzCore.framework */,
 				0F159F5A16AF160A00DE596E /* iWallet */,
 				0F159F5316AF160A00DE596E /* Frameworks */,
 				0F159F5116AF160A00DE596E /* Products */,
@@ -186,6 +188,7 @@
 		0F159F5316AF160A00DE596E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FAE1B7416E63D1C004569F5 /* QuartzCore.framework */,
 				0F4E53A316CD3E7D00ABDB93 /* CoreData.framework */,
 				0F159F5416AF160A00DE596E /* UIKit.framework */,
 				0F159F5616AF160A00DE596E /* Foundation.framework */,
@@ -256,6 +259,8 @@
 				0FD6F78016DBB3F30011DDB5 /* MonthlyNavigationStrategy.m */,
 				0FD6F78216DBB41F0011DDB5 /* YearlyNavigationStrategy.h */,
 				0FD6F78316DBB41F0011DDB5 /* YearlyNavigationStrategy.m */,
+				0F08742716E8D58800190EB5 /* CustomCell.h */,
+				0F08742816E8D58800190EB5 /* CustomCell.m */,
 			);
 			name = Statistics;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				0F366CBE16D688BE008FC803 /* Category.m in Sources */,
 				0FD6F78116DBB3F30011DDB5 /* MonthlyNavigationStrategy.m in Sources */,
 				0FD6F78416DBB41F0011DDB5 /* YearlyNavigationStrategy.m in Sources */,
+				0F08742916E8D58800190EB5 /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

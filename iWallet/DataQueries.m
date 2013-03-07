@@ -90,8 +90,10 @@
 -(NSArray*)getSpendingsForCategory:(Category*)cat
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", cat];
-    
-    return [dal getSpendingsWithFilter:predicate andSortDescriptor:nil];
+
+    NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+
+    return [dal getSpendingsWithFilter:predicate andSortDescriptor:sortDesc];
 }
 
 @end

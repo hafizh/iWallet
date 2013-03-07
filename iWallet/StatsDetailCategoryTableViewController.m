@@ -8,16 +8,19 @@
 
 #import "StatsDetailCategoryTableViewController.h"
 
-@interface StatsDetailCategoryTableViewController ()
+@interface StatsDetailCategoryTableViewController () {
+
+    // internal variables
+    NSArray *months;
+    NSArray *spendingItems;
+    NSString *currencySign;
+}
 
 @end
 
 @implementation StatsDetailCategoryTableViewController
 
-NSArray *months;
-//NSMutableArray *sectionsHeaders;
-//NSMutableDictionary *sectionHeadersDictionary;
-NSArray *spendingItems;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,12 +34,6 @@ NSArray *spendingItems;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //*************** Init spending items for selected category *******************
     EntityController *controller = [EntityController getInstance];
@@ -44,34 +41,16 @@ NSArray *spendingItems;
     Category *category = [[controller dataAccessLayer] getCategoryWithName:self.selectedCategory];
     DataQueries *queries = [[DataQueries alloc] init];
     spendingItems = [queries getSpendingsForCategory:category];
-    
-    //
-    //localCategories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] get]];
-
-    // Centralize months array in one object
-//    months = [[NSArray alloc] initWithObjects:
-//              @"January",
-//              @"February",
-//              @"March",
-//              @"April",
-//              @"May",
-//              @"June",
-//              @"July",
-//              @"August",
-//              @"September",
-//              @"October",
-//              @"November",
-//              @"December", nil];
-    
-//    sectionHeadersDictionary = [[NSMutableDictionary alloc] init];
-//    NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    for (SpendingItem *item in spendingItems) {
-//        NSDateComponents *monthAyear = [calendar components:(NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:item.date];
-//        
-//        [sectionHeadersDictionary setValue:item forKey:[NSString stringWithFormat:@"%d",[monthAyear month]+[monthAyear year]]];
-//    }
-    
     self.mainTitle.title = self.selectedCategory;
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    // getting an NSString
+    currencySign = [prefs stringForKey:@"currency"];
+    
+    if([prefs valueForKey:@"currency"] == nil){
+        currencySign = @"€";
+    }
     
 }
 
@@ -126,69 +105,18 @@ NSArray *spendingItems;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"item";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSNumber *spentAmount = [[spendingItems objectAtIndex:indexPath.row] price];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f €", [spentAmount doubleValue]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[spendingItems objectAtIndex:indexPath.row] date]];
+    cell.detailLabel.text = [NSString stringWithFormat:@"%.1f %@", [spentAmount doubleValue], currencySign];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    cell.titleLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[[spendingItems objectAtIndex:indexPath.row] date]]];
+    cell.descriptionLabel.text = @"some description";
     return cell;
 }
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return [sectionsHeaders objectAtIndex:section];
-//}
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-//#pragma mark - Table view delegate
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Navigation logic may go here. Create and push another view controller.
-//    /*
-//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-//     // ...
-//     // Pass the selected object to the new view controller.
-//     [self.navigationController pushViewController:detailViewController animated:YES];
-//     */
-//    
-//}
 
 @end

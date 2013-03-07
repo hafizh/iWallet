@@ -8,17 +8,20 @@
 
 #import "YearlyNavigationStrategy.h"
 
+@interface YearlyNavigationStrategy(){
+    NSCalendar *calendar;
+    
+    /// firstDate <= prevDate <= currentDate >= nextDate >= lastDate
+    NSDateComponents *firstDateComp;
+    NSDateComponents *lastDateComp;
+    
+    int prev, next, current;
+    NSDateComponents *currentComp;
+    NSArray *allSpendingItems;
+}
+
+@end
 @implementation YearlyNavigationStrategy
-
-NSCalendar *calendar;
-
-/// firstDate <= prevDate <= currentDate >= nextDate >= lastDate
-NSDateComponents *firstDateComp;
-NSDateComponents *lastDateComp;
-
-int prev, next, current;
-NSDateComponents *currentComp;
-NSArray *allSpendingItems;
 
 -(id)init
 {
@@ -40,8 +43,6 @@ NSArray *allSpendingItems;
         // calculate next and prev dates to check
         next = current + 1;
         prev = current - 1;
-        
-
     }
     return self;
 }
