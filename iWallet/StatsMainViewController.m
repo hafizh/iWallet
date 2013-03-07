@@ -87,15 +87,18 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     //[dbLayer ]
     
     EntityController *controller = [EntityController getInstance];
-
+    
+    DatabaseExample *dbEx = [[DatabaseExample alloc] init];
     if([[controller dataAccessLayer] getCategories].count<=0){
-        DatabaseExample *dbEx = [[DatabaseExample alloc] init];
+        
         [dbEx addCategories];
         categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
     }else{
         categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
     }
-
+    if([[controller dataAccessLayer] getSpendingsWithFilter:nil andSortDescriptor:nil].count <= 0){
+        [dbEx addSpendings];
+    }
     // charts text.
     chartModes = [[NSArray alloc] initWithObjects:@"Monthly Chart", @"Yearly Chart", nil];
     

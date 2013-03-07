@@ -8,21 +8,24 @@
 
 #import "MonthlyNavigationStrategy.h"
 
+@interface MonthlyNavigationStrategy(){
+    NSCalendar *calendar;
+    
+    /// firstDate <= prevDate <= currentDate >= nextDate >= lastDate
+    NSDate *firstDate;
+    NSDate *prevDate;
+    NSDate *currentDate;
+    NSDate *nextDate;
+    NSDate *lastDate;
+    
+    NSDateComponents *currentComp;
+    NSArray *allSpendingItems;
+    
+    NSArray *months;
+}
+
+@end
 @implementation MonthlyNavigationStrategy
-
-NSCalendar *calendar;
-
-/// firstDate <= prevDate <= currentDate >= nextDate >= lastDate
-NSDate *firstDate;
-NSDate *prevDate;
-NSDate *currentDate;
-NSDate *nextDate;
-NSDate *lastDate;
-
-NSDateComponents *currentComp;
-NSArray *allSpendingItems;
-
-NSArray *months;
 
 -(id)init
 {

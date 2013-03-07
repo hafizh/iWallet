@@ -11,6 +11,10 @@
 @interface PlotView() {
     
     NSArray *plotSpendings;
+    int paddingH;
+    int paddingV;
+    int plotWidth;
+    int plotHeight;
 }
 
 @end
@@ -18,10 +22,7 @@
 
 @implementation PlotView
 
-int paddingH = 10;
-int paddingV = 15;
-int plotWidth = 320;
-int plotHeight;
+
 
 CGColorRef CreateDeviceGrayColor(CGFloat w, CGFloat a)
 {
@@ -56,9 +57,14 @@ CGColorRef graphLineColor()
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-    }
+    
     // Initialization code
+        // default
+        paddingH = 10;
+        paddingV = 15;
+        plotWidth = 320;
+        plotHeight = 180;
+        
     self.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
 //    CALayer *layer = [[CALayer alloc] init];
 //    layer.frame = CGRectMake(3, 3, self.frame.size.width - 8, self.frame.size.height - 8);
@@ -70,12 +76,8 @@ CGColorRef graphLineColor()
 //    [self.layer addSublayer:layer];
     plotWidth = self.frame.size.width-paddingV;
     plotHeight = self.frame.size.height-paddingH;
-    
-    // ******** INIT DUMMY DATA *****************//
-    
-//    plotSpendings = [[NSArray alloc]init];
-//    [self updateData];
-    // ********* FINISH DUMMY ******************//
+
+    }
     return self;
 }
 
@@ -247,7 +249,10 @@ CGColorRef graphLineColor()
     
     float range2 = y - x;
     for (int i = 0; i< normalizedArray.count; i++) {
-        [normalizedArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:([[normalizedArray objectAtIndex:i] floatValue]*range2 + x)]];
+        NSNumber *normalV = [NSNumber numberWithFloat:([[normalizedArray objectAtIndex:i] floatValue]*range2 + x)];
+        [normalizedArray replaceObjectAtIndex:i withObject:normalV];
+        
+        //NSLog(@" %.2f - %.2f", [[array objectAtIndex:i] floatValue], [normalV floatValue]);
     }
 
     return normalizedArray;
