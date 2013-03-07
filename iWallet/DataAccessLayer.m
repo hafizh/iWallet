@@ -43,6 +43,12 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:[self managedObjectContext]];
     [request setEntity:entity];
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:YES];
+    
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, nil];
+    
+    [request setSortDescriptors:sortDescriptors];
+
     NSArray *fetchedObjects = [[self managedObjectContext]
                                executeFetchRequest:request error:&error];
     
