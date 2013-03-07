@@ -40,12 +40,10 @@ NSUserDefaults *prefs;
     dateFormatter.dateFormat = @"yyyyMMdd";
     NSDate *date = [dateFormatter dateFromString:@"20111010"];
     
-    // set swedish locale
-    //    dateFormatter.locale=[[NSLocale alloc] initWithLocaleIdentifier:@"sv_SE"];;
-    
+   
     dateFormatter.dateFormat=@"MMMM";
     NSString * monthString = [[dateFormatter stringFromDate:date] capitalizedString];
-   // [currentMonthLabel setText: [@"Current month: 	" stringByAppendingString:monthString]];
+   
     [currentMonthLabel setText: monthString];
 
     // NSLog(@"month: %@", monthString);
@@ -139,7 +137,7 @@ NSUserDefaults *prefs;
 }
 
 -(void)saveToNSUserDefaults {
-    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+   
     [prefs setObject:currency forKey:@"currency"];
     [prefs setFloat:monthlyBudget forKey:@"Monthly budget"];
 
@@ -150,8 +148,7 @@ NSUserDefaults *prefs;
 -(void)loadCurrencyFromNSUserDefaults {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    // getting an NSString
-    currency = [prefs stringForKey:@"currency"];
+        currency = [prefs stringForKey:@"currency"];
     monthlyBudget = [prefs floatForKey:@"Monthly budget"];
 
 }
@@ -170,11 +167,11 @@ NSUserDefaults *prefs;
     [super viewDidLoad];
    
     prefs = [NSUserDefaults standardUserDefaults];
-	// Do any additional setup after loading the view, typically from a nib.
+	
     [self currentMonth];
     [self loadCurrencyFromNSUserDefaults];
     [self moneyLeft];
-    //[budgetField setText:[NSString stringWithFormat:@"%.2f", monthlyBudget]];
+    
     [self currencyBar];
     NSLog(@"START");
 }
