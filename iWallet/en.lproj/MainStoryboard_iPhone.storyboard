@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -631,7 +631,7 @@
                                 </connections>
                             </button>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter the amount......" minimumFontSize="17" id="Vcx-xe-lkd">
-                                <rect key="frame" x="20" y="108" width="280" height="30"/>
+                                <rect key="frame" x="20" y="104" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -641,7 +641,7 @@
                                 </connections>
                             </textField>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Iqe-Ad-rsq">
-                                <rect key="frame" x="20" y="146" width="130" height="50"/>
+                                <rect key="frame" x="20" y="191" width="130" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="SAVE">
@@ -656,7 +656,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0zF-Yc-aWs">
-                                <rect key="frame" x="170" y="146" width="130" height="50"/>
+                                <rect key="frame" x="170" y="191" width="130" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="CANCEL">
@@ -681,11 +681,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Description (optional)" minimumFontSize="17" id="82b-vH-t5m">
+                                <rect key="frame" x="20" y="148" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6ls-gV-tXl">
+                                <rect key="frame" x="20" y="323" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" image="second" id="6"/>
                     <connections>
+                        <outlet property="action" destination="6ls-gV-tXl" id="FzH-2b-7XO"/>
                         <outlet property="b1" destination="iUD-Rs-KRq" id="1N5-I9-Hu1"/>
                         <outlet property="b2" destination="PWE-ba-v6c" id="Pgb-Kd-EUP"/>
                         <outlet property="b3" destination="ZlA-wX-ToS" id="XaB-og-idB"/>
@@ -700,6 +714,7 @@
                         <outlet property="categoryLabel" destination="e27-uP-1x4" id="lqK-Ra-iCJ"/>
                         <outlet property="savebutton" destination="Iqe-Ad-rsq" id="3cn-DG-HTZ"/>
                         <outlet property="textfield" destination="Vcx-xe-lkd" id="38w-EK-kgF"/>
+                        <outlet property="textfield2" destination="82b-vH-t5m" id="gat-i4-Cy6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
@@ -768,6 +783,7 @@
                 <relationship kind="action" name="cancelAction:"/>
                 <relationship kind="action" name="saveAction:"/>
                 <relationship kind="action" name="textAction:"/>
+                <relationship kind="outlet" name="action" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="b1" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="b2" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="b3" candidateClass="UIButton"/>
@@ -782,6 +798,7 @@
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="savebutton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textfield" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textfield2" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="OverviewViewController" superclassName="UIViewController">

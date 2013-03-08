@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EntityController.h"
+#import "EntityFactory.h"
+#import "SpendingItem.h"
 
 @interface MainViewController : UIViewController
+{
+//NUEVA VERSION
+    EntityController *ec;
+    EntityFactory *factory;
+    SpendingItem *item;
+    NSString *acategory;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *b1;
 @property (weak, nonatomic) IBOutlet UIButton *b2;
@@ -20,13 +30,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *b8;
 @property (weak, nonatomic) IBOutlet UIButton *b9;
 
+@property (weak, nonatomic) IBOutlet UITextField *textfield2;
 @property (weak, nonatomic) IBOutlet UITextField *textfield;
+
 @property (weak, nonatomic) IBOutlet UIButton *savebutton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelbutton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *category;
 
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *action;
 
 - (IBAction)b1Action:(id)sender;
 - (IBAction)b2Action:(id)sender;
