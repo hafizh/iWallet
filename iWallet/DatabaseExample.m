@@ -96,6 +96,7 @@
         [spending setDate:[dateFormatter dateFromString:[dates objectAtIndex:i]]];
         [spending setCategory:cat];
         [spending setPrice:[NSNumber numberWithFloat:arc4random_uniform(90)]];
+        [spending setDesc:@"some description"];
     }
     }
      [dal saveContext];

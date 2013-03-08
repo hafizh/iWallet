@@ -379,7 +379,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     if (indexPath.row == 0) {
         CellIdentifier = @"detailCell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = @"Detail...";
+        cell.textLabel.text = @"Overview...";
     }
     else if(indexPath.row > 0){
         CellIdentifier = @"category";

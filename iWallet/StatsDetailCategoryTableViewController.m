@@ -114,7 +114,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
     cell.titleLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[[spendingItems objectAtIndex:indexPath.row] date]]];
-    cell.descriptionLabel.text = @"some description";
+    cell.descriptionLabel.text = [[spendingItems objectAtIndex:indexPath.row] desc];
     return cell;
 }
 

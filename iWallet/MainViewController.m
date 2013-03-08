@@ -119,6 +119,7 @@
     item.category = [ec.dataAccessLayer getCategoryWithName:acategory];
     item.price = [NSNumber numberWithDouble:[_textfield.text doubleValue]];
     item.desc = _textfield2.text;
+    item.date = [NSDate date];
     [ec.dataAccessLayer saveContext];
     [self changeViewSecond];
     
