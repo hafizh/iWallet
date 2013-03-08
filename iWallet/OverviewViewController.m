@@ -38,7 +38,8 @@ NSUserDefaults *prefs;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyyMMdd";
-    NSDate *date = [dateFormatter dateFromString:@"20111010"];
+    NSDate *date = [NSDate date];
+   // NSDate *date = [dateFormatter dateFromString:@"20111010"];
     
    
     dateFormatter.dateFormat=@"MMMM";
@@ -52,19 +53,19 @@ NSUserDefaults *prefs;
 -(void) moneyLeft{
   
 ///HERE
-    //EntityController *en = [UIViewController getInstance()] ;
-    //DataAccessLayer *dal = [en dataAccessLayer];
+   // EntityController *en = [EntityController getInstance] ;
+  //  DataAccessLayer *dal = [en dataAccessLayer];
+    DataQueries *queries = [[DataQueries alloc] init];
+    NSDate *date = [NSDate date];
+    NSDateComponents *month = [[NSCalendar currentCalendar] components:NSDayCalendarUnit| NSMonthCalendarUnit | NSYearCalendarUnit  fromDate:date];
     
-    //NSDateComponents *Smonth = [[NSDateComponents alloc] init];
-    //[month setMonth:MONTH];
-    //[month setYear: YEAR];
-    
-    //NSArray *filteredItems = [d getSpendingsForMonth:month withSortDescriptor:nil];
-    //NSNumber *totalSpendingAmount = [filteredItems valueForKeyPath:@"@sum.price"];
-    
+    NSArray *filteredItems = [queries getSpendingsForMonth:month withSortDescriptor:nil];
+    NSNumber *totalSpendingAmount = [filteredItems valueForKeyPath:@"@sum.price"];
+    NSLog(@"%@",totalSpendingAmount);
 
     //get sum of spent money of this month
-    double spentMoney = 333.45;
+    double spentMoney = [totalSpendingAmount doubleValue];
+   
     
     if (currency==nil) {
         currency =@"€";
