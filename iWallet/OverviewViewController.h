@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *pound;
 @property (weak, nonatomic) IBOutlet UILabel *currencyLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *budgetSave;
+@property (weak, nonatomic) IBOutlet UILabel *budgetLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentMonthLabel;
 

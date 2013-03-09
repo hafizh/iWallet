@@ -84,10 +84,10 @@ NSUserDefaults *prefs;
     }
     
     if (moneyLeft > 0) {
-        moneyLeftLabel.textColor = [UIColor greenColor];
+        moneyLeftLabel.textColor = [UIColor colorWithRed:0 green:0.7 blue:0 alpha:1.0];
     }
     else
-        moneyLeftLabel.textColor = [UIColor redColor];
+        moneyLeftLabel.textColor = [UIColor colorWithRed:0.7 green:0 blue:0 alpha:1.0];
     
     
  
@@ -167,14 +167,24 @@ NSUserDefaults *prefs;
 {
     [super viewDidLoad];
    
+    
+    
     prefs = [NSUserDefaults standardUserDefaults];
 	
-    [self currentMonth];
+    
     [self loadCurrencyFromNSUserDefaults];
+    if(currency)
+    {
+    
+    
+    }
+    [self currentMonth];
     [self moneyLeft];
     
     [self currencyBar];
     NSLog(@"START");
+    
+    [self moneyLeft];
 }
 
 
@@ -189,12 +199,22 @@ NSUserDefaults *prefs;
         euro.hidden = YES;
         pound.hidden = YES;
         currencyLabel.hidden = YES;
+       
+        budgetField.hidden = YES;
+        _budgetLabel.hidden = YES;
+        _budgetSave.hidden = YES;
+        
     }
     else {
         dollar.hidden = NO;
         euro.hidden = NO;
         pound.hidden = NO;
         currencyLabel.hidden = NO;
+        
+        budgetField.hidden = NO;
+        _budgetLabel.hidden = NO;
+        _budgetSave.hidden = NO;
+        
     }
     
 }

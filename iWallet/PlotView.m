@@ -170,13 +170,14 @@ CGColorRef graphLineColor()
                           width:xAxisLength - 0.5];
         
         // draw x axis label
+        if(i%2==0){
         [[NSString stringWithFormat:@"%i", i] drawInRect:
          CGRectMake(destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH)
                                                       withFont:[UIFont systemFontOfSize:paddingH - 2]
                                                  lineBreakMode:NSLineBreakByWordWrapping
                                                      alignment:NSTextAlignmentCenter];
-
-        NSLog(@"rect: %f, %f, %f, %f", destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH);
+        }
+        //NSLog(@"rect: %f, %f, %f, %f", destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH);
         // draw actual value label
         float actualValue = [[plotSpendings objectAtIndex:i] floatValue];
         if(actualValue > 0){

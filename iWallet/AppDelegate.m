@@ -12,8 +12,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    
+    NSUserDefaults *prefs;
+    
+[prefs setBool:YES forKey:@"currencyBOOL"];
+    
     return YES;
+    
+
     
 }
 							

@@ -185,6 +185,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
                              [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:CGRectMake(0, 0, 480, 320)];
                              [[self.tabBarController.view.subviews objectAtIndex:1] setHidden:TRUE];
                              [self updateLayoutToLandscape];
+                             
                          }
          ];
 
@@ -224,6 +225,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     if(self.pageControl.currentPage == 1){
         [self.scrollView scrollRectToVisible:CGRectMake(480, tableHeight, 480, 300) animated:NO];
     }
+
 }
 
 

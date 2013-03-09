@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -75,11 +75,14 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.jpg" id="iWT-aE-SrP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Money:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sYX-50-lN7">
                                 <rect key="frame" x="53" y="101" width="160" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Spent:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hLK-oA-Mq4">
@@ -218,7 +221,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99346301020408168" green="0.99134828194972868" blue="0.86180766879934967" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <action selector="backgroundTouched:" destination="2" eventType="touchDown" id="TpW-d4-O2X"/>
                         </connections>
@@ -226,6 +229,8 @@
                     <tabBarItem key="tabBarItem" title="Overview" image="first" id="7"/>
                     <connections>
                         <outlet property="budgetField" destination="qyA-Nx-PvV" id="kVy-Kr-t6c"/>
+                        <outlet property="budgetLabel" destination="geh-H5-48O" id="ib6-3f-xuP"/>
+                        <outlet property="budgetSave" destination="cof-yt-M1F" id="MWL-n4-pML"/>
                         <outlet property="currencyLabel" destination="Boq-6s-bX4" id="IOb-Jl-RE5"/>
                         <outlet property="currentMonthLabel" destination="3tg-OX-yBE" id="3xW-hS-406"/>
                         <outlet property="dollar" destination="PZE-Dj-Gyt" id="o2v-4d-G5q"/>
@@ -245,7 +250,7 @@
         <scene sceneID="yyb-da-JKY">
             <objects>
                 <viewController id="Vgd-z9-FRo" customClass="StatsMainViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WyZ-R5-qCx">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="WyZ-R5-qCx">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -253,7 +258,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.70588235294117641" green="0.41960784313725491" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="40" sectionHeaderHeight="19" sectionFooterHeight="22" id="vKM-Af-9o0">
@@ -327,17 +332,17 @@
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="2mg-J8-ZCl">
                         <barButtonItem key="leftBarButtonItem" title="Prev" id="VRA-sU-qXn">
-                            <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.60162228949999996" green="0.3665846479" blue="0.032579158330000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="prevTimePeriodButtonTapped:" destination="Vgd-z9-FRo" id="ddJ-mJ-zFd"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Next" id="8SA-1E-Z4A">
-                            <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.60162228949999996" green="0.3665846479" blue="0.032579158330000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="nextTimePeriodButtonTapped:" destination="Vgd-z9-FRo" id="W3s-Nj-Zhd"/>
                             </connections>
@@ -388,6 +393,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="VHw-1N-1qT" kind="push" identifier="fromCategoriesToCategory" id="E2e-Kj-fvO"/>
                                 </connections>
@@ -495,6 +501,10 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.jpg" id="5l7-MC-Jg5">
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="411"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUD-Rs-KRq">
                                 <rect key="frame" x="20" y="20" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -630,9 +640,10 @@
                                     <action selector="b9Action:" destination="3" eventType="touchUpInside" id="fx7-ji-4Td"/>
                                 </connections>
                             </button>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter the amount......" minimumFontSize="17" id="Vcx-xe-lkd">
-                                <rect key="frame" x="20" y="104" width="280" height="30"/>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the amount......" minimumFontSize="17" clearButtonMode="whileEditing" id="Vcx-xe-lkd">
+                                <rect key="frame" x="21" y="105" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99215686274509807" green="0.96470588235294119" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -681,9 +692,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Description (optional)" minimumFontSize="17" id="82b-vH-t5m">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description (optional)" minimumFontSize="17" clearButtonMode="whileEditing" id="82b-vH-t5m">
                                 <rect key="frame" x="20" y="148" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -743,6 +755,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background.jpg" width="600" height="860"/>
         <image name="clothing.png" width="57" height="57"/>
         <image name="first" width="16" height="16"/>
         <image name="food.png" width="57" height="57"/>
@@ -810,6 +823,8 @@
                 <relationship kind="action" name="poundActive:"/>
                 <relationship kind="action" name="setBudget:"/>
                 <relationship kind="outlet" name="budgetField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="budgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="budgetSave" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="currencyLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="currentMonthLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dollar" candidateClass="UIButton"/>
