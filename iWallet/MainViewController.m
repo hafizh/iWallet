@@ -31,7 +31,7 @@
     
 
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"clothing.png"]];
+    [_category setImage:[UIImage imageNamed:@"new1.png"]];
     [_categoryLabel setText:@"Clothing"];
     acategory = @"Clothing";
  
@@ -40,7 +40,7 @@
 - (IBAction)b2Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"food.png"]];
+    [_category setImage:[UIImage imageNamed:@"new2.png"]];
     [_categoryLabel setText:@"Food & Groceries"];
     acategory = @"Food & Groceries";
     
@@ -49,7 +49,7 @@
 - (IBAction)b3Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"go.png"]];
+    [_category setImage:[UIImage imageNamed:@"new3_4.png"]];
     [_categoryLabel setText:@"Going Out"];
     acategory = @"Going Out";
     
@@ -58,7 +58,7 @@
 - (IBAction)b4Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"health.png"]];
+    [_category setImage:[UIImage imageNamed:@"new4.png"]];
     [_categoryLabel setText:@"Health Care & Cosmetics"];
     acategory = @"Health Care & Cosmetics";
     
@@ -67,7 +67,7 @@
 - (IBAction)b5Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"household.png"]];
+    [_category setImage:[UIImage imageNamed:@"new5.png"]];
     [_categoryLabel setText:@"Household & Rent"];
     acategory = @"Houshold & Rent";
     
@@ -76,7 +76,7 @@
 - (IBAction)b6Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"sport.png"]];
+    [_category setImage:[UIImage imageNamed:@"new6.png"]];
     [_categoryLabel setText:@"Sport & Hobbies"];
     acategory = @"Sports & Hobbies";
     
@@ -85,7 +85,7 @@
 - (IBAction)b7Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"study.png"]];
+    [_category setImage:[UIImage imageNamed:@"new7.png"]];
     [_categoryLabel setText:@"Study Cost"];
     acategory = @"Study Costs";
     
@@ -94,7 +94,7 @@
 - (IBAction)b8Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"transportation.png"]];
+    [_category setImage:[UIImage imageNamed:@"new8.png"]];
     [_categoryLabel setText:@"Transportation & Travel"];
     acategory = @"Transportation & Travel";
     
@@ -103,7 +103,7 @@
 - (IBAction)b9Action:(id)sender {
     
     [self changeViewFirst];
-    [_category setImage:[UIImage imageNamed:@"others.png"]];
+    [_category setImage:[UIImage imageNamed:@"new9.png"]];
     [_categoryLabel setText:@"Others"];
     acategory = @"Other";
     
@@ -124,6 +124,15 @@
     [self changeViewSecond];
     
     _action.text = @"SAVED";
+    
+    [UIView animateWithDuration:5
+                     animations:^
+     {
+         
+         [_action setAlpha:0];
+         
+     }];
+
 
 }
 
@@ -132,6 +141,15 @@
     [self changeViewSecond];
     
     _action.text = @"CANCELLED";
+    
+    [UIView animateWithDuration:5
+                     animations:^
+    {
+    
+        [_action setAlpha:0];
+    
+    }];
+
     
 }
 
@@ -144,24 +162,31 @@
 - (void) changeViewFirst
 {
     
-    _b1.hidden = YES;
-    _b2.hidden = YES;
-    _b3.hidden = YES;
-    _b4.hidden = YES;
-    _b5.hidden = YES;
-    _b6.hidden = YES;
-    _b7.hidden = YES;
-    _b8.hidden = YES;
-    _b9.hidden = YES;
-    
-    _textfield.hidden = NO;
-    _textfield2.hidden = NO;
-    _savebutton.hidden = NO;
-    _cancelbutton.hidden = NO;
-    _category.hidden = NO;
-    _categoryLabel.hidden = NO;
+    [UIView animateWithDuration:0.3
+                     animations:^
+     {
+         [_b1 setAlpha:0];
+         [_b2 setAlpha:0];
+         [_b3 setAlpha:0];
+         [_b4 setAlpha:0];
+         [_b5 setAlpha:0];
+         [_b6 setAlpha:0];
+         [_b7 setAlpha:0];
+         [_b8 setAlpha:0];
+         [_b9 setAlpha:0];
+         
+         [_textfield setAlpha:1];
+         [_textfield2 setAlpha:1];
+         [_savebutton setAlpha:1];
+         [_cancelbutton setAlpha:1];
+         [_category setAlpha:1];
+         [_categoryLabel setAlpha:1];
+         
+     }];
     
     _action.hidden = YES;
+    
+    [_action setAlpha:1];
     
     [_textfield becomeFirstResponder];
 
@@ -170,22 +195,27 @@
 - (void) changeViewSecond
 {
     
-    _b1.hidden = NO;
-    _b2.hidden = NO;
-    _b3.hidden = NO;
-    _b4.hidden = NO;
-    _b5.hidden = NO;
-    _b6.hidden = NO;
-    _b7.hidden = NO;
-    _b8.hidden = NO;
-    _b9.hidden = NO;
-    
-    _textfield.hidden = YES;
-    _textfield2.hidden = YES;
-    _savebutton.hidden = YES;
-    _cancelbutton.hidden = YES;
-    _category.hidden = YES;
-    _categoryLabel.hidden = YES;
+    [UIView animateWithDuration:0.3
+                     animations:^
+     {
+         [_b1 setAlpha:1];
+         [_b2 setAlpha:1];
+         [_b3 setAlpha:1];
+         [_b4 setAlpha:1];
+         [_b5 setAlpha:1];
+         [_b6 setAlpha:1];
+         [_b7 setAlpha:1];
+         [_b8 setAlpha:1];
+         [_b9 setAlpha:1];
+         
+         [_textfield setAlpha:0];
+         [_textfield2 setAlpha:0];
+         [_savebutton setAlpha:0];
+         [_cancelbutton setAlpha:0];
+         [_category setAlpha:0];
+         [_categoryLabel setAlpha:0];
+         
+     }];
     
     _action.hidden = NO;
     
