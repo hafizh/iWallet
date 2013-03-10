@@ -18,6 +18,8 @@
     float plotHeight;
     float minValue;
     float maxValue;
+    int yGridLineRange;
+
 }
 
 @end
@@ -63,23 +65,10 @@ CGColorRef graphLineColor()
     
     // Initialization code
         // default
-        plotWidth = 320;
-        plotHeight = 180;
-        paddingH = plotHeight*0.05555556;
-        paddingV = plotWidth*0.0375;
-        
-    self.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-//    CALayer *layer = [[CALayer alloc] init];
-//    layer.frame = CGRectMake(3, 3, self.frame.size.width - 8, self.frame.size.height - 8);
-//    layer.borderWidth = 1.0f;
-//    layer.cornerRadius = 5;
-//    layer.backgroundColor = [UIColor colorWithRed:236.0/255 green:229.0/255 blue:182.0/255 alpha:1.0].CGColor;
-//    layer.borderColor = [UIColor redColor].CGColor;
-//    
-//    [self.layer addSublayer:layer];
-    plotWidth = self.frame.size.width-paddingV;
-    plotHeight = self.frame.size.height-paddingH;
 
+    self.backgroundColor = [UIColor colorWithRed:250.0/255 green:247.0/255 blue:198.0/255 alpha:1.0];
+
+        
     }
     return self;
 }
@@ -88,6 +77,14 @@ CGColorRef graphLineColor()
 {
     plotSpendings = nil;
 
+    paddingH = self.frame.size.height*0.05555556;
+    paddingV = self.frame.size.width*0.0375;
+    plotWidth = self.frame.size.width-paddingV;
+    plotHeight = self.frame.size.height-paddingH/2;
+    
+    yGridLineRange = 10;
+    
+    //NSLog(@" %f, %f, %f, %f, %@", plotHeight, plotWidth, paddingH, paddingV, cat.name);
     plotSpendings = [self.plotNaviStrategy classifyCurrentForCategory:cat];
     // update view
     [self setNeedsDisplay];
@@ -105,39 +102,31 @@ CGColorRef graphLineColor()
     CGContextBeginPath(context);
 	CGContextMoveToPoint(context, 1.5*paddingV, paddingH);
 	CGContextAddLineToPoint(context, 1.5*paddingV, plotHeight - paddingH);
-    CGContextSetLineWidth(context, 1.0);
+    //CGContextSetLineWidth(context, 1.0);
 	CGContextStrokePath(context);
     
     // draw gridlines
-    normalizedItems = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-2*paddingH];
-    float interval = (maxValue - minValue)/15;
-    if(interval<5){
-        interval = 5;
-    }
-    minValue += interval;
+    normalizedItems = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-2.5*paddingH];
+    
+    float interval = (maxValue - minValue)/10;
+    //NSLog(@" %f, %f, %f")
+    minValue = 0;
+    yGridLineRange = ceilf((plotHeight-2.5*paddingH)/10);
 
-    for (int i = 10; i < plotHeight-paddingH; i+= 10) {
-		
+    for (int i = plotHeight-paddingH; i > 3; i-= yGridLineRange) {
+        NSLog(@" %i", i);
+        CGContextBeginPath(context);
 		CGContextMoveToPoint(context, 1.5*paddingV, i);
 		CGContextAddLineToPoint(context, plotWidth+paddingV/2, i);
 		CGContextStrokePath(context);
         
         // draw y axis labels
-        int reverseIndex = (i/10);
-        if(reverseIndex < 16){
+        //int reverseIndex = (i/yGridLineRange);
             [[NSString stringWithFormat:@"%.0f", minValue] drawInRect:
-                 CGRectMake(0, (plotHeight-paddingH) - reverseIndex*10, 1.5*paddingV, paddingH)
+                 CGRectMake(0, i-paddingH+3, 1.5*paddingV, paddingH)
                                                      withFont:[UIFont systemFontOfSize:paddingH-2]
                                                 lineBreakMode:NSLineBreakByWordWrapping
                                                     alignment:NSTextAlignmentCenter];
-        }
-        else{
-            [@"€" drawInRect:
-             CGRectMake(0, (plotHeight-paddingH) - reverseIndex*10, paddingV, paddingH)
-                                                                 withFont:[UIFont systemFontOfSize:paddingH-2]
-                                                            lineBreakMode:NSLineBreakByWordWrapping
-                                                                alignment:NSTextAlignmentCenter];
-        }
         minValue+=interval;
 	}
     
@@ -162,31 +151,35 @@ CGColorRef graphLineColor()
     for (int i=1; i<normalizedItems.count;i++) {
         float xValue = [[normalizedItems objectAtIndex:i] floatValue];
         // draw 1 data line
-        [self drawLineInContext:context
-                        originX:originx
-                        originY:originy
-                          destX:destX
-                          destY:(plotHeight - paddingH) - xValue
-                          width:xAxisLength - 0.5];
+        if(xValue > 0){
+            [self drawLineInContext:context
+                            originX:originx
+                            originY:originy
+                              destX:destX
+                              destY:(plotHeight - paddingH) - xValue
+                              width:xAxisLength - 0.5];
+            
+            //NSLog(@"rect: %f, %f, %f, %f", destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH);
+            // draw actual value label
+            float actualValue = [[plotSpendings objectAtIndex:i] floatValue];
+            if(actualValue > 0){
+                [[NSString stringWithFormat:@"%.0f", actualValue] drawInRect:
+                 CGRectMake(destX-xAxisLength, (plotHeight - paddingH*0.8) - xValue, 2*xAxisLength, paddingH)
+                                                                    withFont:[UIFont systemFontOfSize:paddingH-1]
+                                                               lineBreakMode:NSLineBreakByWordWrapping
+                                                                   alignment:NSTextAlignmentCenter];
+            }
+        }
         
         // draw x axis label
         if(i%2==0){
-        [[NSString stringWithFormat:@"%i", i] drawInRect:
-         CGRectMake(destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH)
-                                                      withFont:[UIFont systemFontOfSize:paddingH - 2]
-                                                 lineBreakMode:NSLineBreakByWordWrapping
-                                                     alignment:NSTextAlignmentCenter];
+            [[NSString stringWithFormat:@"%i", i] drawInRect:
+             CGRectMake(destX-xAxisLength, plotHeight - paddingH, 2*xAxisLength, paddingH)
+                                                    withFont:[UIFont systemFontOfSize:paddingH-1]
+                                               lineBreakMode:NSLineBreakByWordWrapping
+                                                   alignment:NSTextAlignmentCenter];
         }
-        //NSLog(@"rect: %f, %f, %f, %f", destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH);
-        // draw actual value label
-        float actualValue = [[plotSpendings objectAtIndex:i] floatValue];
-        if(actualValue > 0){
-        [[NSString stringWithFormat:@"%.0f", actualValue] drawInRect:
-         CGRectMake(destX-xAxisLength, (plotHeight - paddingH) - xValue, 2*xAxisLength, paddingH)
-                                                            withFont:[UIFont systemFontOfSize:paddingH - 2]
-                                                       lineBreakMode:NSLineBreakByWordWrapping
-                                                           alignment:NSTextAlignmentCenter];
-        }
+        
         originx +=xAxisLength;
         destX +=xAxisLength;
     }
@@ -195,7 +188,7 @@ CGColorRef graphLineColor()
 
 - (void)drawLineInContext:(CGContextRef)context originX:(float)x1 originY:(float)y1 destX:(float)x2 destY:(float)y2 width:(float)width
 {
-        CGContextSetRGBStrokeColor(context, 0.6, 0.3, 0.7, 1.0);
+        CGContextSetRGBStrokeColor(context, 226.0/255, 83.0/255, 85.0/255, 0.8);
         CGContextBeginPath(context);
         CGContextMoveToPoint(context, x1, y1);
         CGContextAddLineToPoint(context, x2, y2);

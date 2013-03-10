@@ -29,6 +29,7 @@
 		0F1D2A7416C00D97007031A3 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1D2A7316C00D97007031A3 /* MainTabBarController.m */; };
 		0F366CBE16D688BE008FC803 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F366CBD16D688BE008FC803 /* Category.m */; };
 		0F3D06EA16B82A7500BC7850 /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D06E916B82A7500BC7850 /* PlotView.m */; };
+		0F49C25916EBDC3A004996B4 /* overview.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F49C25816EBDC3A004996B4 /* overview.png */; };
 		0F4A233516B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */; };
 		0F4A233816B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A233716B1B2CC007294A6 /* StatsDetailCategoryTableViewController.m */; };
 		0F4E539716CD3DA500ABDB93 /* DataAccessLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4E539216CD3DA500ABDB93 /* DataAccessLayer.m */; };
@@ -102,6 +103,7 @@
 		0F366CBD16D688BE008FC803 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		0F3D06E816B82A7400BC7850 /* PlotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotView.h; sourceTree = "<group>"; };
 		0F3D06E916B82A7500BC7850 /* PlotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotView.m; sourceTree = "<group>"; };
+		0F49C25816EBDC3A004996B4 /* overview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overview.png; sourceTree = "<group>"; };
 		0F4A233316B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailAllCategoriesTableViewController.h; sourceTree = "<group>"; };
 		0F4A233416B1AD57007294A6 /* StatsDetailAllCategoriesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsDetailAllCategoriesTableViewController.m; sourceTree = "<group>"; };
 		0F4A233616B1B2CC007294A6 /* StatsDetailCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsDetailCategoryTableViewController.h; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		0F159F5A16AF160A00DE596E /* iWallet */ = {
 			isa = PBXGroup;
 			children = (
+				0F49C25816EBDC3A004996B4 /* overview.png */,
 				7691759416EB97C4000D2D59 /* background.jpg */,
 				7651677416BD6C7E005EB96E /* third.png */,
 				7651677516BD6C7E005EB96E /* third@2x.png */,
@@ -398,6 +401,7 @@
 				7651677716BD6C7E005EB96E /* third@2x.png in Resources */,
 				0FD9930B16E77D9E00469755 /* Settings.bundle in Resources */,
 				7691759516EB97C4000D2D59 /* background.jpg in Resources */,
+				0F49C25916EBDC3A004996B4 /* overview.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

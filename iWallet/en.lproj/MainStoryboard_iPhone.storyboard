@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -226,7 +226,7 @@
                             <action selector="backgroundTouched:" destination="2" eventType="touchDown" id="TpW-d4-O2X"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Overview" image="first" id="7"/>
+                    <tabBarItem key="tabBarItem" title="Overview" image="overview.png" id="7"/>
                     <connections>
                         <outlet property="budgetField" destination="qyA-Nx-PvV" id="kVy-Kr-t6c"/>
                         <outlet property="budgetLabel" destination="geh-H5-48O" id="ib6-3f-xuP"/>
@@ -275,7 +275,7 @@
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jie-FE-i55">
                                                     <rect key="frame" x="10" y="0.0" width="280" height="39"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.8154296875" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
@@ -323,13 +323,14 @@
                                 <rect key="frame" x="141" y="324" width="38" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </pageControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mode(yearly/monthly)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMd-ZW-emJ">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mode(yearly/monthly)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMd-ZW-emJ">
                                 <rect key="frame" x="95" y="210" width="164" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.47744455650000001" green="0.1025075605" blue="0.29054309480000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="highlightedColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.91605839416058399" green="0.11313868613138686" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.91605839420000001" green="0.1131386861" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" red="0.91605839420000001" green="0.1131386861" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686270000003" green="0.96470588239999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -433,8 +434,8 @@
                                             <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LJr-VE-nTB">
-                                            <rect key="frame" x="255" y="11" width="56" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LJr-VE-nTB">
+                                            <rect key="frame" x="210" y="11" width="99" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -757,12 +758,12 @@
     <resources>
         <image name="background.jpg" width="600" height="860"/>
         <image name="clothing.png" width="57" height="57"/>
-        <image name="first" width="16" height="16"/>
         <image name="food.png" width="57" height="57"/>
         <image name="go.png" width="57" height="57"/>
         <image name="health.png" width="57" height="57"/>
         <image name="household.png" width="57" height="57"/>
         <image name="others.png" width="57" height="57"/>
+        <image name="overview.png" width="16" height="16"/>
         <image name="second" width="16" height="16"/>
         <image name="sport.png" width="57" height="57"/>
         <image name="study.png" width="57" height="57"/>

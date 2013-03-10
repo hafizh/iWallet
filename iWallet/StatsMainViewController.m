@@ -41,6 +41,8 @@ CGRect previousFrame;
 // Navigation strategies
 YearlyNavigationStrategy *yearlyNaviStrategy;
 MonthlyNavigationStrategy *monthlyNaviStrategy;
+    
+    NSIndexPath *selectedIndexPath;
 }
 
 @end
@@ -146,6 +148,11 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.categoriesTableView reloadData];
+}
+
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self initLayout];
@@ -173,13 +180,13 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         toOrientation = toInterfaceOrientation;
         UIView *tempView = [self.tabBarController.view.subviews objectAtIndex:0];
         previousFrame = tempView.frame;
-        
     }
 }
 
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if(UIInterfaceOrientationIsLandscape(toOrientation) && UIInterfaceOrientationIsPortrait(fromInterfaceOrientation)){
+       
         [UIView animateWithDuration:animationDuration
                          animations:^{
                              [[self.tabBarController.view.subviews objectAtIndex:0] setFrame:CGRectMake(0, 0, 480, 320)];
@@ -188,7 +195,9 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
                              
                          }
          ];
-
+        if(self.pageControl.currentPage == 1){
+            [self.scrollView scrollRectToVisible:CGRectMake(480, tableHeight, 480, 300) animated:NO];
+        }
     }
     if(UIInterfaceOrientationIsPortrait(toOrientation)){
         [UIView animateWithDuration:animationDuration
@@ -198,6 +207,8 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
                          }
          ];
     }
+    [self.modeLabel setAdjustsFontSizeToFitWidth:YES];
+    [self.modeLabel setFrame:CGRectMake(self.view.frame.origin.x, self.scrollView.frame.origin.y+5, self.view.frame.size.width, 30)];
 }
 
 // Custom Methods
@@ -208,6 +219,11 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 
     if(currentScrollViewAlpha >= 0){
         [self resizeScrollViewToHeight:scrollHeight width:viewWidth origin:CGPointMake(0, tableHeight)];
+    }
+    
+    if(selectedIndexPath.row > 0 && selectedIndexPath.row < 10){
+        [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+        [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
     }
     
 }
@@ -221,11 +237,11 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     // hide navigation bar, but leave status bar
     [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
     [self resizeScrollViewToHeight:300 width:480 origin:CGPointMake(0, 0)];
-    
-    if(self.pageControl.currentPage == 1){
-        [self.scrollView scrollRectToVisible:CGRectMake(480, tableHeight, 480, 300) animated:NO];
-    }
 
+    if(selectedIndexPath.row > 0 && selectedIndexPath.row < 10){
+        [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+        [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    }
 }
 
 
@@ -344,17 +360,10 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         self.nextButton.enabled = [naviStrategy checkNext];
         self.prevButton.enabled = [naviStrategy checkPrevious];
 
-        
-//        [page1 updateData];
-//        [page2 updateData];
-
-        NSIndexPath *selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
-        //NSLog(@"selected:%d", selectedIndexPath.row);
         [self.categoriesTableView reloadData];
         if(selectedIndexPath.row != 0){
             [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-//            [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row]];
-//            [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row]];
+
         }
     }
 }
@@ -406,6 +415,8 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         
 //        [page2 setPlotCategory:[categories objectAtIndex:indexPath.row]];
         [page2 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]];
+        
+        selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
     }
 }
 // END tableview Delegate
@@ -432,15 +443,13 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     [self.prevButton setEnabled:[naviStrategy checkPrevious]];
     [self.nextButton setEnabled:[naviStrategy checkNext]];
     
-    NSIndexPath *selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
-    //NSLog(@"selected:%d", selectedIndexPath.row);
     [self.categoriesTableView reloadData];
     if(selectedIndexPath.row != 0){
         [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
     
-    [page1 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
-    [page2 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
+    [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
     
 }
 
@@ -453,18 +462,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     self.prevButton.title = [naviStrategy getPreviousTitle];
 
    
-     //NSLog(@" month:%@ and year:%d", [months objectAtIndex:[tempComp month]-1], [tempComp year]);
     [self.nextButton setEnabled:[naviStrategy checkNext]];
     [self.prevButton setEnabled:[naviStrategy checkPrevious]];
     
-    NSIndexPath *selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
-    //NSLog(@"selected:%d", selectedIndexPath.row);
     [self.categoriesTableView reloadData];
     if(selectedIndexPath.row != 0){
         [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
     
-    [page1 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
-    [page2 updateDataByCategory:[categories objectAtIndex:[self.categoriesTableView indexPathForSelectedRow].row ]];
+    [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
 }
 @end
