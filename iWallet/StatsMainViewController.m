@@ -42,7 +42,9 @@ CGRect previousFrame;
 YearlyNavigationStrategy *yearlyNaviStrategy;
 MonthlyNavigationStrategy *monthlyNaviStrategy;
     
-    NSIndexPath *selectedIndexPath;
+NSIndexPath *selectedIndexPath;
+    float budget;
+    
 }
 
 @end
@@ -150,12 +152,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    budget = [prefs floatForKey:@"Monthly budget"];
     [self.categoriesTableView reloadData];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self initLayout];
+    selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
 }
 
 // INTERFACE ORIENTATION METHODS
@@ -399,7 +404,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         // Configure the cell...
         Category *cat = [categories objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = cat.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f %%", [naviStrategy getCurrentSumAmountforCategory:cat]/10];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f %%", [naviStrategy getCurrentSumAmountforCategory:cat]*100/budget];
     }
     return cell;
 }
@@ -447,10 +452,11 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     if(selectedIndexPath.row != 0){
         [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
-    
-    [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
-    [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
-    
+
+    if(selectedIndexPath.row >0 && selectedIndexPath.row < 11){
+        [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+        [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    }
 }
 
 - (IBAction)nextTimePeriodButtonTapped:(id)sender {
@@ -470,7 +476,9 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
     
-    [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
-    [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    if(selectedIndexPath.row >0 && selectedIndexPath.row < 11){
+        [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+        [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    }
 }
 @end
