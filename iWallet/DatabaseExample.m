@@ -28,8 +28,7 @@
          [self priceFilterAndSort];
          [self printQuery];
         */
-            categories = [[NSArray alloc] initWithObjects:
-                          @"All",
+        categories = [[NSArray alloc] initWithObjects:
                           @"Food & Groceries",
                           @"Houshold & Rent",
                           @"Clothing",
