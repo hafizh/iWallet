@@ -84,7 +84,6 @@ CGColorRef graphLineColor()
     
     yGridLineRange = 10;
     
-    //NSLog(@" %f, %f, %f, %f, %@", plotHeight, plotWidth, paddingH, paddingV, cat.name);
     plotSpendings = [self.plotNaviStrategy classifyCurrentForCategory:cat];
     // update view
     [self setNeedsDisplay];
@@ -109,12 +108,11 @@ CGColorRef graphLineColor()
     normalizedItems = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-2.5*paddingH];
     
     float interval = (maxValue - minValue)/10;
-    //NSLog(@" %f, %f, %f")
+
     minValue = 0;
     yGridLineRange = ceilf((plotHeight-2.5*paddingH)/10);
 
     for (int i = plotHeight-paddingH; i > 3; i-= yGridLineRange) {
-        NSLog(@" %i", i);
         CGContextBeginPath(context);
 		CGContextMoveToPoint(context, 1.5*paddingV, i);
 		CGContextAddLineToPoint(context, plotWidth+paddingV/2, i);
@@ -159,7 +157,6 @@ CGColorRef graphLineColor()
                               destY:(plotHeight - paddingH) - xValue
                               width:xAxisLength - 0.5];
             
-            //NSLog(@"rect: %f, %f, %f, %f", destX-xAxisLength, plotHeight - 6, 2*xAxisLength, paddingH);
             // draw actual value label
             float actualValue = [[plotSpendings objectAtIndex:i] floatValue];
             if(actualValue > 0){
@@ -214,7 +211,6 @@ CGColorRef graphLineColor()
         NSNumber *normalV = [NSNumber numberWithFloat:([[normalizedArray objectAtIndex:i] floatValue]*range2 + x)];
         [normalizedArray replaceObjectAtIndex:i withObject:normalV];
         
-        //NSLog(@" %.2f - %.2f", [[array objectAtIndex:i] floatValue], [normalV floatValue]);
     }
 
     return normalizedArray;
