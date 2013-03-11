@@ -12,37 +12,40 @@
 
 @interface StatsMainViewController (){
 
-NSArray *categories;
-NSArray *chartModes;
-NSArray *monthsFull;
-NSArray *years;
-
-// view size => default values
-int viewHeight;
-int viewWidth;
-int tableHeight;
-int scrollHeight;
-CGFloat currentScrollViewAlpha;
-
-int modeValue; // 0 or 1, monthly or yearly respectively
-CGFloat animationDuration;
-// scrollview pages
-PlotView *page1;
-PlotView *page2;
-
-id<DateNavigationStrategy> naviStrategy;
-DataQueries *dbLayer;
-
-// used in didRotate... method
-UIInterfaceOrientation toOrientation;
-
-CGRect previousFrame;
-
-// Navigation strategies
-YearlyNavigationStrategy *yearlyNaviStrategy;
-MonthlyNavigationStrategy *monthlyNaviStrategy;
+    NSArray *categories;
+    NSArray *chartModes;
+    NSArray *monthsFull;
+    NSArray *years;
+    
+    // view size => default values
+    int viewHeight;
+    int viewWidth;
+    int tableHeight;
+    int scrollHeight;
+    CGFloat currentScrollViewAlpha;
+    
+    int modeValue; // 0 or 1, monthly or yearly respectively
+    CGFloat animationDuration;
+    
+    // scrollview pages
+    PlotView *page1;
+    PlotView *page2;
+    
+    id<DateNavigationStrategy> naviStrategy;
+    DataQueries *dbLayer;
+    
+    // used in didRotate... method
+    UIInterfaceOrientation toOrientation;
+    
+    CGRect previousFrame;
+    
+    // Navigation strategies
+    YearlyNavigationStrategy *yearlyNaviStrategy;
+    MonthlyNavigationStrategy *monthlyNaviStrategy;
     
     NSIndexPath *selectedIndexPath;
+    float budget;
+    
 }
 
 @end
@@ -85,15 +88,14 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     self.nextButton.title = [naviStrategy getNextTitle];
     self.prevButton.title = [naviStrategy getPreviousTitle];
 
+    //******************* DATA INIT *********************
     dbLayer = [[DataQueries alloc] init];
-    //[dbLayer ]
-    
     EntityController *controller = [EntityController getInstance];
     //[[controller dataAccessLayer] deleteCategory:@"All"];
     
+    // add categories first time.
     DatabaseExample *dbEx = [[DatabaseExample alloc] init];
     if([[controller dataAccessLayer] getCategories].count<=0){
-        
         [dbEx addCategories];
         categories = [[NSArray alloc] initWithArray:[[controller dataAccessLayer] getCategories]];
     }else{
@@ -102,10 +104,11 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     if([[controller dataAccessLayer] getSpendingsWithFilter:nil andSortDescriptor:nil].count <= 0){
         [dbEx addSpendings];
     }
+    
     // charts text.
     chartModes = [[NSArray alloc] initWithObjects:@"Monthly Chart", @"Yearly Chart", nil];
     
-    // later will be extracted from db.
+    // Months titles to map to date's month integer value
     monthsFull = [[NSArray alloc] initWithObjects:
               @"January",
               @"February",
@@ -151,12 +154,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    budget = [prefs floatForKey:@"Monthly budget"];
     [self.categoriesTableView reloadData];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self initLayout];
+    selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
 }
 
 // INTERFACE ORIENTATION METHODS
@@ -355,12 +361,14 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
             naviStrategy = yearlyNaviStrategy;
         }
         
+        // set titles according to navi strategy
         self.mainTitle.title = [naviStrategy getCurrentTitle];
         self.nextButton.title = [naviStrategy getNextTitle];
         self.prevButton.title = [naviStrategy getPreviousTitle];
         self.nextButton.enabled = [naviStrategy checkNext];
         self.prevButton.enabled = [naviStrategy checkPrevious];
 
+        // reload data for year or month and restore selection
         [self.categoriesTableView reloadData];
         if(selectedIndexPath.row != 0){
             [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
@@ -380,7 +388,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return categories.count+1; // +1 for detail...
+    return categories.count+1; // +1 for Overview... cell
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -398,9 +406,9 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
         // Configure the cell...
-        Category *cat = [categories objectAtIndex:indexPath.row - 1];
+        Category *cat = [categories objectAtIndex:indexPath.row - 1]; // -1 because of Overview... cell
         cell.textLabel.text = cat.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f %%", [naviStrategy getCurrentSumAmountforCategory:cat]/10];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1f %%", [naviStrategy getCurrentSumAmountforCategory:cat]*100/budget];
     }
     return cell;
 }
@@ -411,11 +419,10 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
 {
     if(indexPath.row > 0){
         [self updateLayoutCategorySelected];
-        //[page1 setPlotCategory:[categories objectAtIndex:indexPath.row]];
-        [page1 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]];
         
-//        [page2 setPlotCategory:[categories objectAtIndex:indexPath.row]];
-        [page2 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]];
+        [page1 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]]; // -1 because of Overview... cell
+        
+        [page2 updateDataByCategory:[categories objectAtIndex:indexPath.row - 1]]; // -1 because of Overview... cell
         
         selectedIndexPath = [self.categoriesTableView indexPathForSelectedRow];
     }
@@ -444,14 +451,16 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     [self.prevButton setEnabled:[naviStrategy checkPrevious]];
     [self.nextButton setEnabled:[naviStrategy checkNext]];
     
+    // reload tableview data to new month or year and restore selection(if was selected)
     [self.categoriesTableView reloadData];
     if(selectedIndexPath.row != 0){
         [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
-    
-    [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
-    [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
-    
+
+    if(selectedIndexPath.row >0 && selectedIndexPath.row < 11){
+        [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];// -1 because of Overview... cell
+        [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    }
 }
 
 - (IBAction)nextTimePeriodButtonTapped:(id)sender {
@@ -466,12 +475,15 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     [self.nextButton setEnabled:[naviStrategy checkNext]];
     [self.prevButton setEnabled:[naviStrategy checkPrevious]];
     
+    // reload tableview data to new month or year and restore selection(if was selected)
     [self.categoriesTableView reloadData];
     if(selectedIndexPath.row != 0){
         [self.categoriesTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
     
-    [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
-    [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    if(selectedIndexPath.row >0 && selectedIndexPath.row < 11){
+        [page1 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];// -1 because of Overview... cell
+        [page2 updateDataByCategory:[categories objectAtIndex:selectedIndexPath.row - 1]];
+    }
 }
 @end

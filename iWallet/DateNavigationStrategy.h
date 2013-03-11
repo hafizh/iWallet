@@ -18,7 +18,7 @@
 -(NSString*) getNextTitle;
 -(NSDateComponents*) calculatePrevious;
 -(NSString*)getPreviousTitle;
--(NSDateComponents*) getCurrent;
+-(NSDateComponents*) getCurrent; // current is NSDateComponents instance representing one year or one month, depenting on implementation class
 -(NSString*)getCurrentTitle;
 -(float) getCurrentSumAmountforCategory:(Category*)cat;
 -(NSArray*) classifyCurrentForCategory:(Category*)cat;

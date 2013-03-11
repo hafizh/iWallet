@@ -37,7 +37,7 @@
     
     //*************** Init spending items for selected category *******************
     EntityController *controller = [EntityController getInstance];
-    //self.selectedCategory = @"Other";
+
     Category *category = [[controller dataAccessLayer] getCategoryWithName:self.selectedCategory];
     DataQueries *queries = [[DataQueries alloc] init];
     spendingItems = [queries getSpendingsForCategory:category];
@@ -45,32 +45,13 @@
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    // getting an NSString
+    // getting the currency
     currencySign = [prefs stringForKey:@"currency"];
     
     if([prefs valueForKey:@"currency"] == nil){
         currencySign = @"€";
     }
     
-}
-
-// difference in months
-- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
-{
-    NSDate *fromDate;
-    NSDate *toDate;
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    [calendar rangeOfUnit:NSMonthCalendarUnit startDate:&fromDate
-                 interval:NULL forDate:fromDateTime];
-    [calendar rangeOfUnit:NSMonthCalendarUnit startDate:&toDate
-                 interval:NULL forDate:toDateTime];
-    
-    NSDateComponents *difference = [calendar components:NSMonthCalendarUnit
-                                               fromDate:fromDate toDate:toDate options:0];
-    
-    return [difference month];
 }
 
 - (void)didReceiveMemoryWarning
