@@ -36,6 +36,7 @@
         //error handling
         NSLog(@"Category doesn't exist");
     }
+    [self saveContext];
 }
 
 -(NSArray*)getCategories  {

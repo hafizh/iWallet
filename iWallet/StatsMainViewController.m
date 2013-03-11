@@ -89,6 +89,7 @@ MonthlyNavigationStrategy *monthlyNaviStrategy;
     //[dbLayer ]
     
     EntityController *controller = [EntityController getInstance];
+    //[[controller dataAccessLayer] deleteCategory:@"All"];
     
     DatabaseExample *dbEx = [[DatabaseExample alloc] init];
     if([[controller dataAccessLayer] getCategories].count<=0){
