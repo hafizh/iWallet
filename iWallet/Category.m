@@ -75,7 +75,6 @@
         NSDateComponents *oneDay = [calendar components:(NSDayCalendarUnit) fromDate:item.date];
         [classifiedSpendings replaceObjectAtIndex:[oneDay day] withObject:[[self filterSpendingItems:filteredSpendings byDay:oneDay] valueForKeyPath:@"@sum.price"]];
     }
-    //NSLog(@"classified #: %d Cat:%@",classifiedSpendings.count, self.name);
     return classifiedSpendings;
 }
 

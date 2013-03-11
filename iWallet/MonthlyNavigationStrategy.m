@@ -108,16 +108,20 @@
     return [NSString stringWithFormat:@"%@/%d",[months objectAtIndex:[currentComp month]-1], [currentComp year]];
 }
 
+// amount for current month in the given category
 -(float) getCurrentSumAmountforCategory:(Category*)cat
 {
     return [cat getSumAmountForMonth:currentComp];
 }
 
+// sum up all values spent in each day in current month
+// return 28-31 values, sum amount for each day
 -(NSArray*) classifyCurrentForCategory:(Category*)cat
 {   
     return [cat classifySpendingsByDateForMonth:currentComp];
 }
 
+// for testing purposes
 -(NSString*) getNaviType
 {
     return @"Monthly Navi";

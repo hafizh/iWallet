@@ -10,15 +10,15 @@
 
 @interface PlotView() {
     
-    NSArray *plotSpendings;
-    NSArray *normalizedItems;
+    NSArray *plotSpendings;     // Array of float values(Not spending item entities only amount)
+    NSArray *normalizedItems;   // above values normalized to fit into the height of plot view
     float paddingH;
     float paddingV;
     float plotWidth;
     float plotHeight;
-    float minValue;
-    float maxValue;
-    int yGridLineRange;
+    float minValue;     // min amount of spending
+    float maxValue;     // max amount of spendings
+    int yGridLineRange; // range between y axis data lines
 
 }
 
@@ -77,8 +77,8 @@ CGColorRef graphLineColor()
 {
     plotSpendings = nil;
 
-    paddingH = self.frame.size.height*0.05555556;
-    paddingV = self.frame.size.width*0.0375;
+    paddingH = self.frame.size.height*0.05555556; //horizontal
+    paddingV = self.frame.size.width*0.0375;    // vertical
     plotWidth = self.frame.size.width-paddingV;
     plotHeight = self.frame.size.height-paddingH/2;
     
@@ -97,21 +97,22 @@ CGColorRef graphLineColor()
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextSetStrokeColorWithColor(context, graphLineColor());
+    
     // draw y axis
     CGContextBeginPath(context);
 	CGContextMoveToPoint(context, 1.5*paddingV, paddingH);
 	CGContextAddLineToPoint(context, 1.5*paddingV, plotHeight - paddingH);
-    //CGContextSetLineWidth(context, 1.0);
 	CGContextStrokePath(context);
     
-    // draw gridlines
+    // normalize value into a range [0 - to plotHeight] nearly
     normalizedItems = [self normalizeValues:plotSpendings intoRangeFrom:0 to:plotHeight-2.5*paddingH];
     
-    float interval = (maxValue - minValue)/10;
+    float interval = (maxValue - minValue)/10; // 10 gridlines, interval of labels
 
     minValue = 0;
-    yGridLineRange = ceilf((plotHeight-2.5*paddingH)/10);
+    yGridLineRange = ceilf((plotHeight-2.5*paddingH)/10);   
 
+    // start from bottom
     for (int i = plotHeight-paddingH; i > 3; i-= yGridLineRange) {
         CGContextBeginPath(context);
 		CGContextMoveToPoint(context, 1.5*paddingV, i);
@@ -119,8 +120,7 @@ CGColorRef graphLineColor()
 		CGContextStrokePath(context);
         
         // draw y axis labels
-        //int reverseIndex = (i/yGridLineRange);
-            [[NSString stringWithFormat:@"%.0f", minValue] drawInRect:
+        [[NSString stringWithFormat:@"%.0f", minValue] drawInRect:
                  CGRectMake(0, i-paddingH+3, 1.5*paddingV, paddingH)
                                                      withFont:[UIFont systemFontOfSize:paddingH-2]
                                                 lineBreakMode:NSLineBreakByWordWrapping
@@ -134,6 +134,7 @@ CGColorRef graphLineColor()
     CGContextAddLineToPoint(context, plotWidth+paddingV/2, plotHeight - paddingH);
     CGContextStrokePath(context);
 
+    // draw the columns
     [self drawDataColumnPlot:context];
     
 }
@@ -142,14 +143,16 @@ CGColorRef graphLineColor()
 - (void) drawDataColumnPlot:(CGContextRef)context
 {
     // init variables
-    float xAxisLength = (plotWidth - 2*paddingV)/(plotSpendings.count-1);
+    float xAxisLength = (plotWidth - 2*paddingV)/(plotSpendings.count-1); // the width of a column
     float originx = 1.5*paddingV+xAxisLength/2; float originy = plotHeight - paddingH;
     float destX = originx;
 
     for (int i=1; i<normalizedItems.count;i++) {
         float xValue = [[normalizedItems objectAtIndex:i] floatValue];
-        // draw 1 data line
+        
+        // if value == 0 do not draw anything
         if(xValue > 0){
+            // draw the column
             [self drawLineInContext:context
                             originX:originx
                             originY:originy

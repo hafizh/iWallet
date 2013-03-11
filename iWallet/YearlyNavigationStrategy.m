@@ -81,7 +81,7 @@
 }
 
 -(NSArray*) classifyCurrentForCategory:(Category*)cat
-{//NSLog(@"YearNavi: cat:%@", cat.name);
+{
     return [cat classifySpendingsByMonthForYear:currentComp];
 }
 
