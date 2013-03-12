@@ -4,6 +4,7 @@
 //
 //  Created by lab on 2/21/13.
 //  Copyright (c) 2013 lab. All rights reserved.
+//  This class is created, to show how the database layer can be accessed.
 //
 
 #import "DatabaseExample.h"
@@ -56,6 +57,7 @@
     return self;
 }
 
+//add all categories of the array "categories" to the database
 -(void)addCategories {
     // clear all old test categories before adding some new ones
     [self clearAllCategories];
@@ -77,6 +79,7 @@
     
 }
 
+//add some randomly generated spendings
 -(void)addSpendings {
  
     [self clearAllSpendings];
@@ -101,6 +104,7 @@
      [dal saveContext];
 }
 
+//prints a query by using the DataQueries 
 -(void)printQuery {
    
     DataQueries *q = [DataQueries new];
@@ -116,6 +120,8 @@
     
 }
 
+//use the getSpendingsWithFilter method of the DataAccessLayer to filter all spendings
+//with a price >= 0.45. The spendings are ascending sorted by price.
 -(void)priceFilterAndSort {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price >= 0.45"];
     NSSortDescriptor *sortByPrice = [[NSSortDescriptor alloc] initWithKey:@"price" ascending:YES];
