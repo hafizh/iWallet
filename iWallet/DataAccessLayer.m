@@ -21,7 +21,7 @@
     return self;
 }
 
-
+//delete the category with a name equal to name
 -(void)deleteCategory: (NSString*) name  {
     Category *category;
     
@@ -30,6 +30,7 @@
             category = cat;
     }
     
+    //check whether object was found
     if (category != nil) {
         [[self managedObjectContext]  deleteObject:category];
     } else {
@@ -56,6 +57,7 @@
     return fetchedObjects;
 }
 
+//returns the category with a name equal to name
 -(Category *)getCategoryWithName:(NSString*)name
 {
     NSError *error;
@@ -88,6 +90,7 @@
     
 }
 
+//gets all spendings by applying a filter and sorting 
 -(NSArray*)getSpendingsWithFilter:(NSPredicate*)predicate andSortDescriptor: (NSSortDescriptor*)descriptor {
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -116,7 +119,7 @@
     
 }
 
-
+//save changes to the current context
 -(void)saveContext {
     NSError *error;
     if (![[self managedObjectContext] save:&error]) {
